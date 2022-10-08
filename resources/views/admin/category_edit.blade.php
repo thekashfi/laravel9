@@ -20,8 +20,6 @@
                 <div id="defaultFormControlHelp" class="form-text">میتوانید آیکن را از این لیست انتخاب کنید.</div>
             </div>
 
-            <textarea id="mytextarea">Hello, World!</textarea>
-
             <div class="mt-3">
                 <div class="form-check form-check-linethrough">
                     <input class="form-check-input h-5 mt-0 rounded-circle border-dashed flex-none float-end" type="checkbox" checked="checked">
@@ -44,5 +42,5 @@
 @endsection
 
 @section('head')
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin" defer></script>
 @endsection

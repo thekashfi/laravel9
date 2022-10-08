@@ -15,9 +15,15 @@ return new class extends Migration
     {
         Schema::create('contracts', function (Blueprint $table) {
             $table->id();
-            $table->integer('price');
+            $table->foreignId('category_id')
+                ->references('id')
+                ->on('categories')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
             $table->string('name');
-            $table->text('description');
+            $table->text('text');
+            $table->text('description')->nullable();
+            $table->integer('price')->default(0);
             $table->timestamps();
         });
     }

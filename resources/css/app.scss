@@ -7,6 +7,10 @@
     font-display: swap;
 }
 
+.dashboard * {
+    font-family: Vazirmatn !important;
+}
+
 .navbar-vertical.navbar-expand-xs .navbar-collapse {
     height: 100vh !important;
 }
@@ -17,4 +21,8 @@
 
 .navbar-vertical.navbar-expand-xs {
     z-index: 2 !important;
+}
+
+.tox-promotion, .tox-statusbar__branding {
+    display: none;
 }

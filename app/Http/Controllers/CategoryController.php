@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -13,7 +14,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('admin.category_index');
+        $categories = Category::withCount('contracts')->paginate(20);
+
+        return view('admin.category_index', compact('categories'));
     }
 
     /**

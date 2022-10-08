@@ -3,52 +3,41 @@
 @section('content')
     <div class="card mb-4 p-3">
 
-        <form method="post">
+        <form method="post" action="{{ route($contract->id === null ? 'admin.contract.store' : 'admin.contract.update', $contract->id) }}">
+            @csrf
+
+            @if(! $contract->id === null)
+                @method('put')
+            @endif
 
             <div class="">
-                <h6>قرارداد فو</h6>
+                <h6>قرارداد جدید</h6>
             </div>
 
             <div class="pb-3">
-                <label for="defaultFormControlInput" class="form-label">نام قرارداد</label>
-                <input type="text" class="form-control" id="defaultFormControlInput" placeholder="" aria-describedby="defaultFormControlHelp">
+                <label for="name" class="form-label">نام</label>
+                <input name="name" type="text" class="form-control" id="name" value="{{ old('name', $contract->name) }}">
             </div>
 
-            @include('tinymce.editor')
+            <div class="pb-3">
+                <label class="form-label mt-3">متن قرارداد</label>
+                <textarea name="text" class="tinymce-editor">{!! old('text', $contract->text) !!}</textarea>
+            </div>
 
             <div class="pb-3">
-                <label for="defaultFormControlInput" class="form-label mt-3">قیمت</label>
-                <input type="number" class="form-control" id="defaultFormControlInput" placeholder="John Doe" aria-describedby="defaultFormControlHelp">
+                <label class="form-label mt-3">توضیحات</label>
+                <textarea name="description" class="tinymce-editor">{!! old('description', $contract->description) !!}</textarea>
+            </div>
+
+            <div class="pb-2">
+                <label for="price" class="form-label mt-3">قیمت</label>
+                <input name="price" type="number" class="form-control" id="price" value="{{old('price', $contract->price)}}">
             </div>
 
             <div class="w-100 text-center">
-                <button class="btn btn-primary btn-sm mt-3">ثبت</button>
+                <button class="btn btn-primary btn-sm mt-3" type="submit">ثبت</button>
             </div>
         </form>
-    </div>
-
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Launch demo modal
-    </button>
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
     </div>
 @endsection
 

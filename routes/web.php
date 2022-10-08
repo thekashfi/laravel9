@@ -22,6 +22,10 @@ use Mpdf\Mpdf;
 |
 */
 
+// $faker = Faker\Factory::create('fa_IR'); // create a French faker
+// for ($i = 0; $i < 10; $i++) {
+//     die ($faker->name);
+// }
 Route::redirect('admin', 'admin/dashboard');
 Route::redirect('dashboard', 'admin/dashboard');
 
@@ -30,6 +34,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin'], function() {
     Route::resource('contract', ContractController::class);
     Route::view('dashboard', 'admin.dashboard')->name('dashboard');
     Route::view('fillables', 'admin.fillables')->name('fillables');
+    Route::post('fillables', [ContractController::class, 'fillables'])->name('fillables');
 });
 
 Route::get('foo', function() {
