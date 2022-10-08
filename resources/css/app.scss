@@ -1,0 +1,20 @@
+@font-face {
+    font-family: 'Vazirmatn';
+    src: url('/fonts/Vazirmatn[wght].woff2') format('woff2 supports variations'),
+    url('/fonts/Vazirmatn[wght].woff2') format('woff2-variations');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+.navbar-vertical.navbar-expand-xs .navbar-collapse {
+    height: 100vh !important;
+}
+
+//.tox {
+//    z-index: 9999 !important;
+//}
+
+.navbar-vertical.navbar-expand-xs {
+    z-index: 2 !important;
+}
