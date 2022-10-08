@@ -32,4 +32,9 @@ class Controller extends BaseController
         }
         return response()->json($res, $code);
     }
+
+    public function flashBack()
+    {
+        return redirect()->back()->with('flash', 'با موفیقت انجام شد.');
+    }
 }

@@ -31,7 +31,7 @@ class ContractController extends Controller
 
         Contract::create($request->all());
 
-        return redirect()->back()->with('flash', 'با موفیقت انجام شد.');
+        return $this->flashBack();
     }
 
     public function show($id)
@@ -56,14 +56,14 @@ class ContractController extends Controller
 
         Contract::findOrFail($id)->update($request->all());
 
-        return redirect()->back()->with('flash', 'با موفیقت انجام شد.');
+        return $this->flashBack();
     }
 
     public function destroy($id)
     {
         Contract::findOrFail($id)->delete();
 
-        return redirect()->back()->with('flash', 'با موفیقت انجام شد.');
+        return $this->flashBack();
     }
 
     public function fillables(Request $request)

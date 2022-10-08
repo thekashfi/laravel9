@@ -21,9 +21,9 @@
                             <tr>
                                 <td>
                                     <div class="d-flex px-2 py-1">
-                                        <div>
-                                            <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
-                                        </div>
+{{--                                        <div>--}}
+{{--                                            <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">--}}
+{{--                                        </div>--}}
                                         <div class="d-flex flex-column justify-content-center">
                                             <h6 class="mb-0 text-sm">{{ $category->name }}</h6>
                                         </div>
@@ -40,7 +40,7 @@
                                     @endif
                                 </td>
                                 <td class="align-middle">
-                                    <a href="{{ route('admin.category.edit', 1) }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                                    <a href="{{ route('admin.category.edit', $category->id) }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                                         ویرایش
                                     </a>
                                 </td>
