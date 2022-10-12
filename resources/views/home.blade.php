@@ -1,0 +1,245 @@
+@extends('layout')
+
+@section('content')
+    <!-- ========================= hero-section start ========================= -->
+    <section id="home" class="hero-section">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <div class="hero-content">
+                <span class="wow fadeInLeft" data-wow-delay=".2s">لورم ایپسوم متن</span>
+                  <h1 class="wow fadeInUp" data-wow-delay=".4s">
+                      تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک
+                  </h1>
+              <p class="wow fadeInUp" data-wow-delay=".6s">
+                  چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع.
+              </p>
+							<a href="{{ route('contracts') }}" class="main-btn btn-hover wow fadeInUp" data-wow-delay=".6s">دیدن نمونه قرارداد ها</a>
+            </div>
+					</div>
+					<div class="col-lg-6">
+						<div class="hero-img wow fadeInUp" data-wow-delay=".5s">
+							<img src="{{ url('') }}/bliss/img/hero/hero-img.svg" alt="">
+						</div>
+					</div>
+            </div>
+			</div>
+    </section>
+		<!-- ========================= hero-section end ========================= -->
+
+		<!-- ========================= client-logo-section start ========================= -->
+		<section class="client-logo-section pt-150">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-3 col-sm-6">
+						<div class="single-logo text-center">
+							<img src="{{ url('') }}/bliss/img/client-logo/lineicons.svg" alt="">
+						</div>
+					</div>
+					<div class="col-lg-3 col-sm-6">
+						<div class="single-logo text-center">
+							<img src="{{ url('') }}/bliss/img/client-logo/uideck.svg" alt="">
+						</div>
+					</div>
+					<div class="col-lg-3 col-sm-6">
+						<div class="single-logo text-center">
+							<img src="{{ url('') }}/bliss/img/client-logo/pagebulb.svg" alt="">
+						</div>
+					</div>
+					<div class="col-lg-3 col-sm-6">
+						<div class="single-logo text-center">
+							<img src="{{ url('') }}/bliss/img/client-logo/graygrids.svg" alt="">
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- ========================= client-logo-section end ========================= -->
+
+		<!-- ========================= about-section start ========================= -->
+		<section id="about" class="about-section pt-150">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="about-img mb-50">
+							<img src="{{ url('') }}/bliss/img/about/about-img.svg" alt="about">
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<div class="about-content mb-50">
+							<div class="section-title mb-50">
+								<h1 class="mb-25">حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد</h1>
+								<p>تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت</p>
+							</div>
+							<div class="accordion pb-15" id="accordionExample">
+								<div class="single-faq">
+									<button class="w-100 text-start" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        تایپ به پایان رسد وزمان مورد نیاز شامل
+									</button>
+
+									<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+										<div class="faq-content">
+                                            حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
+										</div>
+									</div>
+								</div>
+								<div class="single-faq">
+									<button class="w-100 text-start collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت
+									</button>
+									<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+										<div class="faq-content">
+                                            تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت
+										</div>
+									</div>
+								</div>
+								<div class="single-faq">
+									<button class="w-100 text-start collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        شناخت فراوان جامعه و متخصصان را می طلبد
+									</button>
+									<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+										<div class="faq-content">
+                                            صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد
+										</div>
+									</div>
+								</div>
+							</div>
+							<a href="javascript:void(0)" class="main-btn btn-hover">سوالات دیگر</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- ========================= about-section end ========================= -->
+
+		<!-- ========================= service-section start ========================= -->
+		<section id="service" class="service-section img-bg pt-100 pb-100 mt-150">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-xxl-5 col-xl-6 col-lg-7 col-md-10">
+						<div class="section-title text-center mb-50">
+							<h1>قرارداد ها</h1>
+							<p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+                    @foreach($categories as $category)
+                        <a class="col-xl-3 col-md-6" href="{{ route('contracts', $category->slug) }}">
+                            <div class="single-service py-4">
+                                <div class="content">
+                                    <h3>{{ $category->name }}</h3>
+                                </div>
+                            </div>
+                        </a>
+                    @endforeach
+{{--					<div class="col-xl-3 col-md-6">--}}
+{{--						<div class="single-service">--}}
+{{--							<div class="icon color-2">--}}
+{{--								<i class="lni lni-code-alt"></i>--}}
+{{--							</div>--}}
+{{--							<div class="content">--}}
+{{--								<h3>قرارداد های مشاوره</h3>--}}
+{{--								<p>Lorem ipsum dolor sitsdw consetsad pscing eliewtr, diam nonumy.</p>--}}
+{{--							</div>--}}
+{{--						</div>--}}
+{{--					</div>--}}
+				</div>
+
+				<div class="view-all-btn text-center pt-30">
+					<a href="{{ route('contracts') }}" class="main-btn btn-hover">همه قرارداد ها</a>
+				</div>
+
+			</div>
+		</section>
+		<!-- ========================= service-section end ========================= -->
+
+		<!-- ========================= counter-up-section start ========================= -->
+		<section class="counter-up-section pt-150">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="counter-up-content mb-50">
+							<div class="section-title mb-40">
+								<h1 class="mb-20 wow fadeInUp" data-wow-delay=".2s">Why we are the best, Why you hire?</h1>
+								<p class="wow fadeInUp" data-wow-delay=".4s">Lorem ipsum dolor sit amet, consetetur sadipscing elitr,sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.</p>
+							</div>
+							<div class="counter-up-wrapper">
+								<div class="row">
+									<div class="col-lg-6 col-sm-6">
+										<div class="single-counter">
+											<div class="icon color-1">
+												<i class="lni lni-emoji-smile"></i>
+											</div>
+											<div class="content">
+												<h1 id="secondo1" class="countup" cup-end="3642" cup-append=" ">3642</h1>
+												<span>Happy client</span>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-6 col-sm-6">
+										<div class="single-counter">
+											<div class="icon color-2">
+												<i class="lni lni-checkmark"></i>
+											</div>
+											<div class="content">
+												<h1 id="secondo2" class="countup" cup-end="5436" cup-append=" ">5436</h1>
+												<span>Project done</span>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-6 col-sm-6">
+										<div class="single-counter">
+											<div class="icon color-3">
+												<i class="lni lni-world"></i>
+											</div>
+											<div class="content">
+												<h1 id="secondo3" class="countup" cup-end="642" cup-append="K">642</h1>
+												<span>Live Design</span>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-6 col-sm-6">
+										<div class="single-counter">
+											<div class="icon color-4">
+												<i class="lni lni-users"></i>
+											</div>
+											<div class="content">
+												<h1 id="secondo4" class="countup" cup-end="42" cup-append=" ">42</h1>
+												<span>Creative designer's</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-6 col-lg-6">
+						<div class="counter-up-img mb-50">
+							<img src="{{ url('') }}/bliss/img/counter-up/counter-up-img.svg" alt="">
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="cta-section img-bg pt-110 pb-60">
+			<div class="container">
+				<div class="row align-items-center">
+					<div class="col-xl-6 col-lg-7">
+						<div class="section-title mb-50">
+							<h1 class="mb-20 wow fadeInUp" data-wow-delay=".2s">Have any project in you mind? You can hire</h1>
+							<p class="wow fadeInUp" data-wow-delay=".4s">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.</p>
+						</div>
+					</div>
+					<div class="col-xl-6 col-lg-5">
+						<div class="cta-btn text-lg-end mb-50">
+							<a href="javascript:void(0)" class="main-btn btn-hover text-uppercase">LET'S START YOUR PROJECT</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- ========================= cta-section end ========================= -->
+@endsection

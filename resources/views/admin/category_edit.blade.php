@@ -3,18 +3,26 @@
 @section('content')
     <div class="card mb-4 p-3">
 
-        <form method="post" action="{{ route($category->id === null ? 'admin.cateory.store' : 'admin.category.update', $category->id) }}">
+        <form method="post" action="{{ route($category->id === null ? 'admin.category.store' : 'admin.category.update', $category->id) }}">
             @csrf
 
+            @if($category->id !== null)
                 @method('put')
+            @endif
 
             <div class="">
-                <h6>دسته فو</h6>
+                <h6>دسته جدید</h6>
             </div>
 
             <div class="pb-3">
                 <label for="name" class="form-label">نام</label>
                 <input name="name" type="text" class="form-control" id="name" placeholder="" value="{{ old('name', $category->name) }}">
+            </div>
+
+            <div class="pb-3">
+                <label for="slug" class="form-label">آدرس</label>
+                <input name="slug" type="text" class="form-control" id="slug" placeholder="" value="{{ old('slug', $category->slug) }}">
+                <div id="optionsHelp" class="form-text">نام انگلیسی برای استفاده در url صفحه</div>
             </div>
 
 {{--            <div class="pb-3">--}}

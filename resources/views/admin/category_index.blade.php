@@ -2,9 +2,12 @@
 
 @section('content')
     <div class="card mb-4">
-        <div class="card-header pb-0">
-            <h6>دسته بندی ها</h6>
+
+        <div class="card-header d-flex justify-content-between pb-0">
+            <h6 class="d-inline-block">دسته بندی ها</h6>
+            <a class="btn bg-gradient-dark mb-0 d-inline-block" href="{{ route('admin.category.create') }}"><i class="fas fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;افزودن دسته بندی</a>
         </div>
+
         <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-0">
                 <table class="table align-items-center mb-0">
@@ -43,6 +46,13 @@
                                     <a href="{{ route('admin.category.edit', $category->id) }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                                         ویرایش
                                     </a>
+                                    <form method="post" action="{{ route('admin.category.destroy', $category->id) }}" onsubmit="return confirm('از حذف {{ $category->name }} مطمئن هستید؟')" class="d-inline-block">
+                                        @csrf
+                                        @method('delete')
+                                        <button href="{{ route('admin.category.edit', $category->id) }}" class="text-warning bg-body border-0 font-weight-bold text-xs mx-1" data-toggle="tooltip" type="submit">
+                                            حذف
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

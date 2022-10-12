@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContractController;
+use App\Http\Controllers\IndexController;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,14 @@ use Mpdf\Mpdf;
 // for ($i = 0; $i < 10; $i++) {
 //     die ($faker->name);
 // }
+
+Route::get('', [IndexController::class, 'home'])->name('home');
+Route::get('contract/{contract}', [IndexController::class, 'contract'])->name('contract');
+Route::get('contracts/{category?}', [IndexController::class, 'contracts'])->name('contracts');
+// Route::get('login', [IndexController::class, 'home'])->name('login');
+// Route::view('login', 'login')->name('login');
+Route::get('payments', [IndexController::class, 'payments'])->name('payments');
+
 Route::redirect('admin', 'admin/dashboard');
 Route::redirect('dashboard', 'admin/dashboard');
 
@@ -36,6 +45,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin'], function() {
     Route::view('fillables', 'admin.fillables')->name('fillables');
     Route::post('fillables', [ContractController::class, 'fillables'])->name('fillables');
 });
+
 
 Route::get('foo', function() {
     // instantiate and use the dompdf class

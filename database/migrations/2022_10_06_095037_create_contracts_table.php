@@ -20,9 +20,11 @@ return new class extends Migration
                 ->on('categories')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-            $table->string('name');
-            $table->text('text');
+            $table->string('name', 100);
+            $table->string('summary', 255);
             $table->text('description')->nullable();
+            $table->text('text');
+            $table->string('slug', 100)->unique();
             $table->integer('price')->default(0);
             $table->timestamps();
         });

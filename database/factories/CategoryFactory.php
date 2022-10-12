@@ -18,7 +18,8 @@ class CategoryFactory extends Factory
     {
         $faker = \Faker\Factory::create('fa_IR');
         return [
-            'name' => $faker->word
+            'name' => $faker->word,
+            'slug' => $this->faker->unique()->word,
         ];
     }
 }

@@ -16,12 +16,22 @@ class CategoryController extends Controller
 
     public function create()
     {
-        //
+        $category = new Category;
+
+        return view('admin.category_edit', compact('category'));
     }
 
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|max:100',
+            'slug' => 'required|max:100|unique:categories,id',
+            'in_menu' => 'boolean'
+        ]);
+
+        Category::create($request->all());
+
+        return $this->flashBack(null, 'admin.category.index');
     }
 
     public function show($id)
@@ -40,6 +50,7 @@ class CategoryController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|max:100',
+            'slug' => 'required|max:100|unique:categories,id,' . $id,
             'in_menu' => 'boolean'
         ]);
 
@@ -50,6 +61,8 @@ class CategoryController extends Controller
 
     public function destroy($id)
     {
-        //
+        Category::findOrFail($id)->delete();
+
+        return $this->flashBack();
     }
 }

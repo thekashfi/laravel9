@@ -6,7 +6,7 @@
         <form method="post" action="{{ route($contract->id === null ? 'admin.contract.store' : 'admin.contract.update', $contract->id) }}">
             @csrf
 
-            @if(! $contract->id === null)
+            @if($contract->id !== null)
                 @method('put')
             @endif
 
@@ -17,6 +17,17 @@
             <div class="pb-3">
                 <label for="name" class="form-label">نام</label>
                 <input name="name" type="text" class="form-control" id="name" value="{{ old('name', $contract->name) }}">
+            </div>
+
+            <div class="pb-3">
+                <label for="summary" class="form-label">خلاصه</label>
+                <input name="summary" type="text" class="form-control" id="summary" value="{{ old('summary', $contract->summary) }}">
+            </div>
+
+            <div class="pb-3">
+                <label for="slug" class="form-label">آدرس</label>
+                <input name="slug" type="text" class="form-control" id="slug" value="{{ old('slug', $contract->slug) }}">
+                <div id="optionsHelp" class="form-text">نام انگلیسی برای استفاده در url صفحه</div>
             </div>
 
             <div class="pb-3">
@@ -32,6 +43,18 @@
             <div class="pb-2">
                 <label for="price" class="form-label mt-3">قیمت</label>
                 <input name="price" type="number" class="form-control" id="price" value="{{old('price', $contract->price)}}">
+            </div>
+
+            <div class="mb-3 col-md-12">
+                <label for="category_id" class="form-label">دسته بندی</label>
+                <select name="category_id" class="form-select" size="4" x-model="category_id" id="category_id">
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}"
+                            {{ (old('category_id') === $category->id || $contract->category->id === $category->id) ? 'selected' : '' }}>
+                            {{ $category->name }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="w-100 text-center">

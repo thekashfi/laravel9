@@ -20,8 +20,10 @@ class ContractFactory extends Factory
         $faker = \Faker\Factory::create('fa_IR');
         return [
             'category_id' => Category::first()->id,
-            'name' => $faker->name,
+            'name' => $faker->word,
+            'slug' => $this->faker->unique()->word,
             'description' => $faker->randomHtml(10),
+            'summary' => $faker->realText(300),
             'text' => $faker->realText(3000),
             'price' => $faker->randomElement([1000, 2000, 3000]),
         ];

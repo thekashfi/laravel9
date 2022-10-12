@@ -33,8 +33,14 @@ class Controller extends BaseController
         return response()->json($res, $code);
     }
 
-    public function flashBack()
+    public function flashBack($msg = null, $route = null)
     {
-        return redirect()->back()->with('flash', 'با موفیقت انجام شد.');
+        if ($msg == null)
+            $msg = 'با موفیقت انجام شد.';
+
+        if ($route == null)
+            return redirect()->back()->with('flash', $msg);
+
+        return redirect()->route($route)->with('flash', $msg);
     }
 }
