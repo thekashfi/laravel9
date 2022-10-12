@@ -96,29 +96,31 @@
                                         <a class="" href="">درباره ما</a>
                                     </li>
 
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            منوی کاربری
-                                        </a>
-                                        <ul class="dropdown-menu px-3 shadow rounded-3 border-0 text-end" aria-labelledby="navbarDropdown">
-                                            <li><a class="dropdown-item" href="">قرارداد ها</a></li>
-                                            <li><a class="dropdown-item" href="">تاریخچه پرداخت</a></li>
-                                            <li><hr class="dropdown-divider"></li>
-                                            <li><a class="dropdown-item" href="">خروج</a></li>
-                                        </ul>
-                                    </li>
-
-{{--                                    <li class="nav-item">--}}
-{{--                                        <div class="navbar-btn d-none d-sm-inline-block">--}}
-{{--                                            <a href="" class="ud-main-btn ud-login-btn">--}}
-{{--                                            ورود--}}
-{{--                                            </a>--}}
-{{--                                            /--}}
-{{--                                            <a href="" class="ud-main-btn ud-white-btn">--}}
-{{--                                            ثبت نام--}}
-{{--                                            </a>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
+                                    @auth
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                منوی کاربری
+                                            </a>
+                                            <ul class="dropdown-menu px-3 shadow rounded-3 border-0 text-end" aria-labelledby="navbarDropdown">
+                                                <li><a class="dropdown-item" href="">قرارداد ها</a></li>
+                                                <li><a class="dropdown-item" href="">تاریخچه پرداخت</a></li>
+                                                <li><hr class="dropdown-divider"></li>
+                                                <li><a class="dropdown-item" href="">خروج</a></li>
+                                            </ul>
+                                        </li>
+                                    @else
+                                        <li class="nav-item">
+                                            <div class="navbar-btn d-none d-sm-inline-block">
+                                                <a href="" class="ud-main-btn ud-login-btn">
+                                                ورود
+                                                </a>
+                                                /
+                                                <a href="" class="ud-main-btn ud-white-btn">
+                                                ثبت نام
+                                                </a>
+                                            </div>
+                                        </li>
+                                    @endauth
                                 </ul>
                             </div>
                             <!-- navbar collapse -->
@@ -134,6 +136,17 @@
     </header>
 
     <div class="pt-100"></div>
+
+    @if ($errors->any())
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">X</button>
+            <strong>اشکالات زیر را برطرف کنید:</strong>
+
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </div>
+    @endif
 
     @yield('content')
 

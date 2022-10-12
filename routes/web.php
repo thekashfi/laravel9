@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContractController;
 use App\Http\Controllers\IndexController;
@@ -37,6 +38,17 @@ Route::get('payments', [IndexController::class, 'payments'])->name('payments');
 
 Route::redirect('admin', 'admin/dashboard');
 Route::redirect('dashboard', 'admin/dashboard');
+
+
+Route::as('auth.')->group(function () {
+    Route::middleware('guest')->group(function () {
+        Route::get('login', [AuthController::class, 'showLoginForm'])->name('showLogin');
+        Route::post('Login', [AuthController::class, 'login'])->name('login');
+        Route::get('verify', [AuthController::class, 'showVerifyForm'])->name('showVerify');
+        Route::post('verify', [AuthController::class, 'verify'])->name('verify');
+    });
+    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+});
 
 Route::group(['as' => 'admin.', 'prefix' => 'admin'], function() {
     Route::resource('category', CategoryController::class);

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "14d65d38db78ad80a0e4f63637a6ec3d",
+    "content-hash": "8b9fda804442c047de36cda448ed2788",
     "packages": [
         {
             "name": "alexusmai/laravel-file-manager",
@@ -3832,6 +3832,62 @@
                 }
             ],
             "time": "2021-02-11T11:37:01+00:00"
+        },
+        {
+            "name": "smart-raya/ippanel-laravel",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SmartRaya/IPPanel-Laravel.git",
+                "reference": "bff91379e338fc277e32b13ecc688bee93ea20a1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SmartRaya/IPPanel-Laravel/zipball/bff91379e338fc277e32b13ecc688bee93ea20a1",
+                "reference": "bff91379e338fc277e32b13ecc688bee93ea20a1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.4"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "SmartRaya\\IPPanelLaravel\\IPPanelServiceProvider"
+                    ],
+                    "aliases": {
+                        "IPPanel": "SmartRaya\\IPPanelLaravel\\Facades\\IPPanel"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SmartRaya\\IPPanelLaravel\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Keivan Sohrabloo",
+                    "email": "k.sohrabloo.k@gmail.com",
+                    "homepage": "http://sms.7panel.ir"
+                }
+            ],
+            "description": "A simple API extension for send text message By IPPanel in Laravel",
+            "keywords": [
+                "IPPanel",
+                "SmartRaya",
+                "sms"
+            ],
+            "support": {
+                "issues": "https://github.com/SmartRaya/IPPanel-Laravel/issues",
+                "source": "https://github.com/SmartRaya/IPPanel-Laravel/"
+            },
+            "time": "2020-06-08T17:10:05+00:00"
         },
         {
             "name": "symfony/console",

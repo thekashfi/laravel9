@@ -18,26 +18,17 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'email',
-        'password',
+        'phone',
     ];
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public static function findByPhone($phone): self|null
+    {
+        return self::wherePhone($phone)->first();
+    }
+    public function registerNewUser($phone): User
+    {
+        $this->phone = $phone;
+        $this->name = 'user-' . mt_rand(1000000, 9999999);
+        $this->save();
+        return $this;
+    }
 }

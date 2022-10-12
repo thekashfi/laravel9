@@ -8,13 +8,14 @@
                     <div class="col-12 col-md-9 col-lg-7 col-xl-6">
                         <div>
                             <div class="card-body p-5">
-                                <h3 class="text-uppercase text-center mb-2">ثبت نام / ورود</h3>
-                                <form method="post" action="{{ route('auth.login') }}">
+                                <h3 class="text-uppercase text-center mb-2">کد تایید را وارد کنید</h3>
+                                <form method="POST" action="{{ route('auth.verify') }}">
                                     @csrf
+                                    <input type="hidden" value="{{ session()->get('phone') }}" name="phone">
 
                                     <div class="form-outline mb-3">
-                                        <label class="form-label mb-1" for="form3Example1cg">شماره تلفن</label>
-                                        <input type="tel" name="phone" id="form3Example1cg" class="form-control form-control" dir="ltr"/>
+                                        <label class="form-label mb-1" for="code"></label>
+                                        <input name="code" type="number" id="code" class="form-control form-control"/>
                                     </div>
 
 {{--                                    <div class="form-check d-flex justify-content-center mb-3">--}}
