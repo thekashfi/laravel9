@@ -23,6 +23,8 @@
         <form method="post" action="" class="p-3 w-100" x-data="{type: null}">
             @csrf
 
+            <input type="hidden" name="contract_id" value="{{ request()->contract_id }}">
+
             <div class="mb-3 col-md-12">
                 <label for="name" class="form-label">نام</label>
                 <input name="name" type="text" class="form-control" id="name" value="{{ old('name') }}">
@@ -42,18 +44,22 @@
             <div class="mb-3 col-md-12">
                 <label for="name" class="form-label">نوع</label>
                 <select name="type" class="form-select" size="4" x-model="type">
-                    <option value="text" {{ old('type') === 'text' ? 'selected' : '' }}>متن</option>
-                    <option value="number" {{ old('type') === 'number' ? 'selected' : '' }}>عدد</option>
-                    <option value="select" {{ old('type') === 'select' ? 'selected' : '' }}>لیست</option>
-                    <option value="timestamps" {{ old('type') === 'timestamps' ? 'selected' : '' }}>تاریخ میلادی</option>
-                    <option value="timestamps_solar" {{ old('type') === 'timestamps_solar' ? 'selected' : '' }}>تاریخ شمسی</option>
+                    <option value="text" selected {{ old('type') == 'text' ? 'selected' : '' }}>متن</option>
+                    <option value="number" {{ old('type') == 'number' ? 'selected' : '' }}>عدد</option>
+                    <option value="select" {{ old('type') == 'select' ? 'selected' : '' }}>لیست</option>
+                    <option value="time" {{ old('type') == 'timestamps' ? 'selected' : '' }}>زمان</option>
+                    <option value="date_solar" {{ old('type') == 'date_solar' ? 'selected' : '' }}>تاریخ شمسی</option>
+                    <option value="month" {{ old('type') == 'month' ? 'selected' : '' }}>ماه میلادی</option>
+                    <option value="date" {{ old('type') == 'date' ? 'selected' : '' }}>تاریخ میلادی</option>
+                    <option value="url" {{ old('type') == 'url' ? 'selected' : '' }}>وبگاه</option>
+                    <option value="textarea" {{ old('type') == 'textarea' ? 'selected' : '' }}>نایحه متنی</option>
                 </select>
             </div>
 
             <template x-if="type === 'select'">
                 <div class="mb-3">
                     <label for="options" class="form-label">گزینه ها</label>
-                    <textarea name="options" class="form-control" id="options" rows="3"  aria-describedby="optionsHelp"></textarea>
+                    <textarea name="options" class="form-control" id="options" rows="3"  aria-describedby="optionsHelp">{{ old('options') }}</textarea>
                     <div id="optionsHelp" class="form-text">هر گزینه را در یک خط وارد کنید.</div>
                 </div>
             </template>

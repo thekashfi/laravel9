@@ -12,11 +12,11 @@ class Fillable extends Model
     protected $fillable = ['name', 'description', 'rules', 'type', 'options'];
 
     protected $casts = [
-        'options' => 'json'
+        'options' => 'json',
     ];
 
-    public function contract()
-    {
-        return $this->belongsto(Contract::class);
-    }
+    // public function contract()
+    // {
+    //     return $this->belongsto(Contract::class);
+    // }
 }

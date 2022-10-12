@@ -70,7 +70,7 @@
                                 </ul>
                                 <div class="pricing-btn text-center">
 {{--                                    <a onclick='this.style.display = "none"; document.querySelector("#dl").classList.remove("d-none");' class="main-btn btn-hover">خرید</a>--}}
-                                    <a href="{{ route('pdf', $contract->slug) }}" class="main-btn btn-success btn-hover">دانلود</a>
+                                    <a href="{{ route('form', $contract->slug) }}" class="main-btn btn-success btn-hover">دانلود</a>
                                 </div>
                             </div>
                         </div>

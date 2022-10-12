@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Contract;
 use App\Models\Fillable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ContractController extends Controller
 {
@@ -82,6 +83,7 @@ class ContractController extends Controller
         $this->validate($request, [
             'name' => 'required|max:255',
             'description' => 'max:255',
+            'rules' => 'max:255',
             'type' => 'required',
         ]);
         // dd($request->options);
@@ -89,12 +91,12 @@ class ContractController extends Controller
         $fillable = Fillable::create([
             'name' => $request->name,
             'description' => $request->description,
-            'rules' => $request->rules,
             'type' => $request->type,
-            'options' => $request->options
+            'rules' => json_encode($request->rules),
+            'options' => json_encode(explode(PHP_EOL , $request->options))
         ]);
 
-        $response = "[{$fillable->id}:<span style='color: #6073DF'>{$fillable->name}</span>]";
+        $response = "[[{$fillable->id}:<span style='color: #6073DF'>{$fillable->name}</span>]]";
 
         return redirect()->back()->with('response', $response);
     }

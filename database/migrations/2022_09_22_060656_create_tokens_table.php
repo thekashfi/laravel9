@@ -14,12 +14,9 @@ return new class extends Migration {
     {
         Schema::create('tokens', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-
             $table->string('code');
-            $table->boolean('used')->default(0);
-
+            $table->integer('uses')->unsigned()->default(1);
+            $table->string('phone');
             $table->timestamps();
         });
     }

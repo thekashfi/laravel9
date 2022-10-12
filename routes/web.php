@@ -32,6 +32,8 @@ use Mpdf\Mpdf;
 Route::get('', [IndexController::class, 'home'])->name('home');
 Route::get('contract/{contract}', [IndexController::class, 'contract'])->name('contract');
 Route::get('contracts/{category?}', [IndexController::class, 'contracts'])->name('contracts');
+Route::get('contract/{contract}/form', [IndexController::class, 'form'])->name('form');
+Route::post('contract/{contract}/download', [IndexController::class, 'download'])->name('download');
 // Route::get('login', [IndexController::class, 'home'])->name('login');
 // Route::view('login', 'login')->name('login');
 Route::get('payments', [IndexController::class, 'payments'])->name('payments');
@@ -65,7 +67,7 @@ Route::get('foo', function() {
     $dompdf->getCanvas()
         ->get_cpdf()
         ->setEncryption('test123', 'test456', ['print', 'modify', 'copy', 'add']);
-    $dompdf->loadHtml('<p>is this text encrypted?</p>');
+    $dompdf->loadHtml('<p>سلام</p>');
     // (Optional) Setup the paper size and orientation
     $dompdf->setPaper('A4', 'landscape');
 
@@ -103,31 +105,40 @@ Route::get('baz', function() {
     // $defaultFontConfig = (new Mpdf\Config\FontVariables())->getDefaults();
     // $fontData = $defaultFontConfig['fontdata'];
 
-    $pdf = new Mpdf(['format' => 'LETTER', 'orientation' => 'P', 'mode' => 'utf-8',
+    $pdf = new Mpdf(['format' => 'A4', 'orientation' => 'P', 'mode' => 'utf-8',
         'fontDir' =>  public_path('fonts'),
         'fontdata' => [ // lowercase letters only in font key
-                'vazir' => [
-                    'I' => 'Vazirmatn-Bold.ttf',
-                    'R' => 'Vazirmatn-Light.ttf',
+                'Yekan' => [
+                    'R' => 'Yekan-Light.ttf',
                 ]
             ],
-        'default_font' => 'vazir']);
+        'default_font' => 'Yekan']);
 
     $pdf->SetProtection([], null, null, 128);
     $pdf->autoScriptToLang = true;
     $pdf->autoLangToFont = true;
     $pdf->writeHTML('
-<div style="position:absolute; width:100%; height:100%; opacity: 0 !important; z-index: 999"></div>
-<h1 style="font-family: dejavusanscondensed; direction: rtl;">فو بار باز</h1>');
+<h1 style="direction: rtl;">فو بار باز</h1>');
     $pdf->Output();
 });
 
 Route::get('qux', function() {
-    $pdf = new TCPDF('P', 'mm', 'LETTER');
+    $pdf = new TCPDF('P', 'mm', 'A4');
+
+    // set some language dependent data:
+    $lg = Array();
+    $lg['a_meta_charset'] = 'UTF-8';
+    $lg['a_meta_dir'] = 'rtl';
+    $lg['a_meta_language'] = 'fa';
+    $lg['w_page'] = 'page';
+
+    $pdf->setFont('dejavusans', '', 12);
+    // set some language-dependent strings (optional)
+    $pdf->setLanguageArray($lg);
     $pdf->SetProtection(
-        [], null, null, 3
+        ['print'], null, null, 3
     );
     $pdf->AddPage();
-    $pdf->writeHTML('<h1>world</h1>');
+    $pdf->writeHTML('<h1>سلام</h1>');
     file_put_contents(public_path('output.pdf'), $pdf->Output('', 'S'));
 });

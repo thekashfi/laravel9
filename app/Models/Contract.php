@@ -12,10 +12,10 @@ class Contract extends Model
     protected $fillable = ['category_id', 'name', 'summary', 'slug', 'description', 'text', 'price'];
     protected $with = ['category'];
 
-    public function fillables()
-    {
-        return $this->hasMany(Fillable::class);
-    }
+    // public function fillables()
+    // {
+    //     return $this->hasMany(Fillable::class);
+    // }
 
     public function category()
     {

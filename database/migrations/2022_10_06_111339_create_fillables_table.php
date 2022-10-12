@@ -15,15 +15,15 @@ return new class extends Migration
     {
         Schema::create('fillables', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('contract_id')
-                ->references('id')
-                ->on('contracts')
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
+            // $table->foreignId('contract_id')
+            //     ->references('id')
+            //     ->on('contracts')
+            //     ->cascadeOnDelete()
+            //     ->cascadeOnUpdate();
             $table->string('name', 255);
             $table->string('description', 255)->nullable();
             $table->string('type', 30);
-            $table->json('rules')->nullable();
+            $table->string('rules', 255)->nullable();
             $table->json('options')->nullable();
             $table->timestamps();
         });
