@@ -19,7 +19,7 @@
                 <div class="col-lg-12">
                     <div class="about-content mb-50">
                         <div class="section-title mb-50 ps-lg-5">
-                            <h1 class="mb-25">قرارداد های مشاوره</h1>
+                            <h1 class="mb-25">{{ ! is_null($category) ? $category->name : 'همه قرارداد ها' }}</h1>
 
                             <div class="row">
                                 @foreach($contracts as $contract)
@@ -28,7 +28,7 @@
                                             <div class="single-service h-100">
                                                 <div class="content position-relative">
                                                     <h3 class="mb-3" class="mb-3">{{ $contract->name }}</h3>
-                                                    <p class="mb-3 text-secondary">
+                                                    <p class="mb-3 text-secondary" style="text-align: justify !important">
                                                         {{ empty($contract->summary) ? Str::limit(strip_tags($contract->description), 100) : $contract->summary }}
                                                     </p>
                                                     <h2 class="price price-badge">{{ number_format($contract->price, null, '.', ',') }}<span class="toman">تومان</span></h2>
@@ -62,7 +62,6 @@
                                 </div>
                             </div>
                         </div> --}}
-                        <a href="javascript:void(0)" class="main-btn btn-hover">pagination buttons here</a>
                     </div>
                 </div>
             </div>

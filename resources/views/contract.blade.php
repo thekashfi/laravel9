@@ -42,7 +42,6 @@
                                 </div>
                             </div>
                         </div> --}}
-                        <a href="javascript:void(0)" class="main-btn btn-hover">View More</a>
                     </div>
                 </div>
                 <div class="col-lg-4 text-center">
@@ -70,8 +69,8 @@
                                     <li>برترین محصول سال</li>
                                 </ul>
                                 <div class="pricing-btn text-center">
-                                    <a onclick='this.style.display = "none"; document.querySelector("#dl").classList.remove("d-none");' class="main-btn btn-hover">خرید</a>
-                                    <a id="dl" class="main-btn btn-success btn-hover d-none">دانلود</a>
+{{--                                    <a onclick='this.style.display = "none"; document.querySelector("#dl").classList.remove("d-none");' class="main-btn btn-hover">خرید</a>--}}
+                                    <a href="{{ route('pdf', $contract->slug) }}" class="main-btn btn-success btn-hover">دانلود</a>
                                 </div>
                             </div>
                         </div>

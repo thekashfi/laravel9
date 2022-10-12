@@ -86,9 +86,9 @@
                                             <a class="" href="{{ route('contracts', $h_category->slug) }}">{{ $h_category->name }}</a>
                                         </li>
                                     @endforeach
-                                    <li class="nav-item">
-                                        <a class="" href="">درخواست قرارداد</a>
-                                    </li>
+{{--                                    <li class="nav-item">--}}
+{{--                                        <a class="" href="">درخواست قرارداد</a>--}}
+{{--                                    </li>--}}
                                     <li class="nav-item">
                                         <a class="" href="">تماس با ما</a>
                                     </li>
@@ -96,30 +96,29 @@
                                         <a class="" href="">درباره ما</a>
                                     </li>
 
-{{--                                    <li class="nav-item dropdown">--}}
-{{--                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">--}}
-{{--                                            منوی کاربری--}}
-{{--                                        </a>--}}
-{{--                                        <ul class="dropdown-menu px-3 shadow rounded-3 border-0 text-end" aria-labelledby="navbarDropdown">--}}
-{{--                                            <li><a class="dropdown-item" href="">قرارداد ها</a></li>--}}
-{{--                                            <li><a class="dropdown-item" href="">تاریخچه پرداخت</a></li>--}}
-{{--                                            <li><a class="dropdown-item" href="">تنظیمات</a></li>--}}
-{{--                                            <li><hr class="dropdown-divider"></li>--}}
-{{--                                            <li><a class="dropdown-item" href="">خروج</a></li>--}}
-{{--                                        </ul>--}}
-{{--                                    </li>--}}
-
-                                    <li class="nav-item">
-                                        <div class="navbar-btn d-none d-sm-inline-block">
-                                            <a href="" class="ud-main-btn ud-login-btn">
-                                            ورود
-                                            </a>
-                                            /
-                                            <a href="" class="ud-main-btn ud-white-btn">
-                                            ثبت نام
-                                            </a>
-                                        </div>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            منوی کاربری
+                                        </a>
+                                        <ul class="dropdown-menu px-3 shadow rounded-3 border-0 text-end" aria-labelledby="navbarDropdown">
+                                            <li><a class="dropdown-item" href="">قرارداد ها</a></li>
+                                            <li><a class="dropdown-item" href="">تاریخچه پرداخت</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item" href="">خروج</a></li>
+                                        </ul>
                                     </li>
+
+{{--                                    <li class="nav-item">--}}
+{{--                                        <div class="navbar-btn d-none d-sm-inline-block">--}}
+{{--                                            <a href="" class="ud-main-btn ud-login-btn">--}}
+{{--                                            ورود--}}
+{{--                                            </a>--}}
+{{--                                            /--}}
+{{--                                            <a href="" class="ud-main-btn ud-white-btn">--}}
+{{--                                            ثبت نام--}}
+{{--                                            </a>--}}
+{{--                                        </div>--}}
+{{--                                    </li>--}}
                                 </ul>
                             </div>
                             <!-- navbar collapse -->
