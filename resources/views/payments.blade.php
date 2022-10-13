@@ -14,27 +14,15 @@
                 </tr>
             </thead> --}}
             <tbody>
-                <tr>
-                    <td>قرارداد یک</td>
-                    <td>
-                        <button type="button" class="btn btn-sm btn-success">دانلود</button>
-                    </td>
-                    <td>1401/11/03</td>
-                </tr>
-                <tr>
-                    <td>Jacob</td>
-                    <td>
-                        <button type="button" class="btn btn-sm btn-success">دانلود</button>
-                    </td>
-                    <td>1401/11/03</td>
-                </tr>
-                <tr>
-                    <td>Larry the Bird</td>
-                    <td>
-                        <button type="button" class="btn btn-sm btn-success">دانلود</button>
-                    </td>
-                    <td>1401/11/03</td>
-                </tr>
+                @foreach($payments as $payment)
+                    <tr>
+                        <td>{{ $payment->contract_name }}</td>
+                        <td>
+                            <a href="{{ route('form', $payment->contract->slug) }}" class="btn btn-sm btn-success">دانلود</a>
+                        </td>
+                        <td>{{ $payment->created_at }}</td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

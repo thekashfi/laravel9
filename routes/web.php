@@ -33,6 +33,7 @@ Route::get('', [IndexController::class, 'home'])->name('home');
 Route::get('contract/{contract}', [IndexController::class, 'contract'])->name('contract');
 Route::get('contracts/{category?}', [IndexController::class, 'contracts'])->name('contracts');
 Route::get('contract/{contract}/form', [IndexController::class, 'form'])->name('form');
+Route::post('contract/{contract}/generate', [IndexController::class, 'generate'])->name('generate');
 Route::post('contract/{contract}/download', [IndexController::class, 'download'])->name('download');
 // Route::get('login', [IndexController::class, 'home'])->name('login');
 // Route::view('login', 'login')->name('login');

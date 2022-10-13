@@ -92,7 +92,7 @@ class ContractController extends Controller
             'name' => $request->name,
             'description' => $request->description,
             'type' => $request->type,
-            'rules' => json_encode($request->rules),
+            'rules' => $request->rules,
             'options' => json_encode(explode(PHP_EOL , $request->options))
         ]);
 

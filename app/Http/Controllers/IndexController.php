@@ -44,30 +44,61 @@ class IndexController extends Controller
 
     public function payments()
     {
-        return view('payments');
+        $payments = Order::with('contract')->whereUserId(auth()->id())->whereIsPaid(1)->get();
+
+        return view('payments', compact('payments'));
     }
 
-    public function form($contract_slug)
+    public function form($order_id)
     {
-        $fillables = $this->get_fillables($contract_slug);
+        $contract_id = Order::whereUserId(auth()->id())->whereIsPaid(1)->find($order_id);
+        $contract = Contract::whereSlug()->firstOrFail();
+
+
+
+
+        // if user don't have a empty version of this contract_slug. must not be in form.
+        if (! Order::whereUserId(auth()->id())->whereIsPaid(1)->whereContractId($contract->id)->whereNull('contract_text')->exists()) {
+            return abort(404);
+        }
+
+        // todo: if contract has empty text then continue. else return to generated one for download
+
+        $fillables = $this->get_fillables($contract);
 
         return view('form', compact('contract_slug', 'fillables'));
     }
 
-    public function download(Request $request , $contract){
+    public function generate(Request $request, $contract_slug)
+    {
+        $contract = Contract::whereSlug($contract_slug)->firstOrFail();
+
+        $fillables = $this->get_fillables($contract);
+
         // validation fillables form
         $fillables = $this->get_fillables($contract);
 
-        $rules = [];
-        $names = [];
-        foreach ($fillables as $fillable){
+        foreach ($fillables as $fillable) {
             if ($fillable->rules != null) {
                 $rules['custom.' . $fillable->id] = $fillable->rules;
-                $names['custom.' . $fillable->id] = $fillable->name;
+                $names['custom.' . $fillable->id] = "«{$fillable->name}»";
             }
         }
+        $this->validate($request, $rules ?? [], [] , $names ?? []);
 
-        $this->validate($request, $rules , [] , $names );
+        //generate html for pdf
+        foreach ($fillables as $fillable) {
+            $inputs[] = "[[$fillable->id:<span style=\"color: #6073df;\">$fillable->name</span>]]";
+            $answers[] = $request->input("custom.$fillable->id") ?? '';
+        }
+
+        Order str_replace($inputs, $answers, $contract->text);
+
+        return view('form', compact('contract_slug', 'fillables'));
+    }
+
+    public function download($uuid){
+
 
         // response download generated pdf
         return $this->generate_pdf('<h1 style="direction: rtl;">فو بار باز</h1>');
@@ -126,10 +157,8 @@ class IndexController extends Controller
         }
     }
 
-    private function get_fillables($contract_slug)
+    private function get_fillables($contract)
     {
-        $contract = Contract::whereSlug($contract_slug)->firstOrFail();
-
         $matches = array();
         // preg_match("/\[\d+\:(.+)\]/", $contract->text, $matches);
         preg_match_all("/\[\[\d+\:([^\]])*\]\]/", $contract->text, $matches);
