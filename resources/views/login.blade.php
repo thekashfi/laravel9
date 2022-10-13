@@ -9,7 +9,7 @@
                         <div>
                             <div class="card-body p-5">
                                 <h3 class="text-uppercase text-center mb-2">ثبت نام / ورود</h3>
-                                <form method="post" action="{{ route('auth.login') }}">
+                                <form method="post" action="{{ request()->has('redirectTo') ? route('auth.login' , ['redirectTo' => request()->redirectTo]) : route('auth.login') }}">
                                     @csrf
 
                                     <div class="form-outline mb-3">

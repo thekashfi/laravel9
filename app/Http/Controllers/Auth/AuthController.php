@@ -21,17 +21,18 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request, AuthService $authService)
     {
+        $redirect = $request->has('redirectTo') ?  ['redirectTo' => $request->redirectTo] : [];
         try {
             if ($user = $authService->login($request->phone))
-                return redirect()->route('auth.showVerify')->with([
+                return redirect()->route('auth.showVerify' , $redirect)->with([
                     'phone' => $user->phone,
                     'id' => $user->id,
                 ]);
-            return redirect()->route('auth.showLogin')->withErrors([
+            return redirect()->route('auth.showLogin' , $redirect)->withErrors([
                 "ارسال کد ناموفق بود"
             ]);
         } catch (SendToManyCodeException $exception) {
-            return redirect()->route('auth.showLogin')->withErrors([
+            return redirect()->route('auth.showLogin',$redirect)->withErrors([
                 "تعداد درخواست های ارسال پیامک شما، از حد مجاز بیشتر شده است!"
             ]);
         }
@@ -44,17 +45,20 @@ class AuthController extends Controller
 
     public function verify(TwoAuthRequest $request, AuthService $authService)
     {
+        $redirect = $request->has('redirectTo') ?  ['redirectTo' => $request->redirectTo] : [];
         try {
             if ($user = $authService->check2AuthCode($request->phone, $request->code)) {
                 auth()->login($user);
+                if ( $request->has('redirectTo') )
+                    return redirect($request->redirectTo);
                 return redirect()->route('home');
             }
         } catch (Invalid2AuthCodeException $exception) {
-            return redirect()->route('auth.showVerify')->withErrors([
+            return redirect()->route('auth.showVerify',$redirect)->withErrors([
                 "کد نامعتبر است!"
             ]);
         }
-        return redirect()->route('auth.showLogin');
+        return redirect()->route('auth.showLogin',$redirect);
     }
 
     public function logout(AuthService $authService)

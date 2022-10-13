@@ -9,7 +9,7 @@
                         <div>
                             <div class="card-body p-5">
                                 <h3 class="text-uppercase text-center mb-2">کد تایید را وارد کنید</h3>
-                                <form method="POST" action="{{ route('auth.verify') }}">
+                                <form method="POST" action="{{ request()->has('redirectTo') ? route('auth.verify' , ['redirectTo' => request()->redirectTo]) : route('auth.verify') }}">
                                     @csrf
                                     <input type="hidden" value="{{ session()->get('phone') }}" name="phone">
 
