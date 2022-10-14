@@ -23,26 +23,24 @@ use Mpdf\Mpdf;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// auth()->logout();
+// auth()->loginUsingId(2);
 
-// $faker = Faker\Factory::create('fa_IR'); // create a French faker
-// for ($i = 0; $i < 10; $i++) {
-//     die ($faker->name);
-// }
-
+// Pages
 Route::get('', [IndexController::class, 'home'])->name('home');
 Route::get('contract/{contract}', [IndexController::class, 'contract'])->name('contract');
 Route::get('contracts/{category?}', [IndexController::class, 'contracts'])->name('contracts');
-Route::get('contract/{contract}/form', [IndexController::class, 'form'])->name('form');
-Route::post('contract/{contract}/generate', [IndexController::class, 'generate'])->name('generate');
-Route::post('contract/{contract}/download', [IndexController::class, 'download'])->name('download');
-// Route::get('login', [IndexController::class, 'home'])->name('login');
-// Route::view('login', 'login')->name('login');
-Route::get('payments', [IndexController::class, 'payments'])->name('payments');
+Route::get('form/{order}', [IndexController::class, 'form'])->name('form');
+Route::post('generate/{order}', [IndexController::class, 'generate'])->name('generate');
+Route::post('download/{order}', [IndexController::class, 'download'])->name('download');
 
-Route::redirect('admin', 'admin/dashboard');
-Route::redirect('dashboard', 'admin/dashboard');
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('contract/{contract}/buy', [IndexController::class, 'buy'])->name('buy');
+    Route::get('payments', [IndexController::class, 'payments'])->name('payments');
+    Route::any('transaction/{uuid}/back' , [IndexController::class,'callback'])->name('callback');
+});
 
-
+// Login
 Route::as('auth.')->group(function () {
     Route::middleware('guest')->group(function () {
         Route::get('login', [AuthController::class, 'showLoginForm'])->name('showLogin');
@@ -50,8 +48,12 @@ Route::as('auth.')->group(function () {
         Route::get('verify', [AuthController::class, 'showVerifyForm'])->name('showVerify');
         Route::post('verify', [AuthController::class, 'verify'])->name('verify');
     });
-    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+    Route::any('logout', [AuthController::class, 'logout'])->name('logout');
 });
+
+// Dashboard
+Route::redirect('admin', 'admin/dashboard');
+Route::redirect('dashboard', 'admin/dashboard');
 
 Route::group(['as' => 'admin.', 'prefix' => 'admin'], function() {
     Route::resource('category', CategoryController::class);
@@ -60,10 +62,6 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin'], function() {
     Route::view('fillables', 'admin.fillables')->name('fillables');
     Route::post('fillables', [ContractController::class, 'fillables'])->name('fillables');
 });
-Route::group(['middleware' => 'auth'], function() {
-    Route::get('contract/{contract}/buy', [IndexController::class, 'buy'])->name('buy');
-});
-Route::any('transaction/{uuid}/back' , [IndexController::class,'callback'])->name('callback');
 
 
 Route::get('foo', function() {
@@ -113,17 +111,23 @@ Route::get('baz', function() {
     $pdf = new Mpdf(['format' => 'A4', 'orientation' => 'P', 'mode' => 'utf-8',
         'fontDir' =>  public_path('fonts'),
         'fontdata' => [ // lowercase letters only in font key
-                'Yekan' => [
-                    'R' => 'Yekan-Light.ttf',
+                'iransansweb' => [
+                    'R' => 'IRANSansWeb.ttf',
+                    'useOTL' => 0x80,
+                    'useKashida' => 75,
                 ]
             ],
-        'default_font' => 'Yekan']);
+        'default_font' => 'iransansweb'
+    ]);
+    $pdf->useAdobeCJK = true;
 
-    $pdf->SetProtection([], null, null, 128);
+    $pdf->SetProtection(['print'], null, null, 128);
+    $pdf->allow_charset_conversion = false;
     $pdf->autoScriptToLang = true;
     $pdf->autoLangToFont = true;
-    $pdf->writeHTML('
-<h1 style="direction: rtl;">فو بار باز</h1>');
+    // $pdf->autoScriptToLang = true;
+    // $pdf->autoLangToFont = true;
+    $pdf->writeHTML('<p style="direction: rtl; font-family: dejavusanscondensed !important;">آلفا بُتا گاما</p>');
     $pdf->Output();
 });
 

@@ -8,6 +8,7 @@ use App\Models\Fillable;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Mpdf\Mpdf;
 use Shetabit\Multipay\Exceptions\InvalidPaymentException;
 use Shetabit\Multipay\Invoice;
@@ -49,28 +50,23 @@ class IndexController extends Controller
         return view('payments', compact('payments'));
     }
 
-    public function form($order_id)
+    public function form(Order $order)
     {
-        $contract_id = Order::whereUserId(auth()->id())->whereIsPaid(1)->find($order_id);
-        $contract = Contract::whereSlug()->firstOrFail();
+        $contract = Contract::findOrFail($order->contract_id);
 
+        Gate::authorize('use-order', $order);
 
-
-
-        // if user don't have a empty version of this contract_slug. must not be in form.
-        if (! Order::whereUserId(auth()->id())->whereIsPaid(1)->whereContractId($contract->id)->whereNull('contract_text')->exists()) {
-            return abort(404);
-        }
-
-        // todo: if contract has empty text then continue. else return to generated one for download
-
-        $fillables = $this->get_fillables($contract);
-
-        return view('form', compact('contract_slug', 'fillables'));
+        // if contract has empty text => show form. else => download
+        if (empty($order->contract_text)) {
+            $fillables = $this->get_fillables($contract);
+            return view('form', compact('order', 'fillables'));
+        } else
+            return $this->download($order);
     }
 
-    public function generate(Request $request, $contract_slug)
+    public function generate(Request $request, Order $order)
     {
+
         $contract = Contract::whereSlug($contract_slug)->firstOrFail();
 
         $fillables = $this->get_fillables($contract);
@@ -92,12 +88,12 @@ class IndexController extends Controller
             $answers[] = $request->input("custom.$fillable->id") ?? '';
         }
 
-        Order str_replace($inputs, $answers, $contract->text);
+        str_replace($inputs, $answers, $contract->text);
 
         return view('form', compact('contract_slug', 'fillables'));
     }
 
-    public function download($uuid){
+    private function download(Order $order){
 
 
         // response download generated pdf

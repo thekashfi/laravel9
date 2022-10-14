@@ -4,7 +4,7 @@
     <div class="pt-100"></div>
 
     <div class="container">
-        <h3 class="mb-25">قرارداد های من</h3>
+        <h3 class="mb-15">قرارداد های من</h3>
         <table class="table">
             {{-- <thead>
                 <tr>
@@ -14,15 +14,19 @@
                 </tr>
             </thead> --}}
             <tbody>
-                @foreach($payments as $payment)
+                @forelse($payments as $payment)
                     <tr>
                         <td>{{ $payment->contract_name }}</td>
                         <td>
-                            <a href="{{ route('form', $payment->contract->slug) }}" class="btn btn-sm btn-success">دانلود</a>
+                            <a href="{{ route('form', $payment->id) }}" class="btn btn-sm btn-success">دانلود</a>
                         </td>
                         <td>{{ $payment->created_at }}</td>
                     </tr>
-                @endforeach
+                @empty
+                    <p class="text-center mb-3">
+                        {{ auth()->user()->name }} عزیز، شما هنوز قراردادی ندارید.
+                    </p>
+                @endforelse
             </tbody>
         </table>
     </div>

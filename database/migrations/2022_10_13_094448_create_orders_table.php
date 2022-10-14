@@ -29,7 +29,7 @@ return new class extends Migration
                 ->nullOnDelete();
 
             $table->string('contract_name', 100);
-            $table->string('uuid', 255);
+            $table->string('uuid', 255)->unique();
             $table->text('contract_text')->nullable();
             $table->boolean('is_paid')->default(false);
             $table->string('trans1', 255)->nullable();
