@@ -188,4 +188,19 @@ class IndexController extends Controller
         $pdf->writeHTML($html);
         return $pdf->Output();
     }
+
+
+    public function orders(Request $request){
+        $orders = Order::query()->latest()->when($request->has('q') , function ($query) use ($request){
+            $query->where('trans1' , 'like' , $request->q )
+                ->orWhere('contract_name' , 'like' , $request->q )
+                ->orWhere('id'  , trim($request->q , '#') );
+        })->paginate(50);
+
+        return view('admin.orders_index' , compact('orders'));
+    }
+    public function admin_print(Request $request, $uuid){
+        $order = Order::whereUuid($uuid)->firstOrFail();
+        return view('admin.print' , compact('order'));
+    }
 }

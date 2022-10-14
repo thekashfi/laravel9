@@ -61,6 +61,8 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin'], function() {
     Route::view('dashboard', 'admin.dashboard')->name('dashboard');
     Route::view('fillables', 'admin.fillables')->name('fillables');
     Route::post('fillables', [ContractController::class, 'fillables'])->name('fillables');
+    Route::get('orders', [IndexController::class, 'orders'])->name('orders');
+    Route::get('order/{uuid}/print', [IndexController::class, 'admin_print'])->name('print');
 });
 
 
