@@ -4,19 +4,19 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Bliss || Digital Agency Bootstrap 5 Landing Page</title>
+    <title>منبع قرارداد</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="shortcut icon" type="image/x-icon" href="{{ url('') }}/bliss/img/favicon.svg" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url('') }}/front-assets/img/favicon.svg" />
     <!-- Place favicon.ico in the root directory -->
 
     <!-- ========================= CSS here ========================= -->
-    <link rel="stylesheet" href="{{ url('') }}/bliss/css/bootstrap-5.0.0-beta2.min.css" />
-    <link rel="stylesheet" href="{{ url('') }}/bliss/css/LineIcons.2.0.css" />
-    <link rel="stylesheet" href="{{ url('') }}/bliss/css/tiny-slider.css" />
-    <link rel="stylesheet" href="{{ url('') }}/bliss/css/animate.css" />
-    <link rel="stylesheet" href="{{ url('') }}/bliss/css/main.css" />
-    <link rel="stylesheet" href="{{ url('') }}/bliss/css/style.css" />
+    <link rel="stylesheet" href="{{ url('') }}/front-assets/css/bootstrap-5.0.0-beta2.min.css" />
+    <link rel="stylesheet" href="{{ url('') }}/front-assets/css/LineIcons.2.0.css" />
+    <link rel="stylesheet" href="{{ url('') }}/front-assets/css/tiny-slider.css" />
+    <link rel="stylesheet" href="{{ url('') }}/front-assets/css/animate.css" />
+    <link rel="stylesheet" href="{{ url('') }}/front-assets/css/main.css" />
+    <link rel="stylesheet" href="{{ url('') }}/front-assets/css/style.css" />
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-Variable-font-face.css" rel="stylesheet"
         type="text/css" />
     @yield('head')
@@ -24,11 +24,6 @@
 </head>
 
 <body>
-    <style>
-        * {
-            font-family: Vazirmatn !important;
-        }
-    </style>
     <!--[if lte IE 9]>
       <p class="browserupgrade">
         You are using an <strong>outdated</strong> browser. Please
@@ -65,7 +60,7 @@
                     <div class="col-lg-12">
                         <nav class="navbar navbar-expand-lg">
                             <a class="navbar-brand" href="{{ url('') }}">
-                                <img src="{{ url('') }}/bliss/img/logo/logo.svg" alt="Logo" />
+                                <img src="{{ url('') }}/front-assets/img/logo/logo.svg" alt="Logo" />
                             </a>
                             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -77,24 +72,24 @@
                             <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                                 <ul id="nav" class="navbar-nav me-auto">
                                     <li class="nav-item">
-                                        <a class="active" href="{{ route('home') }}">خانه</a>
+                                        <a class="@if(\Illuminate\Support\Facades\Route::currentRouteName() == "home" ) active @endif" href="{{ route('home') }}">خانه</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="" href="{{ route('contracts') }}">همه قرارداد ها</a>
+                                        <a class="@if(\Illuminate\Support\Facades\Route::currentRouteName() == "contracts" ) active @endif" href="{{ route('contracts') }}">قرارداد ها</a>
                                     </li>
                                     @foreach(\App\Models\Category::where('in_menu', true)->get() as $h_category)
                                         <li class="nav-item">
-                                            <a class="" href="{{ route('contracts', $h_category->slug) }}">{{ $h_category->name }}</a>
+                                            <a class="@if(\Illuminate\Support\Facades\Route::currentRouteName() == "contracts" and request()->route('category') == $h_category->slug ) active @endif" href="{{ route('contracts', $h_category->slug) }}">{{ $h_category->name }}</a>
                                         </li>
                                     @endforeach
 {{--                                    <li class="nav-item">--}}
 {{--                                        <a class="" href="">درخواست قرارداد</a>--}}
 {{--                                    </li>--}}
                                     <li class="nav-item">
-                                        <a class="" href="">تماس با ما</a>
+                                        <a class="@if(\Illuminate\Support\Facades\Route::currentRouteName() == "connectus" ) active @endif" href="{{ route('connectus') }}">تماس با ما</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="" href="">درباره ما</a>
+                                        <a class="@if(\Illuminate\Support\Facades\Route::currentRouteName() == "aboutus" ) active @endif" href="{{ route('aboutus') }}">درباره ما</a>
                                     </li>
 
                                     @auth
@@ -103,6 +98,10 @@
                                                 منوی کاربری
                                             </a>
                                             <ul class="dropdown-menu px-3 shadow rounded-3 border-0 text-end" aria-labelledby="navbarDropdown">
+                                                @if(auth()->user()->is_admin )
+                                                    <li><a class="dropdown-item" href="{{ route('admin.dashboard') }}">محیط ادمین</a></li>
+                                                    <li><hr class="dropdown-divider"></li>
+                                                @endif
                                                 <li><a class="dropdown-item" href="{{ route('payments') }}">قرارداد های من</a></li>
                                                 <li><a class="dropdown-item" href="{{ route('payments_history') }}">پرداخت ها</a></li>
                                                 <li><hr class="dropdown-divider"></li>
@@ -112,11 +111,11 @@
                                     @else
                                         <li class="nav-item">
                                             <div class="navbar-btn d-none d-sm-inline-block">
-                                                <a href="" class="ud-main-btn ud-login-btn">
+                                                <a href="{{ route('auth.showLogin') }}" class="ud-main-btn ud-login-btn">
                                                 ورود
                                                 </a>
                                                 /
-                                                <a href="" class="ud-main-btn ud-white-btn">
+                                                <a href="{{ route('auth.showLogin') }}" class="ud-main-btn ud-white-btn">
                                                 ثبت نام
                                                 </a>
                                             </div>
@@ -169,9 +168,9 @@
 						<div class="col-xl-3 col-md-6">
 							<div class="footer-widget">
 								<div class="logo mb-35">
-									<a href="index.html"> <img src="{{ url('') }}/bliss/img/logo/logo.svg" alt=""> </a>
+									<a href="{{ route('home') }}"> <img src="{{ url('') }}/front-assets/img/logo/logo.svg" alt=""> </a>
 								</div>
-								<p class="desc mb-35">We are expert designer team, There have a lot of designer and developer If you have any project you can hire Create a website.</p>
+								<p class="desc mb-35">چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع.</p>
 								<ul class="socials">
 									<li>
 										<a href="jvascript:void(0)"> <i class="lni lni-facebook-filled"></i> </a>
@@ -191,56 +190,72 @@
 
 						<div class="col-xl-2 offset-xl-1 col-md-5 offset-md-1 col-sm-6">
 							<div class="footer-widget">
-								<h3>Link</h3>
+								<h3>لینک ها</h3>
 								<ul class="links">
-									<li> <a href="javascript:void(0)">Home</a> </li>
-									<li> <a href="javascript:void(0)">About</a> </li>
-									<li> <a href="javascript:void(0)">Services</a> </li>
-									<li> <a href="javascript:void(0)">Portfolio</a> </li>
-									<li> <a href="javascript:void(0)">Pricing</a> </li>
-									<li> <a href="javascript:void(0)">Team</a> </li>
-									<li> <a href="javascript:void(0)">Contact</a> </li>
+									<li> <a href="{{ route('home') }}">صفحه اصلی</a> </li>
+                                    <li>
+                                        <a class="" href="{{ route('contracts') }}">قرارداد ها</a>
+                                    </li>
+                                    @auth
+                                        <li><a href="{{ route('payments') }}">قرارداد های من</a></li>
+                                        <li><a href="{{ route('payments_history') }}">پرداخت ها</a></li>
+                                    @else
+                                        <li>
+                                            <a href="{{ route('auth.showLogin') }}">
+                                                ورود
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('auth.showLogin') }}">
+                                                ثبت نام
+                                            </a>
+                                        </li>
+                                    @endauth
+                                    <li>
+                                        <a class="" href="{{ route('aboutus') }}">درباره ما</a>
+                                    </li>
+                                    <li>
+                                        <a class="" href="{{ route('connectus') }}">تماس با ما</a>
+                                    </li>
 								</ul>
 							</div>
 						</div>
 
 						<div class="col-xl-3 col-md-6 col-sm-6">
 							<div class="footer-widget">
-								<h3>Services</h3>
+								<h3>دسته بندی ها</h3>
 								<ul class="links">
-									<li> <a href="javascript:void(0)">Graphic design</a> </li>
-									<li> <a href="javascript:void(0)">Web design</a> </li>
-									<li> <a href="javascript:void(0)">Visual design</a> </li>
-									<li> <a href="javascript:void(0)">Product design</a> </li>
-									<li> <a href="javascript:void(0)">UI/UX design</a> </li>
-									<li> <a href="javascript:void(0)">Web development</a> </li>
-									<li> <a href="javascript:void(0)">Startup business</a> </li>
+                                    @foreach(\App\Models\Category::query()->limit(7)->latest()->get() as $h_category)
+                                        <li>
+                                            <a class="" href="{{ route('contracts', $h_category->slug) }}">{{ $h_category->name }}</a>
+                                        </li>
+                                    @endforeach
 								</ul>
 							</div>
 						</div>
 
 						<div class="col-xl-3 col-md-6">
 							<div class="footer-widget">
-								<h3>Contact</h3>
+								<h3>تماس با ما</h3>
 								<ul>
 									<li>+003894372632</li>
 									<li>helldesigner@gmail.ccom</li>
-									<li>United state of America</li>
+									<li>شیراز ....</li>
 								</ul>
 								<div class="contact_map" style="width: 100%; height: 150px; margin-top: 25px;">
 									<div class="gmap_canvas">
 										<iframe id="gmap_canvas" src="https://maps.google.com/maps?q=Mission%20District%2C%20San%20Francisco%2C%20CA%2C%20USA&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed" style="width: 100%;"></iframe>
 									</div>
-									</div>
+                                </div>
 							</div>
 						</div>
 
 					</div>
 				</div>
 
-				<div class="copy-right">
-					<p>Design and Developed by <a href="https://uideck.com" rel="nofollow" target="_blank"> UIdeck </a></p>
-				</div>
+{{--				<div class="copy-right">--}}
+{{--					<p>Design and Developed by <a href="https://uideck.com" rel="nofollow" target="_blank"> UIdeck </a></p>--}}
+{{--				</div>--}}
 
 			</div>
 		</footer>
@@ -253,12 +268,12 @@
     </a>
 
     <!-- ========================= JS here ========================= -->
-    <script src="{{ url('') }}/bliss/js/bootstrap-5.0.0-beta2.min.js"></script>
-    <script src="{{ url('') }}/bliss/js/count-up.min.js"></script>
-    <script src="{{ url('') }}/bliss/js/tiny-slider.js"></script>
-    <script src="{{ url('') }}/bliss/js/wow.min.js"></script>
-    <script src="{{ url('') }}/bliss/js/polifill.js"></script>
-    <script src="{{ url('') }}/bliss/js/main.js"></script>
+    <script src="{{ url('') }}/front-assets/js/bootstrap-5.0.0-beta2.min.js"></script>
+    <script src="{{ url('') }}/front-assets/js/count-up.min.js"></script>
+    <script src="{{ url('') }}/front-assets/js/tiny-slider.js"></script>
+    <script src="{{ url('') }}/front-assets/js/wow.min.js"></script>
+    <script src="{{ url('') }}/front-assets/js/polifill.js"></script>
+    <script src="{{ url('') }}/front-assets/js/main.js"></script>
 </body>
 
 </html>

@@ -15,13 +15,11 @@ class MakeAclRulesTable extends Migration
     {
         Schema::create('acl_rules', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('user_id')->nullable();
+            $table->foreignId('user_id')->nullable()->references('id')->on('users');
             $table->string('disk');
             $table->string('path');
             $table->tinyInteger('access');
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

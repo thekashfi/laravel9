@@ -46,7 +46,7 @@
                 </div>
                 <div class="col-lg-4 text-center">
                     <div class="about-img">
-                        {{-- <img src="{{ url('') }}/bliss/img/about/about-img.svg" alt="about"> --}}
+                        {{-- <img src="{{ url('') }}/front-assets/img/about/about-img.svg" alt="about"> --}}
                         <div class="pricing-box tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
                             <div class="single-pricing">
                                 <div class="price-header">
