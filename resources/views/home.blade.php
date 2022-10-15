@@ -104,6 +104,7 @@
 									</div>
 								</div>
 							</div>
+                            <a href="{{ route('aboutus') }}" class="main-btn btn-hover">ذرباره ما</a>
 						</div>
 					</div>
 				</div>

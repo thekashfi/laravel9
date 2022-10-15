@@ -16,7 +16,7 @@ class ContactController extends Controller
     public function index()
     {
         $contacts = Contact::query()->latest()->paginate(10);
-        return view('list-contact' , compact('contacts'));
+        return view('admin.list-contact' , compact('contacts'));
     }
 
     /**
@@ -28,8 +28,8 @@ class ContactController extends Controller
     public function store(StoreContactRequest $request, Contact $contact)
     {
         if ( $request->user() != null )
-            $request->merge(['user_id' , auth()->id()]);
-        $contact->saveOrFail($request->all());
+            $request->merge(['user_id' =>auth()->id()]);
+        $contact->create($request->all());
         return redirect()->route('connectus')->with('flash', 'پیام شما با موفقیت ارسال شد، در سریع ترین زمان تیم پشتیبانی پیام شما را مطالعه می‌کنند.');
     }
 
@@ -42,7 +42,7 @@ class ContactController extends Controller
     public function destroy(Contact $contact)
     {
         $contact->delete();
-        return redirect()->back()->with('flash', 'پیام شما با موفقیت ارسال شد، در سریع ترین زمان تیم پشتیبانی پیام شما را مطالعه می‌کنند.');
+        return redirect()->back()->with('flash', 'پیام مد نظر حذف شد!');
 
     }
 }

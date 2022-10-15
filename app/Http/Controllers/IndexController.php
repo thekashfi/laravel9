@@ -66,6 +66,8 @@ class IndexController extends Controller
         // if contract has empty text => show form. else => download
         if (empty($order->contract_text)) {
             $fillables = $this->get_fillables($contract);
+            if ( $fillables->count()  == 0 )
+                return redirect()->route('generate', $uuid);
             session()->flashInput(request()->input()); // olds of redirected back from form_confirmation
             return view('form', compact('order', 'fillables'));
         } else
@@ -156,6 +158,7 @@ class IndexController extends Controller
             if ($order->is_paid == 2) {
                 DB::beginTransaction();
                 $receipt = Payment::amount($order->amount)->transactionId($request->Authority)->verify();
+                $order->trans1 = intval($order->trans1);
                 $order->trans2 = $receipt->getReferenceId();
                 $order->result = "پرداخت تکمیل و با موفقیت انجام شده است";
                 $order->is_paid = 1;

@@ -11,7 +11,7 @@
     <body class="dashboard">
         @if ($errors->any())
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">X</button>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 <strong>اشکالات زیر را برطرف کنید:</strong>
 
                 @foreach ($errors->all() as $error)

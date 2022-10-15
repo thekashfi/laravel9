@@ -56,7 +56,7 @@
                 </table>
             </div>
         </div>
-        <div class="px-3">
+        <div class="p-3">
             {{ $contracts->links() }}
         </div>
     </div>
