@@ -1,5 +1,6 @@
 <?php
 
+use AndreasElia\Analytics\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
@@ -8,16 +9,18 @@ use App\Http\Controllers\IndexController;
 use Illuminate\Support\Facades\Route;
 
 // Pages
-Route::get('', [IndexController::class, 'home'])->name('home');
-Route::get('contract/{contract}', [IndexController::class, 'contract'])->name('contract');
-Route::get('contracts/{category?}', [IndexController::class, 'contracts'])->name('contracts');
-Route::view('contact-us', 'contactus')->name('connectus');
-Route::post('contact-us', [ContactController::class, 'store'])->name('connect-us-save');
-Route::view('about-us', 'aboutus')->name('aboutus');
+Route::middleware('analytics')->group(function () {
+    Route::get('', [IndexController::class, 'home'])->name('home');
+    Route::get('contract/{contract}', [IndexController::class, 'contract'])->name('contract');
+    Route::get('contracts/{category?}', [IndexController::class, 'contracts'])->name('contracts');
+    Route::view('contact-us', 'contactus')->name('connectus');
+    Route::post('contact-us', [ContactController::class, 'store'])->name('connect-us-save');
+    Route::view('about-us', 'aboutus')->name('aboutus');
+});
 
 // Login
 Route::as('auth.')->group(function () {
-    Route::middleware('guest')->group(function () {
+    Route::middleware(['guest' , 'analytics'])->group(function () {
         Route::get('login', [AuthController::class, 'showLoginForm'])->name('showLogin');
         Route::post('Login', [AuthController::class, 'login'])->name('login');
         Route::get('verify', [AuthController::class, 'showVerifyForm'])->name('showVerify');
@@ -27,7 +30,7 @@ Route::as('auth.')->group(function () {
 });
 
 // User
-Route::group(['middleware' => 'auth'], function() {
+Route::group(['middleware' => ['auth', 'analytics']], function() {
     Route::get('contract/{contract}/buy', [IndexController::class, 'buy'])->name('buy');
     Route::get('payments', [IndexController::class, 'payments'])->name('payments');
     Route::get('payments_history', [IndexController::class, 'payments_history'])->name('payments_history');
@@ -38,12 +41,12 @@ Route::group(['middleware' => 'auth'], function() {
 });
 
 // Dashboard
-Route::redirect('admin', 'admin/dashboard');
-Route::redirect('dashboard', 'admin/dashboard');
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'admin'], function() {
+    Route::redirect('admin', 'admin/dashboard');
+    Route::redirect('dashboard', 'admin/dashboard');
     Route::resource('category', CategoryController::class);
     Route::resource('contract', ContractController::class);
-    Route::view('dashboard', 'admin.dashboard')->name('dashboard');
+    Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
     Route::view('fillables', 'admin.fillables')->name('fillables');
     Route::post('fillables', [ContractController::class, 'fillables'])->name('fillables');
     Route::get('orders', [IndexController::class, 'orders'])->name('orders');
