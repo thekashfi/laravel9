@@ -60,10 +60,9 @@ class IndexController extends Controller
     public function form($uuid)
     {
         $order = Order::whereUuid($uuid)->firstOrFail();
-        $contract = Contract::findOrFail($order->contract_id);
-
         Gate::authorize('use-order', $order); // check if order belongs to user && paid
 
+        $contract = Contract::findOrFail($order->contract_id);
         // if contract has empty text => show form. else => download
         if (empty($order->contract_text)) {
             $fillables = $this->get_fillables($contract);
@@ -82,7 +81,7 @@ class IndexController extends Controller
         if (empty($order->contract_text)) {
             $fillables = $this->get_fillables($contract);
             $values = ($request->has('custom') and isset($request->all('custom')['custom'])) ? $request->all('custom')['custom'] : [];
-            return view('form_confirmation', compact('order', 'fillables' , 'values'));
+            return view('form_confirmation', compact('order', 'fillables', 'values'));
         } else
             return $this->generate_pdf($order->contract_text);
     }
@@ -90,39 +89,41 @@ class IndexController extends Controller
     public function generate(Request $request, $uuid)
     {
         $order = Order::whereUuid($uuid)->firstOrFail();
-        $contract = Contract::findOrFail($order->contract_id);
-
         Gate::authorize('use-order', $order); // check if order belongs to user && paid
-        if (! empty($order->contract_text))
+
+        $contract = Contract::findOrFail($order->contract_id);
+        if (!empty($order->contract_text))
             return $this->generate_pdf($order->contract_text);
 
         // validation fillables form
         $fillables = $this->get_fillables($contract);
-
-        foreach ($fillables as $fillable) {
-            if ($fillable->rules != null) {
-                $rules['custom.' . $fillable->id] = $fillable->rules;
-                $names['custom.' . $fillable->id] = "«{$fillable->name}»";
+        $html = $contract->text;
+        if ( $fillables->count()  ) {
+            foreach ($fillables as $fillable) {
+                if ($fillable->rules != null) {
+                    $rules['custom.' . $fillable->id] = $fillable->rules;
+                    $names['custom.' . $fillable->id] = "«{$fillable->name}»";
+                }
             }
-        }
-        $this->validate($request, $rules ?? [], [] , $names ?? []);
+            $this->validate($request, $rules ?? [], [], $names ?? []);
 
-        //generate html for pdf
-        foreach ($fillables as $fillable) {
-            $inputs[] = "[[$fillable->id:<span style=\"color: #6073df;\">$fillable->name</span>]]";
-            $answers[] = nl2br(strip_tags($request->input("custom.$fillable->id"))) ?? '';
-        }
+            //generate html for pdf
+            foreach ($fillables as $fillable) {
+                $inputs[] = "[[$fillable->id:<span style=\"color: #6073df;\">$fillable->name</span>]]";
+                $answers[] = nl2br(strip_tags($request->input("custom.$fillable->id"))) ?? '';
+            }
 
-        $html = str_replace($inputs, $answers, $contract->text);
+            $html = str_replace($inputs, $answers, $html);
+        }
         $order->update(['contract_text' => $html]);
 
         return $this->generate_pdf($order->contract_text);
     }
 
-    public function buy(Request $request , $contract_slug)
+    public function buy(Request $request, $contract_slug)
     {
         $contract = Contract::whereSlug($contract_slug)->firstOrFail();
-        try{
+        try {
             DB::beginTransaction();
             $order = new Order();
             $order->uuid = \Illuminate\Support\Str::uuid();
@@ -134,21 +135,21 @@ class IndexController extends Controller
             $order->is_paid = 2;
             $order->save();
             $invoice = new Invoice;
-            $invoice->amount( $contract->price );
+            $invoice->amount($contract->price);
             $invoice->detail('Title', $contract->name);
             return Payment::callbackUrl(route('callback', $order->uuid))->purchase($invoice, function ($driver, $transactionId) use ($order) {
                 $order->trans1 = $transactionId;
                 $order->save();
                 DB::commit();
             })->pay()->render();
-        } catch (\Exception $exception){
-            return redirect()->route('contract',$contract_slug)->withErrors([
+        } catch (\Exception $exception) {
+            return redirect()->route('contract', $contract_slug)->withErrors([
                 "لطفا مجددا تلاش نمایید!"
             ]);
         }
     }
 
-    public function callback(Request $request , $uuid)
+    public function callback(Request $request, $uuid)
     {
         $order = Order::whereUuid($uuid)->firstOrFail();
         try {
@@ -163,9 +164,9 @@ class IndexController extends Controller
                 return redirect()->route('payments')->with('flash', 'پرداخت با موفقیت انجام شد.');
             }
             return redirect()->route('payments')->withErrors('فاکتور مد نظر قبلا پرداخت شده است!');
-        } catch (InvalidPaymentException | \Exception $exception) {
+        } catch (InvalidPaymentException|\Exception $exception) {
             DB::rollBack();
-            $order->result = ( $order->result != null ? $order->result.PHP_EOL : '') .$exception->getMessage();
+            $order->result = ($order->result != null ? $order->result . PHP_EOL : '') . $exception->getMessage();
             $order->is_paid = 0;
             $order->save();
             return redirect()->route('payments')->withErrors($exception->getMessage());
@@ -178,12 +179,12 @@ class IndexController extends Controller
         // preg_match("/\[\d+\:(.+)\]/", $contract->text, $matches);
         preg_match_all("/\[\[\d+\:([^\]])*\]\]/", $contract->text, $matches);
 
-        foreach($matches[0] as $match) {
+        foreach ($matches[0] as $match) {
             $variable = $match;
             $variable = substr($variable, 0, strpos($variable, ":"));
             $variable = str_replace('[', '', $variable);
             if (is_numeric($variable))
-                $fillables[] = (int) $variable;
+                $fillables[] = (int)$variable;
         }
 
         return Fillable::query()->whereIn('id', $fillables ?? [])->get();
@@ -192,28 +193,21 @@ class IndexController extends Controller
     private function generate_pdf($html)
     {
         $pdf = new Mpdf(['format' => 'A4', 'orientation' => 'P', 'mode' => 'utf-8',
-            'fontDir' =>  public_path('fonts'),
+            'fontDir' => public_path('fonts'),
             'fontdata' => [ // lowercase letters only in font key
-                    'iransansweb' => [
-                        'R' => 'IRANSansWeb.ttf',
-                        'useOTL' => 0x80,
-                        'useKashida' => 75,
-                    ]
-                ],
+                'iransansweb' => [
+                    'R' => 'IRANSansWeb.ttf',
+                    'useOTL' => 0x80,
+                    'useKashida' => 75,
+                ]
+            ],
             'default_font' => 'iransansweb'
         ]);
         $pdf->useAdobeCJK = true;
-        // $alphabet = "ا.ب.پ.ت.ث.ج.چ.ح.خ.د.ذ.ر.ز.ژ.س.ش.ص.ض.ط.ظ.ع.غ.ف.ق.ک.گ.ل.م.ن.و.ه.ی";
-        // $persiansAlphabet = explode('.' , $alphabet);
-        // foreach ($persiansAlphabet as $i => $v) {
-        //     $persiansAlphabet[$i] = $v . ' ';
-        //     $persiansRAlphabet[$i] = $v .'<span style=\'
-        //     display: none\'>1232222222222222222222222222222</span>';
-        // }
-        // $html = str_replace($persiansAlphabet , $persiansRAlphabet , $html);
-        $hash = '<div style=\'color: white; width:0; height:0; overflow: hidden; line-height:1px; padding:0; margin-top: -10px;
-font-size: 1px;\'>1232222222222222222222222222222</div>';
-        // $html = str_replace('</p>', '</p>' . $hash, $html);
+        //         $spam = 'lksfdj  k f dslkhf lksdfj kshf utyd ytrsa warx gfv kjhb m l , plk jpo asdf khsdu fslksfdj  k f dslkhf lksdfj kshf utyd ytrsa warx gfv kjhb m l , plk jpo asdf khsdu fslksfdj  k f dslkhf lksdfj kshf utyd ytrsa warx gfv kjhb m l , plk jpo asdf khsdu fslksfdj  k f dslkhf lksdfj kshf utyd ytrsa warx gfv kjhb m l , plk jpo asdf khsdu fslksfdj  k f dslkhf lksdfj kshf utyd ytrsa warx gfv kjhb m l , plk jpo asdf khsdu fslksfdj  k f dslkhf lksdfj kshf utyd ytrsa warx gfv kjhb m l , plk jpo asdf khsdu fs';
+        //         $hash = '<div style=\'color: white; width:0; height:0; overflow: hidden; line-height:1px; padding:0; margin: 0;
+        // font-size: 1px; position: fixed; top: 0; right: 1px\'>1232222222222222222222222222222</div>';
+        //         $html = str_replace('</p>', '</p>' . $hash, $html);
         $pdf->SetProtection(['print'], null, null, 128);
         $pdf->allow_charset_conversion = false;
         $pdf->autoScriptToLang = true;
@@ -223,17 +217,45 @@ font-size: 1px;\'>1232222222222222222222222222222</div>';
     }
 
 
-    public function orders(Request $request){
-        $orders = Order::query()->latest()->when($request->has('q') , function ($query) use ($request){
-            $query->where('trans1' , 'like' , $request->q )
-                ->orWhere('contract_name' , 'like' , $request->q )
-                ->orWhere('id'  , trim($request->q , '#') );
+    public function orders(Request $request)
+    {
+        $orders = Order::query()->latest()->when($request->has('q'), function ($query) use ($request) {
+            $query->where('trans1', 'like', $request->q)
+                ->orWhere('contract_name', 'like', $request->q)
+                ->orWhere('id', trim($request->q, '#'));
         })->paginate(50);
 
-        return view('admin.orders_index' , compact('orders'));
+        return view('admin.orders_index', compact('orders'));
     }
-    public function admin_print(Request $request, $uuid){
+
+    public function admin_print(Request $request, $uuid)
+    {
         $order = Order::whereUuid($uuid)->firstOrFail();
-        return view('admin.print' , compact('order'));
+        return view('admin.print', compact('order'));
+    }
+
+    public static function Mpdf_main_file_line_26125($html) {
+        $alphabet = "ا.ب.پ.ت.ث.ج.چ.ح.خ.د.ذ.ر.ز.ژ.س.ش.ص.ض.ط.ظ.ع.غ.ف.ق.ک.گ.ل.م.ن.و.ه.ی";
+        $alphabetInsert = "ع.غ.ف.ق.ب.پ.ت.ث";
+        $persiansAlphabet = explode('.', $alphabet);
+        $alphabetInsert = explode('.', $alphabetInsert);
+        foreach ($persiansAlphabet as $i => $v) {
+            $persiansAlphabet1[$i] = $v . ' ';
+            $persiansRAlphabet[$i] = $v . '<span style=\'text-align: right;color: white; width:0; height:0; overflow: hidden; line-height:0px; padding:0; margin: 0;font-size: 1px; position: fixed; top: 0; right: 0px\'>';
+            for ($it = 1; $it <= rand(3,4)    ; $it++)
+                $persiansRAlphabet[$i] .= $alphabetInsert[rand(0, count($alphabetInsert) - 1 )];
+            $persiansRAlphabet[$i] .= '</span> ';
+        }
+        $html = str_replace($persiansAlphabet1, $persiansRAlphabet, $html);
+        $alphabet = "ا.د.ذ.ر.ز.ژ.و";
+        $persiansAlphabet = explode('.', $alphabet);
+        foreach ($persiansAlphabet as $i => $v) {
+            $persiansAlphabet[$i] = $v;
+            $persiansRAlphabet[$i] = $v . '<span style=\'text-align: right;color: white; width:0; height:0; overflow: hidden; line-height:0px; padding:0; margin: 0;font-size: 1px; position: fixed; top: 0; right: 0px\'>';
+            for ($it = 1; $it <= 1; $it++)
+                $persiansRAlphabet[$i] .= $alphabetInsert[rand(0, count($alphabetInsert) - 1 )];
+            $persiansRAlphabet[$i] .= '</span>';
+        }
+        return str_replace($persiansAlphabet, $persiansRAlphabet, $html);
     }
 }
