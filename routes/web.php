@@ -20,7 +20,7 @@ Route::middleware('analytics')->group(function () {
 
 // Login
 Route::as('auth.')->group(function () {
-    Route::middleware(['guest' , 'analytics'])->group(function () {
+    Route::middleware(['guest'])->group(function () {
         Route::get('login', [AuthController::class, 'showLoginForm'])->name('showLogin');
         Route::post('Login', [AuthController::class, 'login'])->name('login');
         Route::get('verify', [AuthController::class, 'showVerifyForm'])->name('showVerify');
@@ -30,7 +30,7 @@ Route::as('auth.')->group(function () {
 });
 
 // User
-Route::group(['middleware' => ['auth', 'analytics']], function() {
+Route::group(['middleware' => ['auth']], function() {
     Route::get('contract/{contract}/buy', [IndexController::class, 'buy'])->name('buy');
     Route::get('payments', [IndexController::class, 'payments'])->name('payments');
     Route::get('payments_history', [IndexController::class, 'payments_history'])->name('payments_history');
