@@ -2,6 +2,7 @@
 <script>
     var editorObject = tinymce.init({
         selector: 'textarea.tinymce-editor', // Replace this CSS selector to match the placeholder element for TinyMCE
+        directionality : 'rtl',
         plugins: 'code table lists',
         toolbar: 'undo redo | formatselect| bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code table | customInsertButton',
         height : "200",

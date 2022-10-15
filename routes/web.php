@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 use Dompdf\Dompdf;
 use Mpdf\Mpdf;
 
+// auth()->loginUsingId(1);
 // use Meneses\LaravelMpdf\Facades\LaravelMpdf as Mpdf;
 // use Mpdf\Mpdf;
 
@@ -30,16 +31,9 @@ use Mpdf\Mpdf;
 Route::get('', [IndexController::class, 'home'])->name('home');
 Route::get('contract/{contract}', [IndexController::class, 'contract'])->name('contract');
 Route::get('contracts/{category?}', [IndexController::class, 'contracts'])->name('contracts');
-Route::get('form/{uuid}', [IndexController::class, 'form'])->name('form');
+Route::any('form/{uuid}', [IndexController::class, 'form'])->name('form');
+Route::post('form/{uuid}/confirmation', [IndexController::class, 'form_confirmation'])->name('form_confirmation');
 Route::post('generate/{uuid}', [IndexController::class, 'generate'])->name('generate');
-Route::post('download/{uuid}', [IndexController::class, 'download'])->name('download');
-
-Route::group(['middleware' => 'auth'], function() {
-    Route::get('contract/{contract}/buy', [IndexController::class, 'buy'])->name('buy');
-    Route::get('payments', [IndexController::class, 'payments'])->name('payments');
-    Route::get('payments_history', [IndexController::class, 'payments_history'])->name('payments_history');
-    Route::any('transaction/{uuid}/back' , [IndexController::class,'callback'])->name('callback');
-});
 
 // Login
 Route::as('auth.')->group(function () {
@@ -52,10 +46,17 @@ Route::as('auth.')->group(function () {
     Route::any('logout', [AuthController::class, 'logout'])->name('logout');
 });
 
+// User
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('contract/{contract}/buy', [IndexController::class, 'buy'])->name('buy');
+    Route::get('payments', [IndexController::class, 'payments'])->name('payments');
+    Route::get('payments_history', [IndexController::class, 'payments_history'])->name('payments_history');
+    Route::any('transaction/{uuid}/back' , [IndexController::class,'callback'])->name('callback');
+});
+
 // Dashboard
 Route::redirect('admin', 'admin/dashboard');
 Route::redirect('dashboard', 'admin/dashboard');
-
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'admin'], function() {
     Route::resource('category', CategoryController::class);
     Route::resource('contract', ContractController::class);

@@ -22,7 +22,7 @@
                                 {{ empty($order->contract_text) ? 'تکمیل و دانلود قرارداد' : 'دانلود' }}
                             </a>
                         </td>
-                        <td dir="ltr" class="text-end">{{ $order->created_at->toJalali()->format('Y-n-j H:i') }}</td>
+                        <td dir="ltr" class="text-end">{{ $order->created_at->toJalali()->format('Y/n/j H:i') }}</td>
                     </tr>
                 @empty
                     <p class="text-center mb-3">

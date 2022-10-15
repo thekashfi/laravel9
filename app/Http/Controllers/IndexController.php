@@ -62,14 +62,29 @@ class IndexController extends Controller
         $order = Order::whereUuid($uuid)->firstOrFail();
         $contract = Contract::findOrFail($order->contract_id);
 
-        Gate::authorize('use-order', $order);
+        Gate::authorize('use-order', $order); // check if order belongs to user && paid
 
         // if contract has empty text => show form. else => download
         if (empty($order->contract_text)) {
             $fillables = $this->get_fillables($contract);
+            session()->flashInput(request()->input()); // olds of redirected back from form_confirmation
             return view('form', compact('order', 'fillables'));
         } else
-            return $this->download($order->uuid);
+            return $this->generate_pdf($order->contract_text);
+    }
+
+    public function form_confirmation(Request $request, $uuid)
+    {
+        $order = Order::whereUuid($uuid)->firstOrFail();
+        Gate::authorize('use-order', $order); // check if order belongs to user && paid
+        $contract = Contract::findOrFail($order->contract_id);
+
+        if (empty($order->contract_text)) {
+            $fillables = $this->get_fillables($contract);
+            $values = ($request->has('custom') and isset($request->all('custom')['custom'])) ? $request->all('custom')['custom'] : [];
+            return view('form_confirmation', compact('order', 'fillables' , 'values'));
+        } else
+            return $this->generate_pdf($order->contract_text);
     }
 
     public function generate(Request $request, $uuid)
@@ -77,12 +92,11 @@ class IndexController extends Controller
         $order = Order::whereUuid($uuid)->firstOrFail();
         $contract = Contract::findOrFail($order->contract_id);
 
-        $fillables = $this->get_fillables($contract);
+        Gate::authorize('use-order', $order); // check if order belongs to user && paid
+        if (! empty($order->contract_text))
+            return $this->generate_pdf($order->contract_text);
 
         // validation fillables form
-        if (! empty($order->contract_text))
-            return abort(403, 'شما قبلا این قرارداد را ساخته اید.');
-
         $fillables = $this->get_fillables($contract);
 
         foreach ($fillables as $fillable) {
@@ -96,18 +110,12 @@ class IndexController extends Controller
         //generate html for pdf
         foreach ($fillables as $fillable) {
             $inputs[] = "[[$fillable->id:<span style=\"color: #6073df;\">$fillable->name</span>]]";
-            $answers[] = strip_tags($request->input("custom.$fillable->id")) ?? '';
+            $answers[] = nl2br(strip_tags($request->input("custom.$fillable->id"))) ?? '';
         }
 
         $html = str_replace($inputs, $answers, $contract->text);
         $order->update(['contract_text' => $html]);
 
-        return $this->download($order->uuid);
-    }
-
-    private function download($uuid)
-    {
-        $order = Order::whereUuid($uuid)->firstOrFail();
         return $this->generate_pdf($order->contract_text);
     }
 
@@ -195,12 +203,22 @@ class IndexController extends Controller
             'default_font' => 'iransansweb'
         ]);
         $pdf->useAdobeCJK = true;
-
+        // $alphabet = "ا.ب.پ.ت.ث.ج.چ.ح.خ.د.ذ.ر.ز.ژ.س.ش.ص.ض.ط.ظ.ع.غ.ف.ق.ک.گ.ل.م.ن.و.ه.ی";
+        // $persiansAlphabet = explode('.' , $alphabet);
+        // foreach ($persiansAlphabet as $i => $v) {
+        //     $persiansAlphabet[$i] = $v . ' ';
+        //     $persiansRAlphabet[$i] = $v .'<span style=\'
+        //     display: none\'>1232222222222222222222222222222</span>';
+        // }
+        // $html = str_replace($persiansAlphabet , $persiansRAlphabet , $html);
+        $hash = '<div style=\'color: white; width:0; height:0; overflow: hidden; line-height:1px; padding:0; margin-top: -10px;
+font-size: 1px;\'>1232222222222222222222222222222</div>';
+        // $html = str_replace('</p>', '</p>' . $hash, $html);
         $pdf->SetProtection(['print'], null, null, 128);
         $pdf->allow_charset_conversion = false;
         $pdf->autoScriptToLang = true;
         $pdf->autoLangToFont = true;
-        $pdf->writeHTML($html);
+        $pdf->writeHTML('<body style="position: relative">' . $html . '</body>');
         return $pdf->Output();
     }
 
