@@ -10,6 +10,7 @@
         "dompdf/dompdf": "^2.0",
         "fruitcake/laravel-cors": "^2.0.5",
         "guzzlehttp/guzzle": "^7.2",
+        "hekmatinasser/verta": "^8.1",
         "laravel/framework": "^9.0",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",

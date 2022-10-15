@@ -104,6 +104,7 @@
                                             </a>
                                             <ul class="dropdown-menu px-3 shadow rounded-3 border-0 text-end" aria-labelledby="navbarDropdown">
                                                 <li><a class="dropdown-item" href="{{ route('payments') }}">قرارداد های من</a></li>
+                                                <li><a class="dropdown-item" href="{{ route('payments_history') }}">پرداخت ها</a></li>
                                                 <li><hr class="dropdown-divider"></li>
                                                 <li><a class="dropdown-item" href="{{ route('auth.logout') }}">خروج</a></li>
                                             </ul>

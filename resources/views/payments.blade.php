@@ -14,13 +14,15 @@
                 </tr>
             </thead> --}}
             <tbody>
-                @forelse($payments as $payment)
+                @forelse($orders as $order)
                     <tr>
-                        <td>{{ $payment->contract_name }}</td>
+                        <td>{{ $order->contract_name }}</td>
                         <td>
-                            <a href="{{ route('form', $payment->id) }}" class="btn btn-sm btn-success">دانلود</a>
+                            <a href="{{ route('form', $order->uuid) }}" class="btn btn-sm btn-success">
+                                {{ empty($order->contract_text) ? 'تکمیل و دانلود قرارداد' : 'دانلود' }}
+                            </a>
                         </td>
-                        <td>{{ $payment->created_at }}</td>
+                        <td dir="ltr" class="text-end">{{ $order->created_at->toJalali()->format('Y-n-j H:i') }}</td>
                     </tr>
                 @empty
                     <p class="text-center mb-3">

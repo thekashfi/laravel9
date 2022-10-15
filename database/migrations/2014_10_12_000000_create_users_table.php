@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('phone')->unique();
+            $table->boolean('is_admin')->default(0);
             $table->timestamps();
         });
     }

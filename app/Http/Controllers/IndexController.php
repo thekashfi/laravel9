@@ -45,13 +45,21 @@ class IndexController extends Controller
 
     public function payments()
     {
-        $payments = Order::with('contract')->whereUserId(auth()->id())->whereIsPaid(1)->get();
+        $orders = Order::with('contract')->whereUserId(auth()->id())->whereIsPaid(1)->latest()->get();
 
-        return view('payments', compact('payments'));
+        return view('payments', compact('orders'));
     }
 
-    public function form(Order $order)
+    public function payments_history()
     {
+        $orders = Order::with('contract')->whereUserId(auth()->id())->latest()->get();
+
+        return view('payments_history', compact('orders'));
+    }
+
+    public function form($uuid)
+    {
+        $order = Order::whereUuid($uuid)->firstOrFail();
         $contract = Contract::findOrFail($order->contract_id);
 
         Gate::authorize('use-order', $order);
@@ -61,17 +69,20 @@ class IndexController extends Controller
             $fillables = $this->get_fillables($contract);
             return view('form', compact('order', 'fillables'));
         } else
-            return $this->download($order);
+            return $this->download($order->uuid);
     }
 
-    public function generate(Request $request, Order $order)
+    public function generate(Request $request, $uuid)
     {
-
-        $contract = Contract::whereSlug($contract_slug)->firstOrFail();
+        $order = Order::whereUuid($uuid)->firstOrFail();
+        $contract = Contract::findOrFail($order->contract_id);
 
         $fillables = $this->get_fillables($contract);
 
         // validation fillables form
+        if (! empty($order->contract_text))
+            return abort(403, 'شما قبلا این قرارداد را ساخته اید.');
+
         $fillables = $this->get_fillables($contract);
 
         foreach ($fillables as $fillable) {
@@ -85,19 +96,19 @@ class IndexController extends Controller
         //generate html for pdf
         foreach ($fillables as $fillable) {
             $inputs[] = "[[$fillable->id:<span style=\"color: #6073df;\">$fillable->name</span>]]";
-            $answers[] = $request->input("custom.$fillable->id") ?? '';
+            $answers[] = strip_tags($request->input("custom.$fillable->id")) ?? '';
         }
 
-        str_replace($inputs, $answers, $contract->text);
+        $html = str_replace($inputs, $answers, $contract->text);
+        $order->update(['contract_text' => $html]);
 
-        return view('form', compact('contract_slug', 'fillables'));
+        return $this->download($order->uuid);
     }
 
-    private function download(Order $order){
-
-
-        // response download generated pdf
-        return $this->generate_pdf('<h1 style="direction: rtl;">فو بار باز</h1>');
+    private function download($uuid)
+    {
+        $order = Order::whereUuid($uuid)->firstOrFail();
+        return $this->generate_pdf($order->contract_text);
     }
 
     public function buy(Request $request , $contract_slug)
@@ -171,18 +182,22 @@ class IndexController extends Controller
     }
 
     private function generate_pdf($html)
-    {$pdf = new Mpdf(['format' => 'LETTER', 'orientation' => 'P', 'mode' => 'utf-8',
-        'fontDir' =>  public_path('fonts'),
-        'fontdata' => [ // lowercase letters only in font key
-            'vazir' => [
-                'I' => 'Vazirmatn-Bold.ttf',
-                'R' => 'Vazirmatn-Light.ttf',
-            ]
-        ],
-        'default_font' => 'vazir'
-    ]);
+    {
+        $pdf = new Mpdf(['format' => 'A4', 'orientation' => 'P', 'mode' => 'utf-8',
+            'fontDir' =>  public_path('fonts'),
+            'fontdata' => [ // lowercase letters only in font key
+                    'iransansweb' => [
+                        'R' => 'IRANSansWeb.ttf',
+                        'useOTL' => 0x80,
+                        'useKashida' => 75,
+                    ]
+                ],
+            'default_font' => 'iransansweb'
+        ]);
+        $pdf->useAdobeCJK = true;
 
         $pdf->SetProtection(['print'], null, null, 128);
+        $pdf->allow_charset_conversion = false;
         $pdf->autoScriptToLang = true;
         $pdf->autoLangToFont = true;
         $pdf->writeHTML($html);

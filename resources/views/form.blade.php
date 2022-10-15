@@ -9,7 +9,7 @@
                         <div>
                             <div class="card-body p-5">
                                 <h3 class="text-uppercase text-center mb-2">مشخصات را وارد کنید</h3>
-                                <form class="row g-3" action="{{ route('generate' , $order->id) }}" method="POST">
+                                <form class="row g-3" action="{{ route('generate' , $order->uuid) }}" method="POST">
                                     @csrf
                                     @foreach($fillables as $fillable)
 {{--                                        <div class="col-md-12">--}}
@@ -22,11 +22,12 @@
                                                     <label for="{{ $fillable->id }}" class="form-label">{{ $fillable->name }}</label>
                                                     <select name="custom[{{ $fillable->id }}]" id="{{ $fillable->id }}" class="form-select" size="3" x-model="type">
                                                         @foreach(json_decode($fillable->options) as $key => $option)
-                                                            <option value="{{ $key }}" @selected(old("custom.$fillable->id") === $key)>
+                                                            <option value="{{ $option }}" @selected(old("custom.$fillable->id") === $option)>
                                                                 {{ $option }}
                                                             </option>
                                                         @endforeach
                                                     </select>
+                                                    @if($fillable->description) <div id="rulesHelp" class="form-text">{{ $fillable->description }}</div> @endif
                                                 </div>
                                             @break
 

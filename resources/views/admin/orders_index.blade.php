@@ -30,7 +30,7 @@
                                     <a href="{{ route('admin.print' , $order->uuid) }}" target="_blank">
                                         <div class="d-flex px-2 py-1">
                                             <div>
-                                                <img src="{{ asset('images/contract.jpg') }}" class="avatar avatar-sm me-3" alt="user1">
+                                                <img src="{{ asset('images/contract.jpg') }}" class="avatar avatar-sm" alt="user1">
                                             </div>
                                             <div class="d-flex flex-column justify-content-center">
                                                 <h6 class="mb-0 text-sm">{{ $order->contract_name }}</h6>

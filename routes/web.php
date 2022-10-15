@@ -30,13 +30,14 @@ use Mpdf\Mpdf;
 Route::get('', [IndexController::class, 'home'])->name('home');
 Route::get('contract/{contract}', [IndexController::class, 'contract'])->name('contract');
 Route::get('contracts/{category?}', [IndexController::class, 'contracts'])->name('contracts');
-Route::get('form/{order}', [IndexController::class, 'form'])->name('form');
-Route::post('generate/{order}', [IndexController::class, 'generate'])->name('generate');
-Route::post('download/{order}', [IndexController::class, 'download'])->name('download');
+Route::get('form/{uuid}', [IndexController::class, 'form'])->name('form');
+Route::post('generate/{uuid}', [IndexController::class, 'generate'])->name('generate');
+Route::post('download/{uuid}', [IndexController::class, 'download'])->name('download');
 
 Route::group(['middleware' => 'auth'], function() {
     Route::get('contract/{contract}/buy', [IndexController::class, 'buy'])->name('buy');
     Route::get('payments', [IndexController::class, 'payments'])->name('payments');
+    Route::get('payments_history', [IndexController::class, 'payments_history'])->name('payments_history');
     Route::any('transaction/{uuid}/back' , [IndexController::class,'callback'])->name('callback');
 });
 
@@ -55,7 +56,7 @@ Route::as('auth.')->group(function () {
 Route::redirect('admin', 'admin/dashboard');
 Route::redirect('dashboard', 'admin/dashboard');
 
-Route::group(['as' => 'admin.', 'prefix' => 'admin'], function() {
+Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'admin'], function() {
     Route::resource('category', CategoryController::class);
     Route::resource('contract', ContractController::class);
     Route::view('dashboard', 'admin.dashboard')->name('dashboard');
