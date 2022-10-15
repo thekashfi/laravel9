@@ -6,13 +6,14 @@
     <div class="container">
         <h3 class="mb-15">قرارداد های من</h3>
         <table class="table">
-            {{-- <thead>
+            <thead>
                 <tr>
-                    <th scope="col" class="text-secondary fw-light border-bottom">نام</th>
+                    <th scope="col" class="text-secondary fw-light border-bottom">عنوان قرارداد</th>
                     <th scope="col" class="text-secondary fw-light border-bottom">دانلود</th>
-                    <th scope="col" class="text-secondary fw-light border-bottom">تاریخ خرید</th>
+                    <th scope="col" class="text-secondary fw-light border-bottom">شماره فاکتور</th>
+                    <th scope="col" class="text-secondary fw-light border-bottom">تاریخ</th>
                 </tr>
-            </thead> --}}
+            </thead>
             <tbody>
                 @forelse($orders as $order)
                     <tr>
@@ -22,6 +23,7 @@
                                 {{ empty($order->contract_text) ? 'تکمیل و دانلود قرارداد' : 'دانلود' }}
                             </a>
                         </td>
+                        <td dir="ltr" class="text-end">#{{ $order->id }}</td>
                         <td dir="ltr" class="text-end">{{ $order->created_at->toJalali()->format('Y/n/j H:i') }}</td>
                     </tr>
                 @empty

@@ -29,13 +29,13 @@ class ContractController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|max:100',
-            'summary' => 'nullable|max:255',
             'slug' => 'required|max:100',
             'text' => 'required',
             'category_id' => 'required',
-            'slug' => 'required',
             'price' => 'int',
         ]);
+
+        $request->merge(['summary' => str_replace('../../../files' , url('files') , $request->summary)]);
 
         Contract::create($request->all());
 
@@ -59,12 +59,13 @@ class ContractController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|max:100',
-            'summary' => 'nullable|max:255',
             'slug' => 'required|max:100',
             'category_id' => 'required',
             'text' => 'required',
             'price' => 'int',
         ]);
+
+        $request->merge(['description' => str_replace('../../../files' , url('files') , $request->description)]);
 
         Contract::findOrFail($id)->update($request->all());
 

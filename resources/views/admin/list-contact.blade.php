@@ -5,7 +5,7 @@
     <div class="card mb-4">
 
         <div class="card-header d-flex justify-content-between pb-0">
-            <h6 class="d-inline-block">{{ $contact->name }}</h6>
+            <h6 class="d-inline-block">{{ $contact->name }}</h6><small>{{ $contact->created_at->toJalali()->format('Y/n/j H:i') }}</small>
             <a class="btn bg-gradient-danger mb-0 d-inline-block" href="{{ route('admin.connect-us-delete' , $contact->id) }}"><i class="fas fas-remove" aria-hidden="true"></i>&nbsp;&nbsp;حذف پیام</a>
         </div>
 

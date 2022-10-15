@@ -29,7 +29,7 @@
                                                 <div class="content position-relative">
                                                     <h3 class="mb-3" class="mb-3">{{ $contract->name }}</h3>
                                                     <p class="mb-3 text-secondary" style="text-align: justify !important">
-                                                        {{ empty($contract->summary) ? Str::limit(strip_tags($contract->description), 100) : $contract->summary }}
+                                                        {!! empty($contract->summary) ? Str::limit(strip_tags($contract->description), 100) : nl2br($contract->summary) !!}
                                                     </p>
                                                     <h2 class="price price-badge">{{ number_format($contract->price, null, '.', ',') }}<span class="toman">تومان</span></h2>
                                                 </div>

@@ -4,6 +4,15 @@
     <div class="card mb-4">
         <div class="card-header d-flex justify-content-between pb-0">
             <h6 class="d-inline-block">سفارش ها</h6>
+            <div class="d-inline-block">
+                <form>
+                    <div class="input-group">
+                        <button type="submit" class="input-group-text text-body"><i class="fas fa-search" style="font-family:'Font Awesome 5 Free' !important;" aria-hidden="true"></i></button>
+                        <input type="text" name="q" value="{{ request()->query('q') }}" class="form-control" placeholder="جست و جو" onfocus="focused(this)" onfocusout="defocused(this)" style="border-right: 1px solid #d2d6da!important;border-left: 1px solid #d2d6da!important;">
+                    </div>
+                </form>
+            </div>
+
         </div>
 
         <div class="card-body px-0 pt-0 pb-2">
@@ -11,7 +20,7 @@
                 <table class="table align-items-center mb-0">
                     <thead>
                         <tr>
-                            <th class=""></th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">شماره فاکتور</th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">نام قرار داد</th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">شماره تماس</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">قیمت</th>
@@ -42,10 +51,10 @@
                                     <p class="text-xs text-secondary mb-0">{{ $order->user->phone }}</p>
                                 </td>
                                 <td class="align-middle text-center">
-                                    <span class="text-secondary text-xs font-weight-bold">{{ $order->amount }}</span>
+                                    <span class="text-secondary text-xs font-weight-bold">{{ number_format($order->amount) }}</span>
                                 </td>
                                 <td class="align-middle text-center">
-                                    <span class="text-secondary text-xs font-weight-bold">{{ $order->created_at }}</span>
+                                    <span class="text-secondary text-xs font-weight-bold">{{ $order->created_at->toJalali()->format('Y/n/j H:i') }}</span>
                                 </td>
                                 <td class="align-middle text-center">
                                     <span class="@if($order->is_paid == 2) text-warning @elseif($order->is_paid == 1 ) text-success @else text-danger @endif">

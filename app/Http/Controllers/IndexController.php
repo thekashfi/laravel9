@@ -222,11 +222,15 @@ class IndexController extends Controller
 
     public function orders(Request $request)
     {
-        $orders = Order::query()->latest()->when($request->has('q'), function ($query) use ($request) {
-            $query->where('trans1', 'like', $request->q)
-                ->orWhere('contract_name', 'like', $request->q)
-                ->orWhere('id', trim($request->q, '#'));
-        })->paginate(50);
+        $orders = Order::query()->latest()->when($request->has('q') and $request->q != null, function ($query) use ($request) {
+            /* @var \Illuminate\Database\Eloquent\Builder $query */
+            $query->where('trans1', 'like', '%'.$request->q.'%')
+                ->orWhere('contract_name', 'like', '%'.$request->q.'%')
+                ->orWhere('id', trim($request->q, '#'))
+                ->orWhereHas('user', function ($query) use ($request) {
+                    $query->where('phone', 'like', '%'.$request->q.'%');
+                });
+        })->paginate(20);
 
         return view('admin.orders_index', compact('orders'));
     }
