@@ -28,11 +28,11 @@ class AuthController extends Controller
                     'phone' => $user->phone,
                     'id' => $user->id,
                 ]);
-            return redirect()->route('auth.showLogin' , $redirect)->withErrors([
+            return redirect()->route('auth.showLogin' , $redirect)->withInput()->withErrors([
                 "ارسال کد ناموفق بود"
             ]);
         } catch (SendToManyCodeException $exception) {
-            return redirect()->route('auth.showLogin',$redirect)->withErrors([
+            return redirect()->route('auth.showLogin',$redirect)->withInput()->withErrors([
                 "تعداد درخواست های ارسال پیامک شما، از حد مجاز بیشتر شده است!"
             ]);
         }
@@ -54,11 +54,11 @@ class AuthController extends Controller
                 return redirect()->route('home');
             }
         } catch (Invalid2AuthCodeException $exception) {
-            return redirect()->route('auth.showVerify',$redirect)->withErrors([
+            return redirect()->route('auth.showVerify',$redirect)->withInput()->withErrors([
                 "کد نامعتبر است!"
             ]);
         }
-        return redirect()->route('auth.showLogin',$redirect);
+        return redirect()->route('auth.showLogin',$redirect)->withInput();
     }
 
     public function logout(AuthService $authService)

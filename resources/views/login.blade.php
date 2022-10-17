@@ -14,7 +14,7 @@
 
                                     <div class="form-outline mb-3">
                                         <label class="form-label mb-1" for="form3Example1cg">شماره تلفن</label>
-                                        <input type="tel" name="phone" id="form3Example1cg" class="form-control form-control" dir="ltr"/>
+                                        <input type="tel" value="{{ old('phone') }}" name="phone" id="form3Example1cg" class="form-control form-control" dir="ltr"/>
                                     </div>
 
 {{--                                    <div class="form-check d-flex justify-content-center mb-3">--}}

@@ -11,7 +11,7 @@
                                 <h3 class="text-uppercase text-center mb-2">کد تایید را وارد کنید</h3>
                                 <form method="POST" action="{{ request()->has('redirectTo') ? route('auth.verify' , ['redirectTo' => request()->redirectTo]) : route('auth.verify') }}">
                                     @csrf
-                                    <input type="hidden" value="{{ session()->get('phone') }}" name="phone">
+                                    <input type="hidden" value="{{ old('phone' , session()->get('phone')) }}" name="phone">
 
                                     <div class="form-outline mb-3">
                                         <label class="form-label mb-1" for="code"></label>
