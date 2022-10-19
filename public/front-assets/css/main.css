@@ -1184,7 +1184,7 @@ p {
 .pricing-section .pricing-active-wrapper .tns-controls {
   position: absolute;
   bottom: 60px;
-  left: -200px;
+  right: -200px;
   z-index: 2;
 }
 

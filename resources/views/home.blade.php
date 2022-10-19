@@ -17,7 +17,7 @@
                         </p>
 
                         @if(\App\Http\Controllers\IndexController::view('hasContract'))
-                            <a href="{{ route('contracts') }}" class="main-btn btn-hover wow fadeInUp"
+                            <a href="{{ route('contracts' , 'all') }}" class="main-btn btn-hover wow fadeInUp"
                                data-wow-delay=".6s">دیدن
                                 نمونه قرارداد ها
                             </a>
@@ -34,37 +34,66 @@
     </section>
     <!-- ========================= hero-section end ========================= -->
 
+    @if(\App\Http\Controllers\IndexController::view('hasPackage'))
     <!-- ========================= client-logo-section start ========================= -->
-    <section class="client-logo-section pt-150">
+    <section id="pricing" class="pricing-section pt-150">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-sm-6">
-                    <div class="single-logo text-center">
-                        <img src="{{ url('') }}/front-assets/img/client-logo/lineicons.svg" alt="">
+
+                <div class="col-xxl-6 col-xl-5 col-lg-8">
+                    <div class="pricing-content">
+                        <div class="image">
+                            <img src="{{ url('') }}/front-assets/img/pricing/pricing-shape.svg" alt="آخرین پکیج های ما">
+                        </div>
+                        <div class="section-title">
+                            <h1 class="mb-20 wow fadeInUp" data-wow-delay=".2s">آخرین پکیج های ما</h1>
+                            <p class="wow fadeInUp" data-wow-delay=".4s">پکیج ها برای شرکت ها مناسب می باشد تا قرارداد های مرتبط به حوضه کاری را هم زمان خریداری کنند.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="single-logo text-center">
-                        <img src="{{ url('') }}/front-assets/img/client-logo/uideck.svg" alt="">
+                <div class="col-xxl-6 col-xl-7" style="direction: ltr;text-align: left;">
+                    <div class="pricing-active-wrapper">
+                        <div class="pricing-active">
+                            @foreach($packages as $package)
+
+                                <div class="pricing-box">
+                                    <div class="single-pricing"  style="direction: rtl;text-align: right;">
+                                        <div class="price-header">
+                                            <div class="shape">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="142.92" height="137" viewBox="0 0 142.92 137">
+                                                    <path id="Path_751" data-name="Path 751" d="M17.065-3.312C-5.734,33.7-93.2,35.845-114.171-.154S-89.6-110.3-45.837-111.307C-2.071-112.381,39.864-40.384,17.065-3.312Z" transform="translate(119.436 111.319)" fill="#{{ (['ffeaea' ,'ffefff' , 'ced7ff'])[rand(0,2)] }}" />
+                                                </svg>
+                                            </div>
+                                            <div class="text">
+                                                <h3 class="package-name">{{ $package->name }}</h3>
+                                                <h2 class="price">{{ number_format($package->price, null, '.', ',') }}<span class="toman">تومان</span></h2>
+                                            </div>
+                                        </div>
+                                        <div class="content">
+                                            {!! empty($package->summary) ? Str::limit(strip_tags($package->description), 100) : nl2br($package->summary) !!}
+                                        </div>
+                                        <div class="pricing-btn text-center">
+                                            <a href="{{ route('package', $package->slug) }}" class="main-btn btn-hover">مشاهده</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="single-logo text-center">
-                        <img src="{{ url('') }}/front-assets/img/client-logo/pagebulb.svg" alt="">
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="single-logo text-center">
-                        <img src="{{ url('') }}/front-assets/img/client-logo/graygrids.svg" alt="">
-                    </div>
-                </div>
+
             </div>
         </div>
     </section>
+
+{{--            <div class="view-all-btn text-center pt-30 mb-5">--}}
+{{--                <a href="{{ route('packages' , 'all') }}" class="main-btn btn-hover">همه پکیج ها</a>--}}
+{{--            </div>--}}
     <!-- ========================= client-logo-section end ========================= -->
+    @endif
 
     <!-- ========================= about-section start ========================= -->
-    <section id="about" class="about-section pt-150">
+    <section id="about" class="about-section img-bg pt-100 pb-100 mt-150">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
@@ -164,7 +193,7 @@
                 </div>
                 <div class="view-all-btn text-center pt-30">
                     @if(\App\Http\Controllers\IndexController::view('hasContract'))
-                        <a href="{{ route('contracts') }}" class="main-btn btn-hover">همه قرارداد ها</a>
+                        <a href="{{ route('contracts' , 'all') }}" class="main-btn btn-hover">همه قرارداد ها</a>
                     @endif
                 </div>
             </div>

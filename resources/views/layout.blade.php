@@ -76,7 +76,17 @@
                                     </li>
                                     @if(\App\Http\Controllers\IndexController::view('hasContract'))
                                         <li class="nav-item">
-                                            <a class="@if(\Illuminate\Support\Facades\Route::currentRouteName() == "contracts" and request()->route('category') == null ) active @endif" href="{{ route('contracts') }}">قرارداد ها</a>
+                                            <a class="@if(\Illuminate\Support\Facades\Route::currentRouteName() == "contracts" and request()->route('category') == "all" ) active @endif" href="{{ route('contracts' , 'all') }}">قرارداد ها</a>
+                                        </li>
+                                    @endif
+                                    @if(\App\Http\Controllers\IndexController::view('hasPackage'))
+                                        <li class="nav-item">
+                                            <a class="@if(\Illuminate\Support\Facades\Route::currentRouteName() == "packages" and request()->route('category') == "all" ) active @endif" href="{{ route('packages' , 'all') }}">پکیج ها</a>
+                                        </li>
+                                    @endif
+                                    @if(\App\Http\Controllers\IndexController::view('hasFile'))
+                                        <li class="nav-item">
+                                            <a class="@if(\Illuminate\Support\Facades\Route::currentRouteName() == "files" and request()->route('category') == "all" ) active @endif" href="{{ route('files' , 'all') }}">فایل ها</a>
                                         </li>
                                     @endif
                                     @foreach(\App\Models\Category::where('in_menu', true)->get() as $h_category)
@@ -198,7 +208,18 @@
 
                                     @if(\App\Http\Controllers\IndexController::view('hasContract'))
                                         <li>
-                                            <a class="" href="{{ route('contracts') }}">قرارداد ها</a>
+                                            <a class="" href="{{ route('contracts' , 'all') }}">قرارداد ها</a>
+                                        </li>
+                                    @endif
+
+                                    @if(\App\Http\Controllers\IndexController::view('hasPackage'))
+                                        <li>
+                                            <a href="{{ route('packages' , 'all') }}">پکیج ها</a>
+                                        </li>
+                                    @endif
+                                    @if(\App\Http\Controllers\IndexController::view('hasFile'))
+                                        <li>
+                                            <a href="{{ route('files' , 'all') }}">فایل ها</a>
                                         </li>
                                     @endif
                                     @auth

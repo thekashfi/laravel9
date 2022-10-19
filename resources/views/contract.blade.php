@@ -7,7 +7,7 @@
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item px-0"><a href="{{ route('home') }}">خانه</a></li>
-                  <li class="breadcrumb-item px-0"><a href="{{ route('contracts') }}">قرارداد ها</a></li>
+                  <li class="breadcrumb-item px-0"><a href="{{ route('contracts' , 'all') }}">قرارداد ها</a></li>
                   <li class="breadcrumb-item px-0"><a href="{{ route('contracts', $contract->category->slug) }}">قرارداد های مشاوره</a></li>
                   <li class="breadcrumb-item px-0 active" aria-current="page">{{ $contract->name }}</li>
                 </ol>

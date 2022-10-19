@@ -18,7 +18,12 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('analytics')->group(function () {
     Route::get('', [IndexController::class, 'home'])->name('home');
     Route::get('contract/{contract}', [IndexController::class, 'contract'])->name('contract');
-    Route::get('contracts/{category?}', [IndexController::class, 'contracts'])->name('contracts');
+    Route::get('package/{package}', [IndexController::class, 'package'])->name('package');
+    Route::get('file/{file}', [IndexController::class, 'file'])->name('file');
+    Route::get('category/{category}/contracts', [IndexController::class, 'contracts'])->name('contracts');
+    Route::get('category/{category}/packages', [IndexController::class, 'packages'])->name('packages');
+    Route::get('category/{category}/files', [IndexController::class, 'files'])->name('files');
+    Route::get('category/{category}', [IndexController::class, 'category'])->name('category');
     Route::view('contact-us', 'contactus')->name('connectus');
     Route::post('contact-us', [ContactController::class, 'store'])->name('connect-us-save');
     Route::view('about-us', 'aboutus')->name('aboutus');

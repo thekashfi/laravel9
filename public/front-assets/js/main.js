@@ -36,9 +36,9 @@
         }
     };
 
-    // for menu scroll 
+    // for menu scroll
     var pageLink = document.querySelectorAll('.page-scroll');
-    
+
     pageLink.forEach(elem => {
         elem.addEventListener('click', e => {
             e.preventDefault();
@@ -71,7 +71,7 @@
 	window.document.addEventListener('scroll', onScroll);
 
     //===== close navbar-collapse when a  clicked
-    let navbarToggler = document.querySelector(".navbar-toggler");    
+    let navbarToggler = document.querySelector(".navbar-toggler");
     var navbarCollapse = document.querySelector(".navbar-collapse");
 
     document.querySelectorAll(".page-scroll").forEach(e =>
@@ -82,14 +82,14 @@
     );
     navbarToggler.addEventListener('click', function() {
         navbarToggler.classList.toggle("active");
-    }) 
+    })
 
 
 	// WOW active
     new WOW().init();
 
-    
-    //====== counter up 
+
+    //====== counter up
     var cu = new counterUp({
         start: 0,
         duration: 2000,
@@ -98,6 +98,31 @@
         append: " ",
     });
     cu.start();
+
+    //======== tiny slider
+    var slider = new tns({
+        container: '.pricing-active',
+        slideBy: 'page',
+        autoplay: false,
+        mouseDrag: true,
+        gutter: 0,
+        items: 2,
+        nav: false,
+        controls: true,
+        controlsText: [
+            '<i class="lni lni-chevron-left prev"></i>',
+            '<i class="lni lni-chevron-right next"></i>'
+        ],
+        responsive: {
+            0: {
+                items: 1,
+            },
+
+            768: {
+                items: 2,
+            }
+        }
+    });
 
 })();
 
@@ -134,5 +159,5 @@ Math.easeInOutQuad = function (t, b, c, d) {
 };
 
 document.querySelector('.scroll-top').onclick = function () {
-	scrollTo(document.documentElement); 
+	scrollTo(document.documentElement);
 }

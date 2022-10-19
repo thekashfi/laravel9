@@ -23,8 +23,8 @@ class IndexController extends Controller
     public function home()
     {
         $categories = Category::get();
-
-        return view('home', compact('categories'));
+        $packages = Package::query()->active()->latest()->limit(8)->get();
+        return view('home', compact('categories' , 'packages'));
     }
 
     public function contract($contract)
@@ -34,10 +34,10 @@ class IndexController extends Controller
         return view('contract', compact('contract'));
     }
 
-    public function contracts($category = null)
+    public function contracts($category)
     {
         $contracts = Contract::query()->active();
-        if ($category) {
+        if (strtolower($category) != "all") {
             $category = Category::whereSlug($category)->firstOrFail();
             $contracts = $contracts->where('category_id', $category->id);
         }
