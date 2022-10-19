@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('contracts', function (Blueprint $table) {
+        Schema::create('files', function (Blueprint $table) {
             $table->id();
             $table->foreignId('category_id')
                 ->references('id')
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('name', 100);
             $table->string('summary', 255);
             $table->text('description')->nullable();
-            $table->text('text');
+            $table->text('file');
             $table->string('slug', 100)->unique();
             $table->integer('price')->default(0);
             $table->boolean('is_active')->default(1);
@@ -38,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contracts');
+        Schema::dropIfExists('files');
     }
 };

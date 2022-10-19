@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('order_items', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')
                 ->nullable()
@@ -21,13 +21,16 @@ return new class extends Migration
                 ->on('users')
                 ->cascadeOnUpdate()
                 ->nullOnDelete();
-            $table->string('uuid', 255)->unique();
-            $table->boolean('is_paid')->default(false);
-            $table->string('trans1', 255)->nullable();
-            $table->string('trans2', 255)->nullable();
-            $table->text('result')->nullable();
-            $table->integer('amount');
-            $table->ipAddress('ip');
+            $table->foreignId('order_id')
+                ->nullable()
+                ->references('id')
+                ->on('orders')
+                ->cascadeOnUpdate()
+                ->nullOnDelete();
+            $table->unsignedBigInteger('item_id');
+            $table->string('item_Type');
+            $table->string('item_name', 100);
+            $table->text('item_text')->nullable();
             $table->timestamps();
         });
     }
@@ -39,6 +42,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('order_items');
     }
 };

@@ -9,14 +9,14 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'contract_id', 'contract_name', 'uuid', 'contract_text', 'is_paid', 'trans1', 'trans2', 'result', 'amount', 'ip'];
+    protected $fillable = ['user_id', 'uuid', 'is_paid', 'trans1', 'trans2', 'result', 'amount', 'ip'];
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-    public function contract()
+    public function items()
     {
-        return $this->belongsTo(Contract::class);
+        return $this->hasMany(OrderItem::class);
     }
 }

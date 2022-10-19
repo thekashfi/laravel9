@@ -15,4 +15,9 @@ class Category extends Model
     {
         return $this->hasMany(Contract::class);
     }
+
+    public function files()
+    {
+        return $this->hasMany(File::class);
+    }
 }

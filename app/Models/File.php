@@ -5,17 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Contract extends Model
+class File extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['category_id', 'name', 'summary', 'slug', 'description', 'text', 'price' , 'is_active'];
-    protected $with = ['category'];
+    protected $fillable = ['category_id', 'name','summary','description', 'file', 'slug' ,'price' , 'is_active'];
 
-    // public function fillables()
-    // {
-    //     return $this->hasMany(Fillable::class);
-    // }
 
     public function category()
     {
@@ -26,4 +21,5 @@ class Contract extends Model
     {
         return $this->morphToMany(Package::class, 'item' , 'package_items');
     }
+
 }
