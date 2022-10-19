@@ -103,7 +103,7 @@
                                                     <li><hr class="dropdown-divider"></li>
                                                 @endif
                                                 <li><a class="dropdown-item" href="{{ route('payments') }}">قرارداد های من</a></li>
-                                                <li><a class="dropdown-item" href="{{ route('payments_history') }}">پرداخت ها</a></li>
+                                                <li><a class="dropdown-item" href="{{ route('payments_history') }}">فاکتور ها</a></li>
                                                 <li><hr class="dropdown-divider"></li>
                                                 <li><a class="dropdown-item" href="{{ route('auth.logout') }}">خروج</a></li>
                                             </ul>
@@ -198,7 +198,7 @@
                                     </li>
                                     @auth
                                         <li><a href="{{ route('payments') }}">قرارداد های من</a></li>
-                                        <li><a href="{{ route('payments_history') }}">پرداخت ها</a></li>
+                                        <li><a href="{{ route('payments_history') }}">فاکتور ها</a></li>
                                     @else
                                         <li>
                                             <a href="{{ route('auth.showLogin') }}">

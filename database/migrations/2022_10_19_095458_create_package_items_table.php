@@ -20,7 +20,7 @@ return new class extends Migration
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->unsignedBigInteger('item_id');
-            $table->string('item_Type');
+            $table->string('item_type');
         });
     }
 

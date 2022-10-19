@@ -26,4 +26,15 @@ class Contract extends Model
     {
         return $this->morphToMany(Package::class, 'item' , 'package_items');
     }
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', 1);
+    }
+
+    public function isBought(User $user){
+        return $user->items()->where('item_id' , $this->id)
+            ->where('item_type' , self::class)
+            ->exists();
+    }
 }

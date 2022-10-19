@@ -15,6 +15,7 @@
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">نام</th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">متن قرارداد</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">قیمت</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">فعال</th>
                             <th class="text-secondary opacity-7"></th>
                         </tr>
                     </thead>
@@ -36,19 +37,26 @@
                                     <p class="text-xs text-secondary mb-0">{{ Str::limit(strip_tags($contract->text), 30) }}</p>
                                 </td>
                                 <td class="align-middle text-center">
-                                    <span class="text-secondary text-xs font-weight-bold">{{ $contract->price }}</span>
+                                    <span class="text-secondary text-xs font-weight-bold">{{ number_format($contract->price) }} تومان</span>
+                                </td>
+                                <td class="align-middle text-center text-sm">
+                                    @if($contract->is_active)
+                                        <span class="badge badge-sm bg-gradient-success">فعال</span>
+                                    @else
+                                        <span class="badge badge-sm bg-gradient-secondary">غیرفعال</span>
+                                    @endif
                                 </td>
                                 <td class="align-middle">
                                     <a href="{{ route('admin.contract.edit', $contract->id) }}" class="text-secondary font-weight-bold text-xs mx-1" data-toggle="tooltip" data-original-title="Edit user">
                                         ویرایش
                                     </a>
-                                    <form method="post" action="{{ route('admin.contract.destroy', $contract->id) }}" onsubmit="return confirm('از حذف {{ $contract->name }} مطمئن هستید؟')" class="d-inline-block">
-                                        @csrf
-                                        @method('delete')
-                                        <button href="{{ route('admin.contract.edit', $contract->id) }}" class="text-warning bg-body border-0 font-weight-bold text-xs mx-1" data-toggle="tooltip" type="submit">
-                                            حذف
-                                        </button>
-                                    </form>
+{{--                                    <form method="post" action="{{ route('admin.contract.destroy', $contract->id) }}" onsubmit="return confirm('از حذف {{ $contract->name }} مطمئن هستید؟')" class="d-inline-block">--}}
+{{--                                        @csrf--}}
+{{--                                        @method('delete')--}}
+{{--                                        <button href="{{ route('admin.contract.edit', $contract->id) }}" class="text-warning bg-body border-0 font-weight-bold text-xs mx-1" data-toggle="tooltip" type="submit">--}}
+{{--                                            حذف--}}
+{{--                                        </button>--}}
+{{--                                    </form>--}}
                                 </td>
                             </tr>
                         @endforeach

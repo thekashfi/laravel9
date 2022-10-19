@@ -28,7 +28,7 @@ return new class extends Migration
                 ->cascadeOnUpdate()
                 ->nullOnDelete();
             $table->unsignedBigInteger('item_id');
-            $table->string('item_Type');
+            $table->string('item_type');
             $table->string('item_name', 100);
             $table->text('item_text')->nullable();
             $table->timestamps();

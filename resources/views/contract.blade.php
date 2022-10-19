@@ -69,8 +69,15 @@
                                     <li>برترین محصول سال</li>
                                 </ul>
                                 <div class="pricing-btn text-center">
-                                    <a href="{{ route('buy', $contract->slug) }}" class="main-btn btn-hover">خرید</a>
-{{--                                    <a href="{{ route('form', $contract->slug) }}" class="main-btn btn-success btn-hover">دانلود</a>--}}
+                                    @auth
+                                        @if ($contract->isBought(auth()->user()))
+                                            <a href="{{ route('payments' , ['contract' => $contract->id]) }}" class="main-btn btn-success btn-hover">دانلود</a>
+                                        @else
+                                            <a href="{{ route('buy', $contract->slug) }}" class="main-btn btn-hover">خرید</a>
+                                        @endif
+                                    @else
+                                        <a href="{{ route('buy', $contract->slug) }}" class="main-btn btn-hover">خرید</a>
+                                    @endauth
                                 </div>
                             </div>
                         </div>

@@ -18,17 +18,25 @@ use Shetabit\Payment\Facade\Payment;
 class ProfileController extends Controller
 {
 
-    public function boughtItem()
+    public function boughtItem(Request $request)
     {
-        $orders = Order::with('contract')->whereUserId(auth()->id())->whereIsPaid(1)->latest()->get();
-
-        return view('payments', compact('orders'));
+        $orderItems = $request->user()->items()->latest()
+            ->when($request->id != null , function ($query) use($request){
+                $query->where('order_id' , $request->id);
+            })
+            ->when($request->contract != null , function ($query) use($request){
+                $query->where('item_id' , $request->contract)
+                    ->where('item_type' , Contract::class);
+            })
+            ->paginate();
+        return view('payments', compact('orderItems'));
     }
 
-    public function orders()
+    public function orders(Request $request)
     {
-        $orders = Order::with('contract')->whereUserId(auth()->id())->latest()->get();
-
+        $orders =  $request->user()->orders()->latest()->when($request->id != null , function ($query) use($request){
+            $query->where('id' , $request->id);
+        })->paginate();
         return view('payments_history', compact('orders'));
     }
 }

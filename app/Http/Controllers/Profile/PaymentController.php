@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Profile;
 use App\Http\Controllers\Controller;
 use App\Models\Contract;
 use App\Models\Order;
+use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Shetabit\Multipay\Exceptions\InvalidPaymentException;
@@ -13,30 +14,41 @@ use Shetabit\Payment\Facade\Payment;
 
 class PaymentController extends Controller
 {
-    public function buy(Request $request, $contract_slug)
-    {
+    public function buyContract(Request $request, $contract_slug){
         $contract = Contract::whereSlug($contract_slug)->firstOrFail();
+        $item = new OrderItem();
+        $item->item_id = $contract->id;
+        $item->item_type = Contract::class;
+        $item->item_name = $contract->name;
+        $price = $contract->price ;
+        return $this->buy($request, $price , [$item] , route('contract', $contract_slug));
+    }
+
+    private function buy(Request $request, $amount , array  $Order_items , $rollbackUri)
+    {
         try {
             DB::beginTransaction();
             $order = new Order();
             $order->uuid = \Illuminate\Support\Str::uuid();
-            $order->user_id = auth()->id();
-            $order->contract_id = $contract->id;
-            $order->contract_name = $contract->name;
-            $order->amount = $contract->price;
+            $order->user_id = $request->user()->id;
+            $order->amount = $amount;
             $order->ip = $request->ip();
             $order->is_paid = 2;
             $order->save();
+            foreach ( $Order_items as $item){
+                $item->user_id = $order->user_id;
+                $item->order_id = $order->id;
+                $item->save();
+            }
             $invoice = new Invoice;
-            $invoice->amount($contract->price);
-            $invoice->detail('Title', $contract->name);
+            $invoice->amount($order->amount);
             return Payment::callbackUrl(route('callback', $order->uuid))->purchase($invoice, function ($driver, $transactionId) use ($order) {
-                $order->trans1 = $transactionId;
+                $order->trans1 = intval($transactionId);
                 $order->save();
                 DB::commit();
             })->pay()->render();
         } catch (\Exception $exception) {
-            return redirect()->route('contract', $contract_slug)->withErrors([
+            return redirect($rollbackUri)->withErrors([
                 "لطفا مجددا تلاش نمایید!"
             ]);
         }
@@ -63,7 +75,7 @@ class PaymentController extends Controller
             $order->result = ($order->result != null ? $order->result . PHP_EOL : '') . $exception->getMessage();
             $order->is_paid = 0;
             $order->save();
-            return redirect()->route('payments')->withErrors($exception->getMessage());
+            return redirect()->route('orders')->withErrors($exception->getMessage());
         }
     }
 }

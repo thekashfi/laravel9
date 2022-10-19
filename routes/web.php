@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Profile\PaymentController;
+use App\Http\Controllers\Profile\ContractController as PContractController;
 use Illuminate\Support\Facades\Route;
 
 // Pages
@@ -35,12 +36,12 @@ Route::as('auth.')->group(function () {
 
 // User
 Route::group(['middleware' => ['auth']], function() {
-    Route::get('buy/contract/{contract}', [PaymentController::class, 'buy'])->name('buy');
+    Route::get('buy/contract/{contract}', [PaymentController::class, 'buyContract'])->name('buy');
     Route::get('bought/items', [ProfileController::class, 'boughtItem'])->name('payments');
     Route::get('orders', [ProfileController::class, 'orders'])->name('payments_history');
-    Route::any('form/{uuid}', [ContractController::class, 'form'])->name('form');
-    Route::post('form/{uuid}/confirmation', [ContractController::class, 'form_confirmation'])->name('form_confirmation');
-    Route::any('generate/{uuid}', [ContractController::class, 'generate'])->name('generate');
+    Route::any('form/{uuid}/{id}', [PContractController::class, 'form'])->name('form');
+    Route::post('form/{uuid}/confirmation', [PContractController::class, 'form_confirmation'])->name('form_confirmation');
+    Route::any('generate/{uuid}', [PContractController::class, 'generate'])->name('generate');
 });
 
 // Dashboard
@@ -54,6 +55,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'admin'], f
     Route::post('fillables', [ContractController::class, 'fillables'])->name('fillables');
     Route::get('orders', [AdminController::class, 'orders'])->name('orders');
     Route::get('order/{uuid}/print', [AdminController::class, 'admin_print'])->name('print');
+    Route::get('order/{uuid}', [AdminController::class, 'order'])->name('order');
     Route::get('contact-us', [ContactController::class, 'index'])->name('connect-us-list');
     Route::get('contact-us/{contact}/delete', [ContactController::class, 'destroy'])->name('connect-us-delete');
 });

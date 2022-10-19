@@ -16,20 +16,19 @@ class IndexController extends Controller
 
     public function contract($contract)
     {
-        $contract = Contract::whereSlug($contract)->firstOrFail();
+        $contract = Contract::whereSlug($contract)->active()->firstOrFail();
 
         return view('contract', compact('contract'));
     }
 
     public function contracts($category = null)
     {
-        $contracts = new Contract;
+        $contracts = Contract::query()->active();
         if ($category) {
             $category = Category::whereSlug($category)->firstOrFail();
             $contracts = $contracts->where('category_id', $category->id);
         }
         $contracts = $contracts->get();
-        $category = $category ?? null;
 
         return view('contracts', compact('contracts', 'category'));
     }

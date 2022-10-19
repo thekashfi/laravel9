@@ -13,15 +13,24 @@ class Category extends Model
 
     public function contracts()
     {
-        return $this->hasMany(Contract::class);
+        return $this->hasMany(Contract::class)->where('is_active' , 1 );
     }
 
     public function files()
     {
-        return $this->hasMany(File::class);
+        return $this->hasMany(File::class)->where('is_active' , 1 );
+    }
+    public function allContracts()
+    {
+        return $this->hasMany(Contract::class)->where('is_active' , 1 );
+    }
+
+    public function allFiles()
+    {
+        return $this->hasMany(File::class)->where('is_active' , 1 );
     }
     public function packages()
     {
-        return $this->hasMany(Package::class);
+        return $this->hasMany(Package::class)->where('is_active' , 1 );
     }
 }

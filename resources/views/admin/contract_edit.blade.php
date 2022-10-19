@@ -45,6 +45,14 @@
                     </select>
                 </div>
 
+                <div class="pb-3 col-md-6">
+                    <div class="form-check form-check-linethrough">
+                        <input value="0" name="is_active" class="form-check-input h-5 mt-0 rounded-circle border-dashed flex-none float-end" type="hidden">
+                        <input value="1" name="is_active" id="is_active" class="form-check-input h-5 mt-0 rounded-circle border-dashed flex-none float-end" type="checkbox" {{ $contract->is_active == false ?: 'checked' }}>
+                        <label for="is_active" class="me-4">قابل مشاهده در وبسایت</label>
+                    </div>
+                </div>
+
             </div>
             <div class="pb-3">
                 <label for="summary" class="form-label">خلاصه</label>

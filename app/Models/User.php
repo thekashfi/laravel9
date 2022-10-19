@@ -31,4 +31,19 @@ class User extends Authenticatable
         $this->save();
         return $this;
     }
+
+
+    public function items()
+    {
+        return $this->hasMany(OrderItem::class)->with('order' , 'item')->whereHas('order' , function ($query) {
+            $query->where('is_paid' , 1);
+        });
+    }
+
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
 }

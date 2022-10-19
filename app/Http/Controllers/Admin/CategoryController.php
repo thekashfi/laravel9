@@ -62,8 +62,10 @@ class CategoryController extends Controller
 
     public function destroy($id)
     {
-        Category::findOrFail($id)->delete();
-
+        $category = Category::findOrFail($id);
+        if ( $category->allContracts()->count() > 0 or $category->allFiles()->count() > 0 )
+            return redirect()->back()->withErrors('دسته مورد نظر شامل قرارداد و یا فایل می باشد!');
+        $category->delete();
         return $this->flashBack();
     }
 }

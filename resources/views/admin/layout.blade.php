@@ -21,6 +21,7 @@
     <!-- CSS Files -->
     <link id="pagestyle" href="{{ asset('/assets/css/argon-dashboard.css?v=2.0.4') }}" rel="stylesheet" />
     <link href="{{ mix('css/app.css') }}" rel="stylesheet" type="text/css" />
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     @yield('head')
 </head>
 
@@ -66,7 +67,7 @@
                         <div class="icon icon-shape icon-sm border-radius-md text-center ms-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
                         </div>
-                        <span class="nav-link-text me-1">سفارش ها</span>
+                        <span class="nav-link-text me-1">فاکتور ها</span>
                     </a>
                 </li>
                 <li class="nav-item">
