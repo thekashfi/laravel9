@@ -1125,6 +1125,7 @@ p {
 .pricing-section {
   position: relative;
   z-index: 1;
+    background: linear-gradient(to top, #ffffff 0%, #f3f4f9 100%);
 }
 
 .pricing-section .pricing-content {

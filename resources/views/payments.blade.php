@@ -9,6 +9,7 @@
             <thead>
                 <tr>
                     <th scope="col" class="text-secondary fw-light border-bottom">عنوان قرارداد</th>
+                    <th scope="col" class="text-secondary fw-light border-bottom">نوع قرارداد</th>
                     <th scope="col" class="text-secondary fw-light border-bottom">دانلود</th>
                     <th scope="col" class="text-secondary fw-light border-bottom">شماره فاکتور</th>
                     <th scope="col" class="text-secondary fw-light border-bottom">تاریخ</th>
@@ -24,6 +25,13 @@
                                 </a>
                             @else
                                 {{ $item->item_name }}
+                            @endif
+                        </td>
+                        <td>
+                            @if ( $item->item_type == \App\Models\Contract::class )
+                                متن قرارداد
+                            @else
+                                فایل قرارداد
                             @endif
                         </td>
                         <td>

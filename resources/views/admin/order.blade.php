@@ -12,6 +12,7 @@
                     <thead>
                         <tr>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">نام قرار داد</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">نوع قرار داد</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">مشاهده</th>
                         </tr>
                     </thead>
@@ -39,6 +40,13 @@
                                                 <h6 class="mb-0 text-sm">{{ $item->item->name }}</h6>
                                             </div>
                                         </div>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ( $item->item_type == \App\Models\Contract::class )
+                                        متن قرارداد
+                                    @else
+                                        فایل قرارداد
                                     @endif
                                 </td>
                                 <td class="text-center">
