@@ -29,7 +29,7 @@
                                         </div>
                                         <div class="d-flex flex-column justify-content-center">
                                             <h6 class="mb-0 text-sm">{{ $file->name }}</h6>
-                                            <p class="text-xs text-secondary mb-0">{{ Str::limit(strip_tags($file->description), 20) }}</p>
+                                            <p class="text-xs text-secondary mb-0">{{ Str::limit(strip_tags($file->summary), 20) }}</p>
                                         </div>
                                     </div>
                                 </td>

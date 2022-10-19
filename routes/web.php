@@ -2,6 +2,7 @@
 
 use AndreasElia\Analytics\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\FileController;
+use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ContactController;
@@ -52,6 +53,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'admin'], f
     Route::resource('category', CategoryController::class);
     Route::resource('contract', ContractController::class);
     Route::resource('file', FileController::class);
+    Route::resource('package', PackageController::class);
     Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
     Route::view('fillables', 'admin.fillables')->name('fillables');
     Route::post('fillables', [ContractController::class, 'fillables'])->name('fillables');

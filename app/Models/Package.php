@@ -16,10 +16,10 @@ class Package extends Model
         return $this->belongsTo(Category::class);
     }
     public function contracts(){
-        return $this->morphToMany(Contract::class , 'item' ,'package_items');
+        return $this->morphedByMany(Contract::class , 'item' ,'package_items');
     }
     public function files(){
-        return $this->morphToMany(File::class , 'item' ,'package_items');
+        return $this->morphedByMany(File::class , 'item' ,'package_items');
     }
 
 

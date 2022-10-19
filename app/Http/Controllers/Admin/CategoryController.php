@@ -10,7 +10,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::withCount('contracts','files')->paginate(20);
+        $categories = Category::withCount('contracts','files' , 'packages')->paginate(20);
         return view('admin.category_index', compact('categories'));
     }
 
@@ -62,8 +62,8 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $category = Category::findOrFail($id);
-        if ( $category->allContracts()->count() > 0 or $category->allFiles()->count() > 0 )
-            return redirect()->back()->withErrors('دسته مورد نظر شامل قرارداد و یا فایل می باشد!');
+        if ( $category->allContracts()->count() > 0 or $category->allFiles()->count() > 0 or $category->allPackages()->count() > 0 )
+            return redirect()->back()->withErrors('دسته مورد نظر شامل قرارداد، پکیج یا فایل می باشد!');
         $category->delete();
         return $this->flashBack();
     }

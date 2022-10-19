@@ -16,6 +16,7 @@
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">نام</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">تعداد قرارداد</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">تعداد فایل</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">تعداد پکیج ها</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">نمایش در منو</th>
                             <th class="text-secondary opacity-7"></th>
                         </tr>
@@ -38,6 +39,9 @@
                                 </td>
                                 <td>
                                     <p class="text-center text-xs font-weight-bold mb-0">{{ $category->files_count }}</p>
+                                </td>
+                                <td>
+                                    <p class="text-center text-xs font-weight-bold mb-0">{{ $category->packages_count }}</p>
                                 </td>
                                 <td class="align-middle text-center text-sm">
                                     @if($category->in_menu)
