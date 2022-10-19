@@ -10,8 +10,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::withCount('contracts')->paginate(20);
-
+        $categories = Category::withCount('contracts','files')->paginate(20);
         return view('admin.category_index', compact('categories'));
     }
 
@@ -26,7 +25,7 @@ class CategoryController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|max:100',
-            'slug' => 'required|max:100|unique:categories,id',
+            'slug' => 'required|max:100|unique:categories,slug',
             'in_menu' => 'boolean'
         ]);
 
@@ -51,7 +50,7 @@ class CategoryController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|max:100',
-            'slug' => 'required|max:100|unique:categories,id,' . $id,
+            'slug' => 'required|max:100|unique:categories,slug,' . $id,
             'in_menu' => 'boolean'
         ]);
 

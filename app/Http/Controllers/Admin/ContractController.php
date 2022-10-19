@@ -30,13 +30,13 @@ class ContractController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|max:100',
-            'slug' => 'required|max:100',
+            'slug' => 'required|max:100|unique:contracts,slug',
             'text' => 'required',
             'category_id' => 'required',
             'price' => 'int',
         ]);
 
-        $request->merge(['summary' => str_replace('../../../files' , url('files') , $request->summary)]);
+        $request->merge(['description' => str_replace('../../../files' , url('files') , $request->description)]);
 
         Contract::create($request->all());
 
@@ -60,7 +60,7 @@ class ContractController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|max:100',
-            'slug' => 'required|max:100',
+            'slug' => 'required|max:100|unique:contracts,slug,'.$id,
             'category_id' => 'required',
             'text' => 'required',
             'price' => 'int',

@@ -24,7 +24,7 @@
 
                 <div class="col-md-6 pb-3">
                     <label for="slug" class="form-label">آدرس</label>
-                    <input name="slug" type="text" class="form-control" id="slug" value="{{ old('slug', $contract->slug) }}">
+                    <input dir="ltr" name="slug" type="text" class="form-control" id="slug" value="{{ old('slug', $contract->slug) }}">
                     <div id="optionsHelp" class="form-text">نام انگلیسی برای استفاده در url صفحه</div>
                 </div>
 
@@ -38,7 +38,7 @@
                     <select name="category_id" class="form-select"  x-model="category_id" id="category_id">
                         @foreach($categories as $category)
                             <option value="{{ $category->id }}"
-                                {{ (old('category_id') == $category->id || optional($contract->category)->id == $category->id) ? 'selected' : '' }}>
+                                {{ (old('category_id' , optional($contract->category)->id) == $category->id) ? 'selected' : '' }}>
                                 {{ $category->name }}
                             </option>
                         @endforeach

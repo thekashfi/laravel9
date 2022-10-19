@@ -21,7 +21,7 @@
 
             <div class="pb-3">
                 <label for="slug" class="form-label">آدرس</label>
-                <input name="slug" type="text" class="form-control" id="slug" placeholder="" value="{{ old('slug', $category->slug) }}">
+                <input dir="ltr" name="slug" type="text" class="form-control" id="slug" placeholder="" value="{{ old('slug', $category->slug) }}">
                 <div id="optionsHelp" class="form-text">نام انگلیسی برای استفاده در url صفحه</div>
             </div>
 
