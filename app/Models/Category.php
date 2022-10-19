@@ -20,4 +20,8 @@ class Category extends Model
     {
         return $this->hasMany(File::class);
     }
+    public function packages()
+    {
+        return $this->hasMany(Package::class);
+    }
 }

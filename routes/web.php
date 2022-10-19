@@ -2,10 +2,13 @@
 
 use AndreasElia\Analytics\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\ContractController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\ContractController;
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\Profile\ProfileController;
+use App\Http\Controllers\Profile\PaymentController;
 use Illuminate\Support\Facades\Route;
 
 // Pages
@@ -16,6 +19,7 @@ Route::middleware('analytics')->group(function () {
     Route::view('contact-us', 'contactus')->name('connectus');
     Route::post('contact-us', [ContactController::class, 'store'])->name('connect-us-save');
     Route::view('about-us', 'aboutus')->name('aboutus');
+    Route::any('transaction/{uuid}/back' , [PaymentController::class,'callback'])->name('callback');
 });
 
 // Login
@@ -31,13 +35,12 @@ Route::as('auth.')->group(function () {
 
 // User
 Route::group(['middleware' => ['auth']], function() {
-    Route::get('contract/{contract}/buy', [IndexController::class, 'buy'])->name('buy');
-    Route::get('payments', [IndexController::class, 'payments'])->name('payments');
-    Route::get('payments_history', [IndexController::class, 'payments_history'])->name('payments_history');
-    Route::any('transaction/{uuid}/back' , [IndexController::class,'callback'])->name('callback');
-    Route::any('form/{uuid}', [IndexController::class, 'form'])->name('form');
-    Route::post('form/{uuid}/confirmation', [IndexController::class, 'form_confirmation'])->name('form_confirmation');
-    Route::any('generate/{uuid}', [IndexController::class, 'generate'])->name('generate');
+    Route::get('buy/contract/{contract}', [PaymentController::class, 'buy'])->name('buy');
+    Route::get('bought/items', [ProfileController::class, 'boughtItem'])->name('payments');
+    Route::get('orders', [ProfileController::class, 'orders'])->name('payments_history');
+    Route::any('form/{uuid}', [ContractController::class, 'form'])->name('form');
+    Route::post('form/{uuid}/confirmation', [ContractController::class, 'form_confirmation'])->name('form_confirmation');
+    Route::any('generate/{uuid}', [ContractController::class, 'generate'])->name('generate');
 });
 
 // Dashboard
@@ -49,8 +52,8 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'admin'], f
     Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
     Route::view('fillables', 'admin.fillables')->name('fillables');
     Route::post('fillables', [ContractController::class, 'fillables'])->name('fillables');
-    Route::get('orders', [IndexController::class, 'orders'])->name('orders');
-    Route::get('order/{uuid}/print', [IndexController::class, 'admin_print'])->name('print');
+    Route::get('orders', [AdminController::class, 'orders'])->name('orders');
+    Route::get('order/{uuid}/print', [AdminController::class, 'admin_print'])->name('print');
     Route::get('contact-us', [ContactController::class, 'index'])->name('connect-us-list');
     Route::get('contact-us/{contact}/delete', [ContactController::class, 'destroy'])->name('connect-us-delete');
 });
