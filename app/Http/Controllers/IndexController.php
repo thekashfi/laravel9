@@ -4,9 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Contract;
+use App\Models\File;
+use App\Models\Package;
 
 class IndexController extends Controller
 {
+    public static function view($index = null ){
+        $data =  cache()->remember('viewOptions' , 15 * 60 , function (){
+            return [
+                'hasContract' => Contract::query()->active()->exists(),
+                'hasCategory' => Category::query()->exists(),
+                'hasFile' => File::query()->active()->exists(),
+                'hasPackage' => Package::query()->active()->exists(),
+            ];
+        });
+        return $data ? ( $data[$index] ?? null  ) : $data;
+    }
     public function home()
     {
         $categories = Category::get();

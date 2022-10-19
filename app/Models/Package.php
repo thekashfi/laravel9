@@ -21,4 +21,10 @@ class Package extends Model
     public function files(){
         return $this->morphToMany(File::class , 'item' ,'package_items');
     }
+
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', 1);
+    }
 }

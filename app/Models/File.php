@@ -22,4 +22,10 @@ class File extends Model
         return $this->morphToMany(Package::class, 'item' , 'package_items');
     }
 
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', 1);
+    }
+
 }

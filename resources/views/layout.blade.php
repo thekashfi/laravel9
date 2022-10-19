@@ -74,9 +74,11 @@
                                     <li class="nav-item">
                                         <a class="@if(\Illuminate\Support\Facades\Route::currentRouteName() == "home" ) active @endif" href="{{ route('home') }}">خانه</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="@if(\Illuminate\Support\Facades\Route::currentRouteName() == "contracts" and request()->route('category') == null ) active @endif" href="{{ route('contracts') }}">قرارداد ها</a>
-                                    </li>
+                                    @if(\App\Http\Controllers\IndexController::view('hasContract'))
+                                        <li class="nav-item">
+                                            <a class="@if(\Illuminate\Support\Facades\Route::currentRouteName() == "contracts" and request()->route('category') == null ) active @endif" href="{{ route('contracts') }}">قرارداد ها</a>
+                                        </li>
+                                    @endif
                                     @foreach(\App\Models\Category::where('in_menu', true)->get() as $h_category)
                                         <li class="nav-item">
                                             <a class="@if(\Illuminate\Support\Facades\Route::currentRouteName() == "contracts" and request()->route('category') == $h_category->slug ) active @endif" href="{{ route('contracts', $h_category->slug) }}">{{ $h_category->name }}</a>
@@ -193,9 +195,12 @@
 								<h3>لینک ها</h3>
 								<ul class="links">
 									<li> <a href="{{ route('home') }}">صفحه اصلی</a> </li>
-                                    <li>
-                                        <a class="" href="{{ route('contracts') }}">قرارداد ها</a>
-                                    </li>
+
+                                    @if(\App\Http\Controllers\IndexController::view('hasContract'))
+                                        <li>
+                                            <a class="" href="{{ route('contracts') }}">قرارداد ها</a>
+                                        </li>
+                                    @endif
                                     @auth
                                         <li><a href="{{ route('payments') }}">قرارداد های من</a></li>
                                         <li><a href="{{ route('payments_history') }}">فاکتور ها</a></li>
@@ -222,16 +227,18 @@
 						</div>
 
 						<div class="col-xl-3 col-md-6 col-sm-6">
-							<div class="footer-widget">
-								<h3>دسته بندی ها</h3>
-								<ul class="links">
-                                    @foreach(\App\Models\Category::query()->limit(7)->latest()->get() as $h_category)
-                                        <li>
-                                            <a class="" href="{{ route('contracts', $h_category->slug) }}">{{ $h_category->name }}</a>
-                                        </li>
-                                    @endforeach
-								</ul>
-							</div>
+                            @if(\App\Http\Controllers\IndexController::view('hasCategory'))
+                                <div class="footer-widget">
+                                    <h3>دسته بندی ها</h3>
+                                    <ul class="links">
+                                        @foreach(\App\Models\Category::query()->limit(7)->latest()->get() as $h_category)
+                                            <li>
+                                                <a class="" href="{{ route('contracts', $h_category->slug) }}">{{ $h_category->name }}</a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
 						</div>
 
 						<div class="col-xl-3 col-md-6">
