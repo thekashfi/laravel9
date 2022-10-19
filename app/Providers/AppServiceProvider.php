@@ -31,8 +31,8 @@ class AppServiceProvider extends ServiceProvider
 
         Gate::define('use-order', function (User $user, Order $order) {
             return
-                $user->id === $order->user_id &&
-                $order->is_paid === 1;
+                $user->id == $order->user_id &&
+                $order->is_paid == 1;
         });
 
         Gate::define('see-order', function (User $user, Order $order) {
