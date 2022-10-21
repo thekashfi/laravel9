@@ -39,6 +39,7 @@ class ContractController extends Controller
         $request->merge(['description' => str_replace('../../../files' , url('files') , $request->description)]);
 
         Contract::create($request->all());
+        cache()->clear();
 
         return $this->flashBack();
     }
@@ -69,6 +70,7 @@ class ContractController extends Controller
         $request->merge(['description' => str_replace('../../../files' , url('files') , $request->description)]);
 
         Contract::findOrFail($id)->update($request->all());
+        cache()->clear();
 
         return $this->flashBack();
     }
@@ -76,6 +78,7 @@ class ContractController extends Controller
     public function destroy($id)
     {
         Contract::findOrFail($id)->delete();
+        cache()->clear();
 
         return $this->flashBack();
     }

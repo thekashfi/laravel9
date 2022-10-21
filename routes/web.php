@@ -44,6 +44,8 @@ Route::as('auth.')->group(function () {
 // User
 Route::group(['middleware' => ['auth']], function() {
     Route::get('buy/contract/{contract}', [PaymentController::class, 'buyContract'])->name('buy');
+    Route::get('buy/package/{package}', [PaymentController::class, 'buyPackage'])->name('buyPackage');
+    Route::get('buy/file/{file}', [PaymentController::class, 'buyFile'])->name('buyFile');
     Route::get('bought/items', [ProfileController::class, 'boughtItem'])->name('payments');
     Route::get('orders', [ProfileController::class, 'orders'])->name('payments_history');
     Route::any('form/{uuid}/{id}', [PContractController::class, 'form'])->name('form');

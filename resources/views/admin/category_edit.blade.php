@@ -25,11 +25,28 @@
                 <div id="optionsHelp" class="form-text">نام انگلیسی برای استفاده در url صفحه</div>
             </div>
 
+
+            <div class="col-md-6 pb-3">
+                <label for="image_label" class="form-label">عکس متناسب</label>
+                <div class="input-group">
+                    <input dir="ltr" readonly type="text" id="image_label" class="form-control" name="image"
+                           aria-label="Image" aria-describedby="button-image"  value="{{old('image', $category->image)}}"
+                           style="border-top-left-radius: 0;border-bottom-left-radius: 0;">
+                    <button style="border-left: 1px solid #d2d6da !important;margin-bottom: 0" class="btn btn-outline-secondary" type="button" id="button-image">انتخاب فایل</button>
+                </div>
+            </div>
+
 {{--            <div class="pb-3">--}}
 {{--                <label for="icon" class="form-label">آیکن</label>--}}
 {{--                <input name="icon" type="text" class="form-control" id="icon">--}}
 {{--                <div id="defaultFormControlHelp" class="form-text">میتوانید آیکن را از این لیست انتخاب کنید.</div>--}}
 {{--            </div>--}}
+
+
+            <div class="pb-3">
+                <label class="form-label mt-3">توضیحات</label>
+                <textarea name="description" class="tinymce-editor-full">{!! old('description', $category->description) !!}</textarea>
+            </div>
 
             <div class="mt-3">
                 <div class="form-check form-check-linethrough">
@@ -53,6 +70,22 @@
     </script>
 @endsection
 
+
 @section('head')
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin" defer></script>
+    @include('tinymce.config')
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+
+            document.getElementById('button-image').addEventListener('click', (event) => {
+                event.preventDefault();
+
+                window.open('/file-manager/fm-button', 'fm', 'width=800,height=600');
+            });
+        });
+
+        // set file link
+        function fmSetLink($url) {
+            document.getElementById('image_label').value = $url;
+        }
+    </script>
 @endsection

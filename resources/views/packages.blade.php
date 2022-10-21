@@ -8,10 +8,10 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item px-0"><a href="{{ route('home') }}">خانه</a></li>
                     @if($category == "all")
-                        <li class="breadcrumb-item px-0 active">قرارداد ها</li>
+                        <li class="breadcrumb-item px-0 active">پکیج ها</li>
                     @else
                         <li class="breadcrumb-item px-0 active"><a href="{{ route('category' , $category->slug) }}">{{ $category->name }}</a></li>
-                        <li class="breadcrumb-item px-0">قرارداد ها</li>
+                        <li class="breadcrumb-item px-0">پکیج ها</li>
                     @endif
                 </ol>
             </nav>
@@ -20,12 +20,12 @@
                     <div class="about-content mb-50">
                         <div class="section-title mb-50 ps-lg-5">
                             <h1 class="mb-25">
-                                <i class="lni lni-certificate"></i>
-                                {{ $category != "all" ? 'قرارداد های ' . $category->name : 'همه قرارداد ها' }}
+                                <i class="lni lni-files"></i>
+                                {{ $category != "all" ? 'پکیج های ' . $category->name : 'همه پکیج ها' }}
                             </h1>
 
                             <div class="row">
-                                @foreach($contracts as $contract)
+                                @foreach($packages as $package)
                                     <div class="col-xl-3 col-md-4 col-6 px-sm-2 px-1 mb-3">
                                         <div class="pricing-box w-100">
                                             <div class="single-pricing m-0">
@@ -36,15 +36,15 @@
                                                         </svg>
                                                     </div>
                                                     <div class="text">
-                                                        <h3 class="package-name">{{ $contract->name }}</h3>
-                                                        <h2 class="price">{{ number_format($contract->price, null, '.', ',') }}<span class="toman">تومان</span></h2>
+                                                        <h3 class="package-name">{{ $package->name }}</h3>
+                                                        <h2 class="price">{{ number_format($package->price, null, '.', ',') }}<span class="toman">تومان</span></h2>
                                                     </div>
                                                 </div>
                                                 <div class="content">
-                                                    {!! empty($contract->summary) ? Str::limit(strip_tags($contract->description), 100) : nl2br($contract->summary) !!}
+                                                    {!! empty($package->summary) ? Str::limit(strip_tags($package->description), 100) : nl2br($package->summary) !!}
                                                 </div>
                                                 <div class="pricing-btn text-center mt-15">
-                                                    <a href="{{ route('contract', $contract->slug) }}" class="main-btn btn-hover">مشاهده</a>
+                                                    <a href="{{ route('package', $package->slug) }}" class="main-btn btn-hover">مشاهده</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -52,6 +52,29 @@
                                 @endforeach
                             </div>
                         </div>
+                        {{-- <div class="accordion pb-15" id="accordionExample">
+                            <div class="single-faq">
+                                <button class="w-100 text-start" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Which Service We Provide?
+                                </button>
+
+                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                    <div class="faq-content">
+                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="single-faq">
+                                <button class="w-100 text-start collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    What I need to start design?
+                                </button>
+                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                    <div class="faq-content">
+                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
+                                    </div>
+                                </div>
+                            </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

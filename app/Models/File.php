@@ -28,4 +28,10 @@ class File extends Model
         return $query->where('is_active', 1);
     }
 
+    public function isBought(User $user){
+        return $user->items()->where('item_id' , $this->id)
+            ->where('item_type' , self::class)
+            ->exists();
+    }
+
 }

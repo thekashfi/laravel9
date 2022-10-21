@@ -74,6 +74,18 @@
                                     <li class="nav-item">
                                         <a class="@if(\Illuminate\Support\Facades\Route::currentRouteName() == "home" ) active @endif" href="{{ route('home') }}">خانه</a>
                                     </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            دسته بندی ها
+                                        </a>
+                                        <ul class="dropdown-menu px-3 shadow rounded-3 border-0 text-end" aria-labelledby="navbarDropdown">
+                                            @foreach(\App\Models\Category::query()->latest()->get() as $h_category)
+                                                <li>
+                                                    <a class="dropdown-item" href="{{ route('category', $h_category->slug) }}">{{ $h_category->name }}</a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </li>
                                     @if(\App\Http\Controllers\IndexController::view('hasContract'))
                                         <li class="nav-item">
                                             <a class="@if(\Illuminate\Support\Facades\Route::currentRouteName() == "contracts" and request()->route('category') == "all" ) active @endif" href="{{ route('contracts' , 'all') }}">قرارداد ها</a>
@@ -254,7 +266,7 @@
                                     <ul class="links">
                                         @foreach(\App\Models\Category::query()->limit(7)->latest()->get() as $h_category)
                                             <li>
-                                                <a class="" href="{{ route('contracts', $h_category->slug) }}">{{ $h_category->name }}</a>
+                                                <a class="" href="{{ route('category', $h_category->slug) }}">{{ $h_category->name }}</a>
                                             </li>
                                         @endforeach
                                     </ul>

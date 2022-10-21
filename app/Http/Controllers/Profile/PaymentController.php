@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contract;
+use App\Models\File;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Package;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Shetabit\Multipay\Exceptions\InvalidPaymentException;
@@ -22,6 +25,36 @@ class PaymentController extends Controller
         $item->item_name = $contract->name;
         $price = $contract->price ;
         return $this->buy($request, $price , [$item] , route('contract', $contract_slug));
+    }
+    public function buyFile(Request $request, $file_slug){
+        $file = File::whereSlug($file_slug)->firstOrFail();
+        $item = new OrderItem();
+        $item->item_id = $file->id;
+        $item->item_type = File::class;
+        $item->item_name = $file->name;
+        $price = $file->price ;
+        return $this->buy($request, $price , [$item] , route('file', $file_slug));
+    }
+
+    public function buyPackage(Request $request, $package_slug){
+        $package = Package::whereSlug($package_slug)->firstOrFail();
+        $items = [] ;
+        foreach($package->contracts as $contract){
+            $item = new OrderItem();
+            $item->item_id = $contract->id;
+            $item->item_type = Contract::class;
+            $item->item_name = $contract->name;
+            $items[] = $item;
+        }
+        foreach($package->files as $file){
+            $item = new OrderItem();
+            $item->item_id = $file->id;
+            $item->item_type = File::class;
+            $item->item_name = $file->name;
+            $items[] = $item;
+        }
+        $price = $package->price ;
+        return $this->buy($request, $price , $items , route('package', $package_slug));
     }
 
     private function buy(Request $request, $amount , array  $Order_items , $rollbackUri)

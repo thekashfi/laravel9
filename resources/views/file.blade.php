@@ -5,25 +5,22 @@
     <section id="about" class="about-section">
         <div class="container">
               <nav aria-label="breadcrumb">
-                  <ol class="breadcrumb">
-                      <li class="breadcrumb-item px-0"><a href="{{ route('home') }}">خانه</a></li>
-                      <li class="breadcrumb-item px-0"><a
-                              href="{{ route('category' , $contract->category->slug) }}">{{ $contract->category->name }}</a>
-                      </li>
-                      <li class="breadcrumb-item px-0"><a href="{{ route('contracts', $contract->category->slug) }}">قرارداد
-                              ها</a></li>
-                      <li class="breadcrumb-item px-0 active" aria-current="page">{{ $contract->name }}</li>
-                  </ol>
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item px-0"><a href="{{ route('home') }}">خانه</a></li>
+                  <li class="breadcrumb-item px-0"><a href="{{ route('category' , $file->category->slug) }}">{{ $file->category->name }}</a></li>
+                  <li class="breadcrumb-item px-0"><a href="{{ route('files', $file->category->slug) }}">فایل ها</a></li>
+                  <li class="breadcrumb-item px-0 active" aria-current="page">{{ $file->name }}</li>
+                </ol>
               </nav>
             <div class="row">
                 <div class="col-lg-8">
                     <div class="about-content mb-50">
                         <div class="section-title mb-50 ps-lg-5">
                             <h1 class="mb-25">
-                                <i class="lni lni-certificate" style="margin-left: 15px;"></i>
-                                {{ $contract->name }}
+                                <i class="lni lni-zip" style="margin-left: 15px;"></i>
+                                {{ $file->name }}
                             </h1>
-                            {!! $contract->description !!}
+                            {!! $file->description !!}
                         </div>
                     </div>
                 </div>
@@ -38,7 +35,7 @@
                                         </svg>
                                     </div>
                                     <div class="text">
-                                        <h2 class="price">{{ number_format($contract->price, null, '.', ',') }}</h2>
+                                        <h2 class="price">{{ number_format($file->price, null, '.', ',') }}</h2>
                                         <h3 class="package-name">تومان</h3>
                                     </div>
                                 </div>
@@ -52,13 +49,13 @@
                                 </ul>
                                 <div class="pricing-btn text-center">
                                     @auth
-                                        @if ($contract->isBought(auth()->user()))
-                                            <a href="{{ route('payments' , ['contract' => $contract->id]) }}" class="main-btn btn-success btn-hover">دانلود</a>
+                                        @if ($file->isBought(auth()->user()))
+                                            <a href="{{ route('payments' , ['file' => $file->id]) }}" class="main-btn btn-success btn-hover">دانلود</a>
                                         @else
-                                            <a href="{{ route('buy', $contract->slug) }}" class="main-btn btn-hover">خرید</a>
+                                            <a href="{{ route('buyFile', $file->slug) }}" class="main-btn btn-hover">خرید</a>
                                         @endif
                                     @else
-                                        <a href="{{ route('buy', $contract->slug) }}" class="main-btn btn-hover">خرید</a>
+                                        <a href="{{ route('buyFile', $file->slug) }}" class="main-btn btn-hover">خرید</a>
                                     @endauth
                                 </div>
                             </div>

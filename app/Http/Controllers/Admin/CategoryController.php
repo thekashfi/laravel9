@@ -25,12 +25,13 @@ class CategoryController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|max:100',
+            'image' => 'required',
             'slug' => 'required|max:100|unique:categories,slug',
             'in_menu' => 'boolean'
         ]);
 
         Category::create($request->all());
-
+        cache()->clear();
         return $this->flashBack(null, 'admin.category.index');
     }
 
@@ -50,11 +51,13 @@ class CategoryController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|max:100',
+            'image' => 'required',
             'slug' => 'required|max:100|unique:categories,slug,' . $id,
             'in_menu' => 'boolean'
         ]);
 
         Category::findOrfail($id)->update($request->all());
+        cache()->clear();
 
         return $this->flashBack();
     }
@@ -65,6 +68,7 @@ class CategoryController extends Controller
         if ( $category->allContracts()->count() > 0 or $category->allFiles()->count() > 0 or $category->allPackages()->count() > 0 )
             return redirect()->back()->withErrors('دسته مورد نظر شامل قرارداد، پکیج یا فایل می باشد!');
         $category->delete();
+        cache()->clear();
         return $this->flashBack();
     }
 }

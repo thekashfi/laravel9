@@ -24,7 +24,9 @@
                                     {{ $item->item->name }}
                                 </a>
                             @else
-                                {{ $item->item_name }}
+                                <a href="{{ route('file',[ $item->item->slug]) }}">
+                                    {{ $item->item_name }}
+                                </a>
                             @endif
                         </td>
                         <td>

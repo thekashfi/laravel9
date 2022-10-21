@@ -30,20 +30,74 @@ class IndexController extends Controller
     public function contract($contract)
     {
         $contract = Contract::whereSlug($contract)->active()->firstOrFail();
-
         return view('contract', compact('contract'));
+    }
+    public function package($package_slug)
+    {
+        $package = Package::whereSlug($package_slug)->active()->firstOrFail();
+        return view('package', compact('package'));
+    }
+
+    public function file($file_slug)
+    {
+        $file = File::whereSlug($file_slug)->active()->firstOrFail();
+        return view('file', compact('file'));
     }
 
     public function contracts($category)
     {
-        $contracts = Contract::query()->active();
-        if (strtolower($category) != "all") {
-            $category = Category::whereSlug($category)->firstOrFail();
-            $contracts = $contracts->where('category_id', $category->id);
-        }
-        $contracts = $contracts->get();
+        $result = cache()->remember('contracts_page_'.$category , 15 * 60 , function () use ($category){
+            $contracts = Contract::query()->latest()->active();
+            if (strtolower($category) != "all") {
+                $category = Category::whereSlug($category)->firstOrFail();
+                $contracts = $contracts->where('category_id', $category->id);
+            }
+            $contracts = $contracts->get();
+            return compact('contracts', 'category');
+        });
+        return view('contracts', $result );
+    }
 
-        return view('contracts', compact('contracts', 'category'));
+
+    public function packages($category)
+    {
+        $result = cache()->remember('packages_page_'.$category , 15 * 60 , function () use ($category){
+            $packages = Package::query()->latest()->active();
+            if (strtolower($category) != "all") {
+                $category = Category::whereSlug($category)->firstOrFail();
+                $packages = $packages->where('category_id', $category->id);
+            }
+            $packages = $packages->get();
+            return compact('packages', 'category');
+        });
+
+        return view('packages', $result);
+    }
+
+    public function files($category)
+    {
+        $result = cache()->remember('files_page_'.$category , 15 * 60 , function () use ($category){
+            $files = File::query()->latest()->active();
+            if (strtolower($category) != "all") {
+                $category = Category::whereSlug($category)->firstOrFail();
+                $files = $files->where('category_id', $category->id);
+            }
+            $files = $files->get();
+            return compact('files', 'category');
+        });
+        return view('files', $result);
+    }
+    public function category($category)
+    {
+        $category = Category::whereSlug($category)->firstOrFail();
+        $result = cache()->remember('category_page_'.$category->id , 15 * 60 , function () use ($category){
+            $contracts = $category->contracts()->latest()->limit(8)->get();
+            $files = $category->files()->latest()->limit(8)->get();
+            $packages = $category->packages()->latest()->limit(8)->get();
+            return compact('files', 'contracts' , 'packages');
+        });
+        $result['category'] = $category;
+        return view('category', $result);
     }
 
     public static function Mpdf_main_file_line_26125($html) {

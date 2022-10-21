@@ -7,7 +7,6 @@ use App\Models\Category;
 use App\Models\Contract;
 use App\Models\File;
 use App\Models\Package;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class PackageController extends Controller
@@ -43,6 +42,7 @@ class PackageController extends Controller
         $package = Package::create($request->all());
         $package->contracts()->sync($request->contracts);
         $package->files()->sync($request->file_ids);
+        cache()->clear();
         return $this->flashBack();
     }
 
@@ -76,12 +76,14 @@ class PackageController extends Controller
         $package->update($request->all());
         $package->contracts()->sync($request->contracts);
         $package->files()->sync($request->file_ids);
+        cache()->clear();
         return $this->flashBack();
     }
 
     public function destroy($id)
     {
         Package::findOrFail($id)->delete();
+        cache()->clear();
 
         return $this->flashBack();
     }

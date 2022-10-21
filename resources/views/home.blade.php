@@ -182,7 +182,7 @@
 
                 <div class="row">
                     @foreach($categories as $category)
-                        <a class="col-xl-3 col-md-6" href="{{ route('contracts', $category->slug) }}">
+                        <a class="col-xl-3 col-md-6" href="{{ route('category', $category->slug) }}">
                             <div class="single-service py-4">
                                 <div class="content">
                                     <h3>{{ $category->name }}</h3>
@@ -194,6 +194,10 @@
                 <div class="view-all-btn text-center pt-30">
                     @if(\App\Http\Controllers\IndexController::view('hasContract'))
                         <a href="{{ route('contracts' , 'all') }}" class="main-btn btn-hover">همه قرارداد ها</a>
+                    @elseif(\App\Http\Controllers\IndexController::view('hasPackage'))
+                            <a href="{{ route('packages' , 'all') }}" class="main-btn btn-hover">همه پکیج ها</a>
+                    @elseif(\App\Http\Controllers\IndexController::view('hasFile'))
+                            <a href="{{ route('files' , 'all') }}" class="main-btn btn-hover">همه فایل ها</a>
                     @endif
                 </div>
             </div>

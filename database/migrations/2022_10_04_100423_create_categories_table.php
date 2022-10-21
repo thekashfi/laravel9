@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('icon', 30)->nullable()->default(null);
             $table->string('name', 100);
             $table->string('slug', 100)->unique();
-            // $table->string('description', 255);
+            $table->text('description')->nullable();
+            $table->text('image')->nullable();
             $table->boolean('in_menu')->nullable()->default(null);
             $table->timestamps();
         });
