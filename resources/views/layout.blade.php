@@ -194,7 +194,9 @@
 								<div class="logo mb-35">
 									<a href="{{ route('home') }}"> <img src="{{ url('') }}/front-assets/img/logo/logo.svg" alt=""> </a>
 								</div>
-								<p class="desc mb-35">چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع.</p>
+								<p class="desc mb-35" style="text-align: justify">
+                                    مجوعه راد بیزینس با سالها تجربه در زمینه های بیزینس کوچ و مشاوره کسب و کار، مهم ترین قراردادها، فرم ها و تعهدنامه ها رو برای شما عزیزان آماده کرده که یکی از دغدغه های بزرگ شماها رو رفع کرده باشه
+                                </p>
 								<ul class="socials">
 									<li>
 										<a href="jvascript:void(0)"> <i class="lni lni-facebook-filled"></i> </a>
@@ -280,7 +282,7 @@
 								<ul>
 									<li>+003894372632</li>
 									<li>helldesigner@gmail.ccom</li>
-									<li>شیراز ....</li>
+									<li>بلوار مدرس، خیابان غدیر، خیابان شهید شجاعی، کوچه 14</li>
 								</ul>
 								<div class="contact_map" style="width: 100%; height: 150px; margin-top: 25px;">
 									<div class="gmap_canvas">

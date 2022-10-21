@@ -7,19 +7,24 @@
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <div class="hero-content">
-                        <span class="wow fadeInLeft" data-wow-delay=".2s">لورم ایپسوم متن</span>
+                        <span class="wow fadeInLeft" data-wow-delay=".2s">
+                            از قدیم میگن جنگ اول  بهتر از صلح آخره..
+                        </span>
                         <h1 class="wow fadeInUp" data-wow-delay=".4s">
-                            تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک
+                            شعار  کوتاه سایت
                         </h1>
                         <p class="wow fadeInUp" data-wow-delay=".6s">
-                            چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی
-                            تکنولوژی مورد نیاز و کاربردهای متنوع.
+                            اگه توی زندگی قدرت نه نگفتن داشته باشیم خیلی جاها پشیمون نمیشیم...
+                            <br>
+                            پس یادت باشه قدم اول توی هر صحبتی صداقت و تعهد به اونه، ولی اگر در کنارش همون حرفارو مکتوب کنی با یه تیر دو نشون زدی:
+                            <br>
+                            هم تعهد دوطرفه ایجاد کردی هم نگرانیه بعدشو از بین بردی...
                         </p>
 
                         @if(\App\Http\Controllers\IndexController::view('hasContract'))
                             <a href="{{ route('contracts' , 'all') }}" class="main-btn btn-hover wow fadeInUp"
-                               data-wow-delay=".6s">دیدن
-                                نمونه قرارداد ها
+                               data-wow-delay=".6s">
+                                دیدن نمونه قرارداد ها
                             </a>
                         @endif
                     </div>
@@ -105,59 +110,71 @@
                     <div class="about-content mb-50">
                         <div class="section-title mb-50">
                             <h1 class="mb-25">حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد</h1>
-                            <p>تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ
-                                پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در
-                                ارائه راهکارها و شرایط سخت</p>
+                            <p style="text-align: justify">
+                                قبل از هرچیزی ازت ممنونم که برای خودت و کسب و کارت ارزش قائل شدی و داری تلاش میکنی که ارتقأش بدی..
+                                <br>
+                                تو این سایت ابزارهایی بهت میدم که کمکت میکنه تو مسیر موفقیت راه برات باز شه و هر قدمی که برمیداری محکمتر و مطمئن تر باشه...
+                                <br>
+                                در حال حاضر یکی از مهم ترین و اولین قدمی که هر مدیر، کارفرما، پیمانکار و... باید برداره، داشتنه انواع قراردادها، فرم ها و تعهدنامه هاست که داشتنش از بسیاری پشیمونی ها جلوگیری میکنه...
+                                <br>
+                                مجوعه راد بیزینس با سالها تجربه در زمینه های بیزینس کوچ و مشاوره کسب و کار، مهم ترین قراردادها، فرم ها و تعهدنامه ها رو برای شما عزیزان آماده کرده که یکی از دغدغه های بزرگ شماها رو رفع کرده  باشه...
+                                <br>
+                                همچنان در حال آماده سازی قدم های بعدی شما هستیم که امیدوارم بهتون کمک کنه و شمارو به فردی قدرتمند و آگاه در کسب و کار و زندگی تبدیل کنه...
+                                <br>
+                                برای رویاهات بجنگ چون هیچکس جز خودت اینکارو برات نمیکنه...
+                                <br>
+                                مجموعه راد بیزینس
+                            </p>
                         </div>
-                        <div class="accordion pb-15" id="accordionExample">
-                            <div class="single-faq">
-                                <button class="w-100" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    تایپ به پایان رسد وزمان مورد نیاز شامل
-                                </button>
+{{--                        <div class="accordion pb-15" id="accordionExample">--}}
+{{--                            <div class="single-faq">--}}
+{{--                                <button class="w-100" type="button" data-bs-toggle="collapse"--}}
+{{--                                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">--}}
+{{--                                    تایپ به پایان رسد وزمان مورد نیاز شامل--}}
+{{--                                </button>--}}
 
-                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
-                                     data-bs-parent="#accordionExample">
-                                    <div class="faq-content">
-                                        حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا
-                                        مورد استفاده قرار گیرد.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="single-faq">
-                                <button class="w-100 collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت
-                                </button>
-                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
-                                     data-bs-parent="#accordionExample">
-                                    <div class="faq-content">
-                                        تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.
-                                        کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان
-                                        را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص
-                                        طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید
-                                        داشت
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="single-faq">
-                                <button class="w-100 collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseThree" aria-expanded="false"
-                                        aria-controls="collapseThree">
-                                    شناخت فراوان جامعه و متخصصان را می طلبد
-                                </button>
-                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
-                                     data-bs-parent="#accordionExample">
-                                    <div class="faq-content">
-                                        صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله
-                                        در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای
-                                        متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد
-                                        گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="{{ route('aboutus') }}" class="main-btn btn-hover">درباره ما</a>
+{{--                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"--}}
+{{--                                     data-bs-parent="#accordionExample">--}}
+{{--                                    <div class="faq-content">--}}
+{{--                                        حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا--}}
+{{--                                        مورد استفاده قرار گیرد.--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="single-faq">--}}
+{{--                                <button class="w-100 collapsed" type="button" data-bs-toggle="collapse"--}}
+{{--                                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">--}}
+{{--                                    که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت--}}
+{{--                                </button>--}}
+{{--                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"--}}
+{{--                                     data-bs-parent="#accordionExample">--}}
+{{--                                    <div class="faq-content">--}}
+{{--                                        تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.--}}
+{{--                                        کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان--}}
+{{--                                        را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص--}}
+{{--                                        طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید--}}
+{{--                                        داشت--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="single-faq">--}}
+{{--                                <button class="w-100 collapsed" type="button" data-bs-toggle="collapse"--}}
+{{--                                        data-bs-target="#collapseThree" aria-expanded="false"--}}
+{{--                                        aria-controls="collapseThree">--}}
+{{--                                    شناخت فراوان جامعه و متخصصان را می طلبد--}}
+{{--                                </button>--}}
+{{--                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree"--}}
+{{--                                     data-bs-parent="#accordionExample">--}}
+{{--                                    <div class="faq-content">--}}
+{{--                                        صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله--}}
+{{--                                        در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای--}}
+{{--                                        متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد--}}
+{{--                                        گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <a href="{{ route('aboutus') }}" class="main-btn btn-hover">درباره ما</a>--}}
                     </div>
                 </div>
             </div>
@@ -174,8 +191,9 @@
                     <div class="col-xxl-5 col-xl-6 col-lg-7 col-md-10">
                         <div class="section-title text-center mb-50">
                             <h1>دسته بندی ها</h1>
-                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک
-                                است.</p>
+                            <p>
+                                پس اگه میخوای با یه تیر دو نشون بزنی و هوشمندانه تو کسب و کارت پیش بری، همین الان از تخفیف تکرار نشدنی  99 درصدی استفاده کن و یه عمر خودتو راحت کن...
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -191,15 +209,15 @@
                         </a>
                     @endforeach
                 </div>
-                <div class="view-all-btn text-center pt-30">
-                    @if(\App\Http\Controllers\IndexController::view('hasContract'))
-                        <a href="{{ route('contracts' , 'all') }}" class="main-btn btn-hover">همه قرارداد ها</a>
-                    @elseif(\App\Http\Controllers\IndexController::view('hasPackage'))
-                            <a href="{{ route('packages' , 'all') }}" class="main-btn btn-hover">همه پکیج ها</a>
-                    @elseif(\App\Http\Controllers\IndexController::view('hasFile'))
-                            <a href="{{ route('files' , 'all') }}" class="main-btn btn-hover">همه فایل ها</a>
-                    @endif
-                </div>
+{{--                <div class="view-all-btn text-center pt-30">--}}
+{{--                    @if(\App\Http\Controllers\IndexController::view('hasContract'))--}}
+{{--                        <a href="{{ route('contracts' , 'all') }}" class="main-btn btn-hover">همه قرارداد ها</a>--}}
+{{--                    @elseif(\App\Http\Controllers\IndexController::view('hasPackage'))--}}
+{{--                            <a href="{{ route('packages' , 'all') }}" class="main-btn btn-hover">همه پکیج ها</a>--}}
+{{--                    @elseif(\App\Http\Controllers\IndexController::view('hasFile'))--}}
+{{--                            <a href="{{ route('files' , 'all') }}" class="main-btn btn-hover">همه فایل ها</a>--}}
+{{--                    @endif--}}
+{{--                </div>--}}
             </div>
         </section>
         <!-- ========================= service-section end ========================= -->
@@ -279,9 +297,10 @@
             <div class="row align-items-center">
                 <div class="col-xl-6 col-lg-7">
                     <div class="section-title mb-50">
-                        <h1 class="mb-20 wow fadeInUp" data-wow-delay=".2s">قرارداد مد نظرتان یافت نشد؟</h1>
-                        <p class="wow fadeInUp" data-wow-delay=".4s">با ما در ارتباط باشید تا از خدمات مشاوره حقوقی و
-                            راهنمایی‌های بیشتر بهرمند شوید.</p>
+                        <h1 class="mb-20 wow fadeInUp" data-wow-delay=".2s">پیشنهاد یا انتقادی داری؟</h1>
+                        <p class="wow fadeInUp" data-wow-delay=".4s">
+                            اگه پیشنهاد یا انتقادی داری که میتونه به ما در مسیر بهتر شدن کمک کنه حتمأ بهمون بگو چون برامون با ارزشه دوسته من ... با تشکر
+                        </p>
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-5">

@@ -8,7 +8,11 @@
                     <div class="section-title text-center mb-60">
                         <h1 class="wow fadeInUp mb-20" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">با ما در ارتباط باشید</h1>
                         <p class="wow fadeInUp" data-wow-delay=".4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
-                            لورم ایپسوم متن تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع.
+                            اگه پیشنهاد یا انتقادی داری که میتونه به ما در مسیر بهتر شدن کمک کنه حتمأ بهمون بگو چون برامون با ارزشه دوسته من ... با تشکر
+                        </p>
+                        <p class="wow fadeInUp" data-wow-delay=".4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+                        <strong>آدرس:</strong>
+                            بلوار مدرس، خیابان غدیر، خیابان شهید شجاعی، کوچه 14
                         </p>
                     </div>
                 </div>
