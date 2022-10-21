@@ -112,9 +112,9 @@
                                     <li class="nav-item">
                                         <a class="@if(\Illuminate\Support\Facades\Route::currentRouteName() == "connectus" ) active @endif" href="{{ route('connectus') }}">تماس با ما</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="@if(\Illuminate\Support\Facades\Route::currentRouteName() == "aboutus" ) active @endif" href="{{ route('aboutus') }}">درباره ما</a>
-                                    </li>
+{{--                                    <li class="nav-item">--}}
+{{--                                        <a class="@if(\Illuminate\Support\Facades\Route::currentRouteName() == "aboutus" ) active @endif" href="{{ route('aboutus') }}">درباره ما</a>--}}
+{{--                                    </li>--}}
 
                                     @auth
                                         <li class="nav-item dropdown">

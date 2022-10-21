@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Profile;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Contract;
+use App\Models\File;
 use App\Models\Fillable;
 use App\Models\Order;
 use Illuminate\Http\Request;
@@ -27,6 +28,10 @@ class ProfileController extends Controller
             ->when($request->contract != null , function ($query) use($request){
                 $query->where('item_id' , $request->contract)
                     ->where('item_type' , Contract::class);
+            })
+            ->when($request->file != null , function ($query) use($request){
+                $query->where('item_id' , $request->file)
+                    ->where('item_type' , File::class);
             })
             ->paginate();
         return view('payments', compact('orderItems'));

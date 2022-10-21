@@ -18,45 +18,59 @@ use Shetabit\Payment\Facade\Payment;
 class ContractController extends Controller
 {
 
-    public function form($uuid)
+    public function form($uuid , $id)
     {
         $order = Order::whereUuid($uuid)->firstOrFail();
         Gate::authorize('use-order', $order); // check if order belongs to user && paid
 
-        $contract = Contract::findOrFail($order->contract_id);
+        $item = $order->items()->where('item_type' , Contract::class)->findOrFail($id);
+        $contract = Contract::findOrFail($item->item_id);
         // if contract has empty text => show form. else => download
-        if (empty($order->contract_text)) {
+        //if (empty($item->item_text)) {
             $fillables = $this->get_fillables($contract);
             if ( $fillables->count()  == 0 )
-                return redirect()->route('generate', $uuid);
+                return redirect()->route('generate', [$uuid , $id]);
             session()->flashInput(request()->input()); // olds of redirected back from form_confirmation
-            return view('form', compact('order', 'fillables'));
-        } else
-            return $this->generate_pdf($order->contract_text);
+            return view('form', compact('order','item', 'fillables'));
+        //} else
+        //    return $this->generate_pdf($item->item_text);
     }
 
-    public function form_confirmation(Request $request, $uuid)
+    public function download($uuid , $id)
     {
         $order = Order::whereUuid($uuid)->firstOrFail();
         Gate::authorize('use-order', $order); // check if order belongs to user && paid
-        $contract = Contract::findOrFail($order->contract_id);
+        $item = $order->items()->where('item_type' , Contract::class)->findOrFail($id);
+        if (empty($item->item_text))
+            return redirect()->route('form', [$uuid , $id]);
 
-        if (empty($order->contract_text)) {
+        return $this->generate_pdf($item->item_text);
+    }
+
+    public function form_confirmation(Request $request, $uuid,$id)
+    {
+        $order = Order::whereUuid($uuid)->firstOrFail();
+        Gate::authorize('use-order', $order); // check if order belongs to user && paid
+        $item = $order->items()->where('item_type' , Contract::class)->findOrFail($id);
+        $contract = Contract::findOrFail($item->item_id);
+
+        //if (empty($item->item_text)) {
             $fillables = $this->get_fillables($contract);
             $values = ($request->has('custom') and isset($request->all('custom')['custom'])) ? $request->all('custom')['custom'] : [];
-            return view('form_confirmation', compact('order', 'fillables', 'values'));
-        } else
-            return $this->generate_pdf($order->contract_text);
+            return view('form_confirmation', compact('order' , 'item', 'fillables', 'values'));
+        //} else
+        //    return $this->generate_pdf($item->item_text);
     }
 
-    public function generate(Request $request, $uuid)
+    public function generate(Request $request, $uuid , $id)
     {
         $order = Order::whereUuid($uuid)->firstOrFail();
         Gate::authorize('use-order', $order); // check if order belongs to user && paid
 
-        $contract = Contract::findOrFail($order->contract_id);
-        if (!empty($order->contract_text))
-            return $this->generate_pdf($order->contract_text);
+        $item = $order->items()->where('item_type' , Contract::class)->findOrFail($id);
+        $contract = Contract::findOrFail($item->item_id);
+        //if (!empty($item->item_text))
+        //    return $this->generate_pdf($item->item_text);
 
         // validation fillables form
         $fillables = $this->get_fillables($contract);
@@ -78,9 +92,9 @@ class ContractController extends Controller
 
             $html = str_replace($inputs, $answers, $html);
         }
-        $order->update(['contract_text' => $html]);
+        $item->update(['item_text' => $html]);
 
-        return $this->generate_pdf($order->contract_text);
+        return $this->generate_pdf($item->item_text);
     }
 
     private function get_fillables($contract)

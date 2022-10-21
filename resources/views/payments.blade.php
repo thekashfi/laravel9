@@ -38,16 +38,20 @@
                         </td>
                         <td>
                             @if ( $item->item_type == \App\Models\Contract::class )
-                                <a href="{{ route('form',[ $item->order->uuid ,  $item->id]) }}" class="btn btn-sm btn-success">
-                                    {{ empty($item->contract_text) ? 'تکمیل و دانلود قرارداد' : 'دانلود' }}
-                                </a>
-                                @if( !empty($item->contract_text))
+                                @if( !empty($item->item_text))
+                                    <a href="{{ route('downloadContract',[ $item->order->uuid ,  $item->id]) }}" class="btn btn-sm btn-success">
+                                        دانلود
+                                    </a>
                                     <a href="{{ route('form',[ $item->order->uuid ,  $item->id]) }}" class="btn btn-sm btn-warning">
                                         ویرایش و دانلود مجدد
                                     </a>
+                                @else
+                                    <a href="{{ route('form',[ $item->order->uuid ,  $item->id]) }}" class="btn btn-sm btn-success">
+                                        تکمیل و دانلود قرارداد
+                                    </a>
                                 @endif
                             @else
-                                <a href="{{ route('form',[ $item->order->uuid ,  $item->id]) }}" class="btn btn-sm btn-success">
+                                <a href="{{ route('downloadContract',[ $item->order->uuid ,  $item->id]) }}" class="btn btn-sm btn-success">
                                     دانلود فایل
                                 </a>
                             @endif
