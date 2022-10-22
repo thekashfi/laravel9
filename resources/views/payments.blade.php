@@ -51,7 +51,7 @@
                                     </a>
                                 @endif
                             @else
-                                <a href="{{ route('downloadContract',[ $item->order->uuid ,  $item->id]) }}" class="btn btn-sm btn-success">
+                                <a href="{{ route('downloadFile',[ $item->order->uuid ,  $item->id]) }}" class="btn btn-sm btn-success">
                                     دانلود فایل
                                 </a>
                             @endif

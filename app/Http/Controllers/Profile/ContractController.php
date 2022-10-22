@@ -27,13 +27,13 @@ class ContractController extends Controller
         $contract = Contract::findOrFail($item->item_id);
         // if contract has empty text => show form. else => download
         //if (empty($item->item_text)) {
-            $fillables = $this->get_fillables($contract);
-            if ( $fillables->count()  == 0 )
-                return redirect()->route('generate', [$uuid , $id]);
-            session()->flashInput(request()->input()); // olds of redirected back from form_confirmation
-            return view('form', compact('order','item', 'fillables'));
+        $fillables = $this->get_fillables($contract);
+        if ( $fillables->count()  == 0 )
+            return redirect()->route('generate', [$uuid , $id]);
+        session()->flashInput(request()->input()); // olds of redirected back from form_confirmation
+        return view('form', compact('order','item', 'fillables'));
         //} else
-        //    return $this->generate_pdf($item->item_text);
+        //    return $this->generate_pdf($contract->name, $item->item_text);
     }
 
     public function download($uuid , $id)
@@ -44,7 +44,7 @@ class ContractController extends Controller
         if (empty($item->item_text))
             return redirect()->route('form', [$uuid , $id]);
 
-        return $this->generate_pdf($item->item_text);
+        return $this->generate_pdf($item->item_name, $item->item_text);
     }
 
     public function form_confirmation(Request $request, $uuid,$id)
@@ -55,11 +55,11 @@ class ContractController extends Controller
         $contract = Contract::findOrFail($item->item_id);
 
         //if (empty($item->item_text)) {
-            $fillables = $this->get_fillables($contract);
-            $values = ($request->has('custom') and isset($request->all('custom')['custom'])) ? $request->all('custom')['custom'] : [];
-            return view('form_confirmation', compact('order' , 'item', 'fillables', 'values'));
+        $fillables = $this->get_fillables($contract);
+        $values = ($request->has('custom') and isset($request->all('custom')['custom'])) ? $request->all('custom')['custom'] : [];
+        return view('form_confirmation', compact('order' , 'item', 'fillables', 'values'));
         //} else
-        //    return $this->generate_pdf($item->item_text);
+        //    return $this->generate_pdf($contract->name, $item->item_text);
     }
 
     public function generate(Request $request, $uuid , $id)
@@ -70,7 +70,7 @@ class ContractController extends Controller
         $item = $order->items()->where('item_type' , Contract::class)->findOrFail($id);
         $contract = Contract::findOrFail($item->item_id);
         //if (!empty($item->item_text))
-        //    return $this->generate_pdf($item->item_text);
+        //    return $this->generate_pdf($contract->name, $item->item_text);
 
         // validation fillables form
         $fillables = $this->get_fillables($contract);
@@ -94,7 +94,7 @@ class ContractController extends Controller
         }
         $item->update(['item_text' => $html]);
 
-        return $this->generate_pdf($item->item_text);
+        return $this->generate_pdf($contract->name, $item->item_text);
     }
 
     private function get_fillables($contract)
@@ -114,7 +114,7 @@ class ContractController extends Controller
         return Fillable::query()->whereIn('id', $fillables ?? [])->get();
     }
 
-    private function generate_pdf($html)
+    private function generate_pdf($name , $html)
     {
         $pdf = new Mpdf(['format' => 'A4', 'orientation' => 'P', 'mode' => 'utf-8',
             'fontDir' => public_path('fonts'),
@@ -136,8 +136,11 @@ class ContractController extends Controller
         $pdf->allow_charset_conversion = false;
         $pdf->autoScriptToLang = true;
         $pdf->autoLangToFont = true;
+        $pdf->SetTitle($name.' ['.config('app.name').']');
+        $pdf->SetAuthor(config('app.name'));
+        $pdf->SetCreator(config('app.name'));
         $pdf->writeHTML('<body style="position: relative">' . $html . '</body>');
-        return $pdf->Output();
+        return $pdf->Output($name.' ['.config('app.name').'].pdf', \Mpdf\Output\Destination::DOWNLOAD);
     }
 
 }

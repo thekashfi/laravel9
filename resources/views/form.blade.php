@@ -9,7 +9,7 @@
                         <div>
                             <div class="card-body p-5">
                                 <h3 class="text-uppercase text-center mb-2">مشخصات را وارد کنید</h3>
-                                <form class="row g-3" action="{{ route('form_confirmation' , $order->uuid) }}" method="POST">
+                                <form class="row g-3" action="{{ route('form_confirmation' , [$order->uuid , $item->id]) }}" method="POST">
                                     @csrf
                                     @foreach($fillables as $fillable)
 {{--                                        <div class="col-md-12">--}}
