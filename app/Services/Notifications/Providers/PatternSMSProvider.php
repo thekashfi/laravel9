@@ -16,10 +16,12 @@ class PatternSMSProvider implements NotificationInterface
     private string $from;
     public function setData(array $data): void
     {
-        $this->patternCode = $data['patternCode'];
+        $this->patternCode = config('auth.code.pattern.patternCode');
         $this->phone = $data['phone'];
-        $this->from = $data['from'];
-        $this->patternValues = $data['patternValues'];
+        $this->from = config('auth.code.pattern.from');
+        $this->patternValues = [
+            config('auth.code.pattern.code_variable') => $data['code']
+        ];
     }
 
     public function notice(): bool

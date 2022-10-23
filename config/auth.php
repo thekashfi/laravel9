@@ -111,11 +111,21 @@ return [
     'code' => [
         'accept_minutes' => 15,
         'allow_try_times' => 6,
-        'notification_by' => 'pattern',
+        'notification_by' => 'negresh',
         'pattern' => [
             'patternCode' => 'juhemz41m6yw3n7',
             'from' => '+983000505',
             'code_variable' => 'verification-code',
+        ],
+        'pattern_negresh' => [
+            'bodyId' => 105173,
+            'username' => '09170755215',
+            'password' => 'Xx123456@',
+        ],
+        'negresh' => [
+            'from' => 500012702547515,
+            'username' => '09170755215',
+            'password' => 'Xx123456@',
         ],
     ]
 ];

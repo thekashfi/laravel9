@@ -82,12 +82,8 @@ class AuthService
 
         $notification = NotificationFactory::handle(config('auth.code.notification_by', 'pattern'));
         $notification->setData([
-            'patternCode' => config('auth.code.pattern.patternCode'),
             'phone' => $phone,
-            'from' => config('auth.code.pattern.from'),
-            'patternValues' => [
-                config('auth.code.pattern.code_variable') => $token->code
-            ],
+            'code' => $token->code,
         ]);
         if ($notification->notice() and $token->addUses()) {
             return true;
