@@ -108,7 +108,7 @@ class PaymentController extends Controller
             $order->result = ($order->result != null ? $order->result . PHP_EOL : '') . $exception->getMessage();
             $order->is_paid = 0;
             $order->save();
-            return redirect()->route('orders')->withErrors($exception->getMessage());
+            return redirect()->route('payments_history')->withErrors($exception->getMessage());
         }
     }
 }
