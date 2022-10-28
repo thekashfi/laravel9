@@ -110,7 +110,7 @@
 {{--                                        <a class="" href="">درخواست قرارداد</a>--}}
 {{--                                    </li>--}}
                                     <li class="nav-item">
-                                        <a class="@if(\Illuminate\Support\Facades\Route::currentRouteName() == "connectus" ) active @endif" href="{{ route('connectus') }}">تماس با ما</a>
+                                        <a class="@if(\Illuminate\Support\Facades\Route::currentRouteName() == "connectus" ) active @endif" href="{{ route('connectus') }}">ارتباط با ما</a>
                                     </li>
 {{--                                    <li class="nav-item">--}}
 {{--                                        <a class="@if(\Illuminate\Support\Facades\Route::currentRouteName() == "aboutus" ) active @endif" href="{{ route('aboutus') }}">درباره ما</a>--}}
@@ -255,7 +255,7 @@
                                         <a class="" href="{{ route('aboutus') }}">درباره ما</a>
                                     </li>
                                     <li>
-                                        <a class="" href="{{ route('connectus') }}">تماس با ما</a>
+                                        <a class="" href="{{ route('connectus') }}">ارتباط با ما</a>
                                     </li>
 								</ul>
 							</div>
@@ -278,11 +278,11 @@
 
 						<div class="col-xl-3 col-md-6">
 							<div class="footer-widget">
-								<h3>تماس با ما</h3>
+								<h3>ارتباط با ما</h3>
 								<ul>
-									<li>+003894372632</li>
-									<li>helldesigner@gmail.ccom</li>
-									<li>بلوار مدرس، خیابان غدیر، خیابان شهید شجاعی، کوچه 14</li>
+									<li>09170755215</li>
+									<li>radbusiness2020@gmail.ccom</li>
+									<li>شیراز، بلوار مدرس، خیابان غدیر، خیابان شهید شجاعی، کوچه 14</li>
 								</ul>
 								<div class="contact_map" style="width: 100%; height: 150px; margin-top: 25px;">
 									<div class="gmap_canvas">
