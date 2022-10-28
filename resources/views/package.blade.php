@@ -39,6 +39,12 @@
                                         <h3 class="package-name">تومان</h3>
                                     </div>
                                 </div>
+                                @if ($package->price < $package->old_price)
+                                    <div class="alert alert-success">
+                                        <strong>این پکیج شامل {{ number_format($package->old_price - $package->price, null, '.', ',') }} تومان تخفیف می باشد.</strong>
+                                        <br> قیمت قبلی: {{ number_format($package->old_price, null, '.', ',') }}<span class="toman">تومان</span>
+                                    </div>
+                                @endif
                                 <ul class="content">
                                     <li>
                                         موارد موجود در پکیج:

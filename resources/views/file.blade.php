@@ -39,6 +39,12 @@
                                         <h3 class="package-name">تومان</h3>
                                     </div>
                                 </div>
+                                @if ($file->price < $file->old_price)
+                                    <div class="alert alert-success">
+                                        <strong>این فایل شامل {{ number_format($file->old_price - $file->price, null, '.', ',') }} تومان تخفیف می باشد.</strong>
+                                        <br> قیمت قبلی: {{ number_format($file->old_price, null, '.', ',') }}<span class="toman">تومان</span>
+                                    </div>
+                                @endif
                                 <ul class="content">
                                     <li>به همراه توضیحات کامل و کافی و وافی</li>
                                     <li>پشتیبانی یکماهه</li>
