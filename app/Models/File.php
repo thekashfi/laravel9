@@ -9,7 +9,7 @@ class File extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['category_id', 'name','summary','description', 'file', 'slug' ,'price' , 'is_active'];
+    protected $fillable = ['category_id', 'name','summary','description', 'file', 'slug' ,'price' ,'old_price' , 'is_active'];
 
 
     public function category()

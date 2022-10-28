@@ -38,6 +38,9 @@
                                 </td>
                                 <td class="align-middle text-center">
                                     <span class="text-secondary text-xs font-weight-bold">{{ number_format($file->price) }} تومان</span>
+                                    @if ($file->price < $file->old_price)
+                                        <div class="text-decoration-line-through text-secondary text-xs">{{ number_format($file->old_price) }} تومان</div>
+                                    @endif
                                 </td>
                                 <td class="align-middle text-center text-sm">
                                     @if($file->is_active)

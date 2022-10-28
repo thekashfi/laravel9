@@ -21,7 +21,7 @@
     <!-- CSS Files -->
     <link id="pagestyle" href="{{ asset('/assets/css/argon-dashboard.css?v=2.0.4') }}" rel="stylesheet" />
     <link href="{{ mix('css/app.css') }}" rel="stylesheet" type="text/css" />
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+{{--    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>--}}
     @yield('head')
 </head>
 

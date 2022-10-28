@@ -7,7 +7,7 @@
             <div class="d-inline-block">
                 <form>
                     <div class="input-group">
-                        <button type="submit" class="input-group-text text-body"><i class="fas fa-search" style="font-family:'Font Awesome 5 Free' !important;" aria-hidden="true"></i></button>
+                        <button type="submit" class="input-group-text text-body">🔎︎</button>
                         <input type="text" name="q" value="{{ request()->query('q') }}" class="form-control" placeholder="جست و جو" onfocus="focused(this)" onfocusout="defocused(this)" style="border-right: 1px solid #d2d6da!important;border-left: 1px solid #d2d6da!important;">
                     </div>
                 </form>

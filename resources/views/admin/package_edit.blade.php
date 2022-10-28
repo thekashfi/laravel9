@@ -11,7 +11,13 @@
             @endif
 
             <div class="">
-                <h6>پکیج جدید</h6>
+                <h6>
+                    @if ( $package->id === null )
+                        پکیج جدید
+                    @else
+                        ویرایش پکیج {{ $package->name }}
+                    @endif
+                </h6>
             </div>
 
             <div class="row">
@@ -29,8 +35,13 @@
                 </div>
 
                 <div class="col-md-6 pb-3">
-                    <label for="price" class="form-label">مبلغ به تومان</label>
+                    <label for="price" class="form-label">مبلغ تمام شده به تومان</label>
                     <input name="price" type="number" class="form-control" id="price" value="{{old('price', $package->price)}}">
+                </div>
+
+                <div class="col-md-6 pb-3">
+                    <label for="old_price" class="form-label">مبلغ پیش از تخفیف به تومان</label>
+                    <input name="old_price" type="number" class="form-control" id="old_price" value="{{old('old_price', $package->old_price)}}">
                 </div>
 
                 <div class="pb-3 col-md-6">

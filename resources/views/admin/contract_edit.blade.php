@@ -11,7 +11,13 @@
             @endif
 
             <div class="">
-                <h6>قرارداد جدید</h6>
+                <h6>
+                    @if ( $contract->id === null )
+                        قرارداد جدید
+                    @else
+                        ویرایش قرارداد {{ $contract->name }}
+                    @endif
+                </h6>
             </div>
 
             <div class="row">
@@ -29,8 +35,13 @@
                 </div>
 
                 <div class="col-md-6 pb-3">
-                    <label for="price" class="form-label">مبلغ به تومان</label>
+                    <label for="price" class="form-label">مبلغ تمام شده به تومان</label>
                     <input name="price" type="number" class="form-control" id="price" value="{{old('price', $contract->price)}}">
+                </div>
+
+                <div class="col-md-6 pb-3">
+                    <label for="old_price" class="form-label">مبلغ پیش از تخفیف به تومان</label>
+                    <input name="old_price" type="number" class="form-control" id="old_price" value="{{old('old_price', $contract->old_price)}}">
                 </div>
 
                 <div class="pb-3 col-md-6">
@@ -45,7 +56,7 @@
                     </select>
                 </div>
 
-                <div class="pb-3 col-md-6">
+                <div class="col-md-6 mt-5">
                     <div class="form-check form-check-linethrough">
                         <input value="0" name="is_active" class="form-check-input h-5 mt-0 rounded-circle border-dashed flex-none float-end" type="hidden">
                         <input value="1" name="is_active" id="is_active" class="form-check-input h-5 mt-0 rounded-circle border-dashed flex-none float-end" type="checkbox" {{ $contract->is_active == false ?: 'checked' }}>

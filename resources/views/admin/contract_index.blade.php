@@ -38,6 +38,9 @@
                                 </td>
                                 <td class="align-middle text-center">
                                     <span class="text-secondary text-xs font-weight-bold">{{ number_format($contract->price) }} تومان</span>
+                                    @if ($contract->price < $contract->old_price)
+                                        <div class="text-decoration-line-through text-secondary text-xs">{{ number_format($contract->old_price) }} تومان</div>
+                                    @endif
                                 </td>
                                 <td class="align-middle text-center text-sm">
                                     @if($contract->is_active)
