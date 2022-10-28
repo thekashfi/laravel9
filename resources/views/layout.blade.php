@@ -281,13 +281,15 @@
 								<h3>ارتباط با ما</h3>
 								<ul>
 									<li>09170755215</li>
-									<li>radbusiness2020@gmail.ccom</li>
 									<li>شیراز، بلوار مدرس، خیابان غدیر، خیابان شهید شجاعی، کوچه 14</li>
 								</ul>
-								<div class="contact_map" style="width: 100%; height: 150px; margin-top: 25px;">
-									<div class="gmap_canvas">
-										<iframe id="gmap_canvas" src="https://maps.google.com/maps?q=Mission%20District%2C%20San%20Francisco%2C%20CA%2C%20USA&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed" style="width: 100%;"></iframe>
-									</div>
+                                <h3 class="mb-3 mt-30">نمادها</h3>
+								<div class="contact_map">
+{{--									<div class="gmap_canvas">--}}
+{{--										<iframe id="gmap_canvas" src="https://maps.google.com/maps?q=Mission%20District%2C%20San%20Francisco%2C%20CA%2C%20USA&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed" style="width: 100%;"></iframe>--}}
+{{--									</div>--}}
+                                    <script src="https://www.zarinpal.com/webservice/TrustCode" type="text/javascript"></script>
+
                                 </div>
 							</div>
 						</div>
