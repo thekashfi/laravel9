@@ -20,7 +20,7 @@ return new class extends Migration
                 ->references('id')
                 ->on('users')
                 ->cascadeOnUpdate()
-                ->nullOnDelete();
+                ->cascadeOnDelete();
             $table->string('uuid', 255)->unique();
             $table->boolean('is_paid')->default(false);
             $table->string('trans1', 255)->nullable();

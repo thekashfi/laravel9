@@ -20,13 +20,13 @@ return new class extends Migration
                 ->references('id')
                 ->on('users')
                 ->cascadeOnUpdate()
-                ->nullOnDelete();
+                ->cascadeOnDelete();
             $table->foreignId('order_id')
                 ->nullable()
                 ->references('id')
                 ->on('orders')
                 ->cascadeOnUpdate()
-                ->nullOnDelete();
+                ->cascadeOnDelete();
             $table->unsignedBigInteger('item_id');
             $table->string('item_type');
             $table->string('item_name', 100);
