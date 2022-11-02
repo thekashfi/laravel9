@@ -46,7 +46,7 @@
 
                 <div class="pb-3 col-md-6">
                     <label for="category_id" class="form-label">دسته بندی</label>
-                    <select name="category_id" class="form-select"  x-model="category_id" id="category_id">
+                    <select name="category_id" class="form-select resize-vertical" x-model="category_id" id="category_id">
                         @foreach($categories as $category)
                             <option value="{{ $category->id }}"
                                 {{ (old('category_id' , optional($contract->category)->id) == $category->id) ? 'selected' : '' }}>
@@ -59,7 +59,7 @@
                 <div class="col-md-6 mt-5">
                     <div class="form-check form-check-linethrough">
                         <input value="0" name="is_active" class="form-check-input h-5 mt-0 rounded-circle border-dashed flex-none float-end" type="hidden">
-                        <input value="1" name="is_active" id="is_active" class="form-check-input h-5 mt-0 rounded-circle border-dashed flex-none float-end" type="checkbox" {{ $contract->is_active == false ?: 'checked' }}>
+                        <input value="1" name="is_active" id="is_active" class="form-check-input h-5 mt-0 rounded-circle border-dashed flex-none float-end" type="checkbox" {{ old('is_active', $contract->is_active) == false ?: 'checked' }}>
                         <label for="is_active" class="me-4">قابل مشاهده در وبسایت</label>
                     </div>
                 </div>

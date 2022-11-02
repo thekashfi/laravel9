@@ -43,7 +43,7 @@
 
             <div class="mb-3 col-md-12">
                 <label for="name" class="form-label">نوع</label>
-                <select name="type" class="form-select" size="4" x-model="type">
+                <select name="type" class="form-select resize-vertical" size="4" x-model="type">
                     <option value="text" selected {{ old('type') == 'text' ? 'selected' : '' }}>متن</option>
                     <option value="number" {{ old('type') == 'number' ? 'selected' : '' }}>عدد</option>
                     <option value="select" {{ old('type') == 'select' ? 'selected' : '' }}>لیست</option>

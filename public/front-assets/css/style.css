@@ -86,4 +86,7 @@ body, h1, h2, h3, h5, h6, p, strong, b {
     font-size: 13px;
     font-weight: 400;
 }
+.resize-vertical {
+    resize: vertical;
+}
 .breadcrumb-item+.breadcrumb-item{padding-right:.5rem}.breadcrumb-item+.breadcrumb-item::before{float:right;padding-left:.5rem;color:#6c757d;content:var(--bs-breadcrumb-divider, "/")}.breadcrumb-item.active{color:#6c757d}

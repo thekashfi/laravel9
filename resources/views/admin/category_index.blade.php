@@ -45,9 +45,9 @@
                                 </td>
                                 <td class="align-middle text-center text-sm">
                                     @if($category->in_menu)
-                                        <span class="badge badge-sm bg-gradient-success">On</span>
+                                        <span class="badge badge-sm bg-gradient-success">فعال</span>
                                     @else
-                                        <span class="badge badge-sm bg-gradient-secondary">Off</span>
+                                        <span class="badge badge-sm bg-gradient-secondary">غیرفعال</span>
                                     @endif
                                 </td>
                                 <td class="align-middle">
