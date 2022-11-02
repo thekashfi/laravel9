@@ -45,7 +45,7 @@
 
                 <div class="pb-3 col-md-6">
                     <label for="category_id" class="form-label">دسته بندی</label>
-                    <select name="category_id" class="form-select"  x-model="category_id" id="category_id">
+                    <select name="category_id" class="form-select resize-vertical"  x-model="category_id" id="category_id">
                         @foreach($categories as $category)
                             <option value="{{ $category->id }}"
                                 {{ old('category_id', optional($file->category)->id) == $category->id  ? 'selected' : '' }}>
@@ -69,7 +69,7 @@
                 <div class="pb-3 col-md-6">
                     <div class="form-check form-check-linethrough">
                         <input value="0" name="is_active" class="form-check-input h-5 mt-0 rounded-circle border-dashed flex-none float-end" type="hidden">
-                        <input value="1" name="is_active" id="is_active" class="form-check-input h-5 mt-0 rounded-circle border-dashed flex-none float-end" type="checkbox" {{ $file->is_active == false ?: 'checked' }}>
+                        <input value="1" name="is_active" id="is_active" class="form-check-input h-5 mt-0 rounded-circle border-dashed flex-none float-end" type="checkbox" {{ old('is_active', $file->is_active) == false ?: 'checked' }}>
                         <label for="is_active" class="me-4">قابل مشاهده در وبسایت</label>
                     </div>
                 </div>

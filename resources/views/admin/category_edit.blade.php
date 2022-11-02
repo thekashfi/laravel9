@@ -51,7 +51,7 @@
             <div class="mt-3">
                 <div class="form-check form-check-linethrough">
                     <input value="0" name="in_menu" class="form-check-input h-5 mt-0 rounded-circle border-dashed flex-none float-end" type="hidden">
-                    <input value="1" name="in_menu" id="in_menu" class="form-check-input h-5 mt-0 rounded-circle border-dashed flex-none float-end" type="checkbox" {{ $category->in_menu == false ?: 'checked' }}>
+                    <input value="1" name="in_menu" id="in_menu" class="form-check-input h-5 mt-0 rounded-circle border-dashed flex-none float-end" type="checkbox" {{ old('in_menu', $category->in_menu) == false ?: 'checked' }}>
                     <label for="in_menu" class="me-4">در منو نمایش داده شود.</label>
                 </div>
             </div>

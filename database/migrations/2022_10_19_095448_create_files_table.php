@@ -21,7 +21,7 @@ return new class extends Migration
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->string('name', 100);
-            $table->string('summary', 255);
+            $table->string('summary', 255)->nullable();
             $table->text('description')->nullable();
             $table->text('file');
             $table->string('slug', 100)->unique();

@@ -20,7 +20,7 @@
                                             @case('select')
                                                 <div class="mb-3 col-md-6">
                                                     <label for="{{ $fillable->id }}" class="form-label">{{ $fillable->name }}</label>
-                                                    <select name="custom[{{ $fillable->id }}]" id="{{ $fillable->id }}" class="form-select" size="3" x-model="type">
+                                                    <select name="custom[{{ $fillable->id }}]" id="{{ $fillable->id }}" class="form-select resize-vertical" size="3" x-model="type">
                                                         @foreach(json_decode($fillable->options) as $key => $option)
                                                             <option value="{{ $option }}" @selected(old("custom.$fillable->id") === $option)>
                                                                 {{ $option }}
