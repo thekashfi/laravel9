@@ -50,6 +50,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('orders', [ProfileController::class, 'orders'])->name('payments_history');
     Route::any('form/{uuid}/{id}', [PContractController::class, 'form'])->name('form');
     Route::post('form/{uuid}/{id}/confirmation', [PContractController::class, 'form_confirmation'])->name('form_confirmation');
+    Route::any('edit/{uuid}/{id}', [PContractController::class, 'editForm'])->name('edit.contract');
     Route::any('generate/{uuid}/{id}', [PContractController::class, 'generate'])->name('generate');
     Route::any('download/{uuid}/contract/{id}', [PContractController::class, 'download'])->name('downloadContract');
     Route::any('download/{uuid}/file/{id}', [\App\Http\Controllers\Profile\FileController::class, 'download'])->name('downloadFile');

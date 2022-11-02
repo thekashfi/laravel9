@@ -14,6 +14,12 @@
                                 </div>
                                 <form class="row g-3" action="{{ route('generate' , [$order->uuid, $item->id]) }}" method="POST">
                                     @csrf
+                                    @if( env('CAN_EDIT_CONTRACT' , false) )
+                                        <div class="col-12">
+                                            {!! $html !!}
+                                        </div>
+                                        <input type="hidden" value="{{ $html }}" name="html">
+                                    @else
                                     @foreach($fillables as $fillable)
                                         <div class="col-6">
                                             <strong class="form-label">{{ $fillable->name }}:</strong>
@@ -21,17 +27,25 @@
                                             <span>{{ $values[$fillable->id] ?? "--" }}</span>
                                        </div>
                                     @endforeach
+                                    @endif
                                     <div class="col-12">
                                         <button type="submit" class="btn btn-primary">تایید و دانلود</button>
                                         <button type="button" onclick="document.getElementById('resetForm').submit();" class="btn btn-warning">بازگشت و تصحیح</button>
                                     </div>
                                 </form>
-                                <form id="resetForm" action="{{ route('form' , [$order->uuid, $item->id]) }}" method="POST">
-                                    @csrf
-                                    @foreach($fillables as $fillable)
-                                            <input type="hidden" value="{{ $values[$fillable->id] ?? '' }}" name="custom[{{ $fillable->id }}]">
-                                    @endforeach
-                                </form>
+                                @if( env('CAN_EDIT_CONTRACT' , false) )
+                                    <form id="resetForm" action="{{ route('edit.contract' , [$order->uuid, $item->id]) }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" value="{{ $html }}" name="html">
+                                    </form>
+                                @else
+                                    <form id="resetForm" action="{{ route('form' , [$order->uuid, $item->id]) }}" method="POST">
+                                        @csrf
+                                        @foreach($fillables as $fillable)
+                                                <input type="hidden" value="{{ $values[$fillable->id] ?? '' }}" name="custom[{{ $fillable->id }}]">
+                                        @endforeach
+                                    </form>
+                                @endif
                             </div>
                         </div>
                     </div>

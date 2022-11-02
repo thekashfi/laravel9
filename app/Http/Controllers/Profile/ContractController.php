@@ -28,51 +28,23 @@ class ContractController extends Controller
         // if contract has empty text => show form. else => download
         //if (empty($item->item_text)) {
         $fillables = $this->get_fillables($contract);
-        if ( $fillables->count()  == 0 )
+        if ( $fillables->count()  == 0 and ! env('CAN_EDIT_CONTRACT' , false))
             return redirect()->route('generate', [$uuid , $id]);
+        if ( $fillables->count()  == 0 and env('CAN_EDIT_CONTRACT' , false))
+            return redirect()->route('edit.contract', [$uuid , $id]);
         session()->flashInput(request()->input()); // olds of redirected back from form_confirmation
         return view('form', compact('order','item', 'fillables'));
         //} else
         //    return $this->generate_pdf($contract->name, $item->item_text);
     }
 
-    public function download($uuid , $id)
-    {
-        $order = Order::whereUuid($uuid)->firstOrFail();
-        Gate::authorize('use-order', $order); // check if order belongs to user && paid
-        $item = $order->items()->where('item_type' , Contract::class)->findOrFail($id);
-        if (empty($item->item_text))
-            return redirect()->route('form', [$uuid , $id]);
-
-        return $this->generate_pdf($item->item_name, $item->item_text);
-    }
-
-    public function form_confirmation(Request $request, $uuid,$id)
-    {
+    public function editForm(Request $request , $uuid , $id){
+        if ( ! env('CAN_EDIT_CONTRACT' , false) )
+            abort(404);
         $order = Order::whereUuid($uuid)->firstOrFail();
         Gate::authorize('use-order', $order); // check if order belongs to user && paid
         $item = $order->items()->where('item_type' , Contract::class)->findOrFail($id);
         $contract = Contract::findOrFail($item->item_id);
-
-        //if (empty($item->item_text)) {
-        $fillables = $this->get_fillables($contract);
-        $values = ($request->has('custom') and isset($request->all('custom')['custom'])) ? $request->all('custom')['custom'] : [];
-        return view('form_confirmation', compact('order' , 'item', 'fillables', 'values'));
-        //} else
-        //    return $this->generate_pdf($contract->name, $item->item_text);
-    }
-
-    public function generate(Request $request, $uuid , $id)
-    {
-        $order = Order::whereUuid($uuid)->firstOrFail();
-        Gate::authorize('use-order', $order); // check if order belongs to user && paid
-
-        $item = $order->items()->where('item_type' , Contract::class)->findOrFail($id);
-        $contract = Contract::findOrFail($item->item_id);
-        //if (!empty($item->item_text))
-        //    return $this->generate_pdf($contract->name, $item->item_text);
-
-        // validation fillables form
         $fillables = $this->get_fillables($contract);
         $html = $contract->text;
         if ( $fillables->count()  ) {
@@ -89,10 +61,85 @@ class ContractController extends Controller
                 $inputs[] = "[[$fillable->id:<span style=\"color: #6073df;\">$fillable->name</span>]]";
                 $answers[] = nl2br(strip_tags($request->input("custom.$fillable->id"))) ?? '';
             }
-
             $html = str_replace($inputs, $answers, $html);
         }
-        $item->update(['item_text' => $html]);
+        $values = ($request->has('custom') and isset($request->all('custom')['custom'])) ? $request->all('custom')['custom'] : [];
+        session()->flashInput(request()->input()); // olds of redirected back from form_confirmation
+        return view('editForm', compact('order' , 'item', 'fillables', 'values' , 'html'));
+    }
+
+
+    public function form_confirmation(Request $request, $uuid,$id)
+    {
+        $order = Order::whereUuid($uuid)->firstOrFail();
+        Gate::authorize('use-order', $order); // check if order belongs to user && paid
+        $item = $order->items()->where('item_type' , Contract::class)->findOrFail($id);
+        $contract = Contract::findOrFail($item->item_id);
+
+        //if (empty($item->item_text)) {
+        if ( ! env('CAN_EDIT_CONTRACT' , false) ) {
+            $fillables = $this->get_fillables($contract);
+            $values = ($request->has('custom') and isset($request->all('custom')['custom'])) ? $request->all('custom')['custom'] : [];
+            $html = "";
+        } else {
+            $fillables = [];
+            $values = [];
+            $html = $request->html;
+        }
+        return view('form_confirmation', compact('order' , 'item', 'fillables', 'values' , 'html'));
+        //} else
+        //    return $this->generate_pdf($contract->name, $item->item_text);
+    }
+
+    public function download($uuid , $id)
+    {
+        $order = Order::whereUuid($uuid)->firstOrFail();
+        Gate::authorize('use-order', $order); // check if order belongs to user && paid
+        $item = $order->items()->where('item_type' , Contract::class)->findOrFail($id);
+        if (empty($item->item_text))
+            return redirect()->route('form', [$uuid , $id]);
+
+        return $this->generate_pdf($item->item_name, $item->item_text);
+    }
+
+
+    public function generate(Request $request, $uuid , $id)
+    {
+        $order = Order::whereUuid($uuid)->firstOrFail();
+        Gate::authorize('use-order', $order); // check if order belongs to user && paid
+
+        $item = $order->items()->where('item_type' , Contract::class)->findOrFail($id);
+        $contract = Contract::findOrFail($item->item_id);
+        //if (!empty($item->item_text))
+        //    return $this->generate_pdf($contract->name, $item->item_text);
+
+
+        if ( ! env('CAN_EDIT_CONTRACT' , false) ) {
+            // validation fillables form
+            $fillables = $this->get_fillables($contract);
+            $html = $contract->text;
+            if ($fillables->count()) {
+                foreach ($fillables as $fillable) {
+                    if ($fillable->rules != null) {
+                        $rules['custom.' . $fillable->id] = $fillable->rules;
+                        $names['custom.' . $fillable->id] = "«{$fillable->name}»";
+                    }
+                }
+                $this->validate($request, $rules ?? [], [], $names ?? []);
+
+                //generate html for pdf
+                foreach ($fillables as $fillable) {
+                    $inputs[] = "[[$fillable->id:<span style=\"color: #6073df;\">$fillable->name</span>]]";
+                    $answers[] = nl2br(strip_tags($request->input("custom.$fillable->id"))) ?? '';
+                }
+
+                $html = str_replace($inputs, $answers, $html);
+            }
+            $item->update(['item_text' => $html]);
+        } else {
+            $html = $request->html;
+            $item->update(['item_text' => $html]);
+        }
 
         return $this->generate_pdf($contract->name, $item->item_text);
     }
