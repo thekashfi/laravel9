@@ -73,6 +73,20 @@ class PaymentController extends Controller
                 $item->order_id = $order->id;
                 $item->save();
             }
+            if ( $request->user()->is_admin ){
+                $order->result = "خرید رایگان برای مدیریت وبسایت.";
+                $order->is_paid = 1;
+                $order->save();
+                DB::commit();
+                return redirect()->route('payments')->with('flash', 'پرداخت با موفقیت انجام شد.');
+            }
+            if ( $order->amount == 0 ){
+                $order->result = "خرید سرویس رایگان.";
+                $order->is_paid = 1;
+                $order->save();
+                DB::commit();
+                return redirect()->route('payments')->with('flash', 'پرداخت با موفقیت انجام شد.');
+            }
             $invoice = new Invoice;
             $invoice->amount($order->amount);
             return Payment::callbackUrl(route('callback', $order->uuid))->purchase($invoice, function ($driver, $transactionId) use ($order) {
