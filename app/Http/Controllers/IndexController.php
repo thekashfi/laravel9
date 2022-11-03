@@ -124,4 +124,16 @@ class IndexController extends Controller
         }
         return str_replace($persiansAlphabet, $persiansRAlphabet, $html);
     }
+
+    public function sitemap()
+    {
+        // $categories = Category::get();
+        $contracts = Contract::active()->get();
+        $files = File::active()->get();
+        $packages = Package::active()->get();
+
+        return response()
+            ->view('sitemap', compact('categories', 'contracts', 'files', 'packages'))
+            ->header('Content-Type', 'text/xml');
+    }
 }

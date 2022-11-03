@@ -70,7 +70,7 @@
                             </button>
 
                             <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
-                                <ul id="nav" class="navbar-nav me-auto">
+                                <ul id="nav" class="navbar-nav me-4">
                                     <li class="nav-item">
                                         <a class="@if(\Illuminate\Support\Facades\Route::currentRouteName() == "home" ) active @endif" href="{{ route('home') }}">خانه</a>
                                     </li>

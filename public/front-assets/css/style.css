@@ -89,4 +89,26 @@ body, h1, h2, h3, h5, h6, p, strong, b {
 .resize-vertical {
     resize: vertical;
 }
+.tns-liveregion, .tns-visually-hidden {
+    display: none !important;
+}
+p.wow.fadeInUp {
+    font-size: 17px;
+}
+
+/* md: */
+@media (min-width: 768px) {
+    .pt-md-140 {
+        padding-top: 140px !important;
+    }
+    .pt-md-100 {
+        padding-top: 100px;
+    }
+    .pb-md-100 {
+        padding-top: 100px;
+    }
+    ul#nav li.nav-item * {
+        font-size: 1.08rem !important;
+    }
+}
 .breadcrumb-item+.breadcrumb-item{padding-right:.5rem}.breadcrumb-item+.breadcrumb-item::before{float:right;padding-left:.5rem;color:#6c757d;content:var(--bs-breadcrumb-divider, "/")}.breadcrumb-item.active{color:#6c757d}

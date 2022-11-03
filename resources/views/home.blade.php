@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- ========================= hero-section start ========================= -->
-    <section id="home" class="hero-section">
+    <section id="home" class="hero-section pt-4 pt-md-140">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
@@ -43,7 +43,7 @@
 
     @if(\App\Http\Controllers\IndexController::view('hasPackage'))
     <!-- ========================= client-logo-section start ========================= -->
-    <section id="pricing" class="pricing-section pt-150">
+    <section id="pricing" class="pricing-section pt-50">
         <div class="container">
             <div class="row">
 
@@ -103,7 +103,7 @@
     @endif
 
     <!-- ========================= about-section start ========================= -->
-    <section id="about" class="about-section img-bg pt-100 pb-100 mt-150">
+    <section id="about" class="about-section img-bg pt-100 mt-4">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
@@ -116,7 +116,7 @@
                         <div class="section-title mb-50">
                             <h1 class="mb-25">قبل از هرچیزی ازت ممنونم که برای خودت و کسب و کارت ارزش قائل شدی و داری تلاش میکنی که ارتقأش بدی</h1>
                             <p style="text-align: justify">
-                               
+
                                 تو این سایت ابزارهایی بهت میدم که کمکت میکنه تو مسیر موفقیت راه برات باز شه و هر قدمی که برمیداری محکمتر و مطمئن تر باشه...
                                 <br>
                                 در حال حاضر یکی از مهم ترین و اولین قدمی که هر مدیر، کارفرما، پیمانکار و... باید برداره، داشتنه انواع قراردادها، فرم ها و تعهدنامه هاست که داشتنش از بسیاری پشیمونی ها جلوگیری میکنه...
@@ -126,7 +126,7 @@
                                 همچنان در حال آماده سازی قدم های بعدی شما هستیم که امیدوارم بهتون کمک کنه و شمارو به فردی قدرتمند و آگاه در کسب و کار و زندگی تبدیل کنه...
                                 <br>
                                 برای رویاهات بجنگ چون هیچکس جز خودت اینکارو برات نمیکنه...
-                                
+
                             </p>
                             <br>
                             <p style="text-align:center;"><img src="{{ url('') }}/front-assets/img/logo/logo.svg" alt="Logo"></p>
@@ -192,7 +192,7 @@
 
     @if(\App\Http\Controllers\IndexController::view('hasCategory'))
         <!-- ========================= service-section start ========================= -->
-        <section id="service" class="service-section img-bg pt-100 pb-100 mt-150">
+        <section id="service" class="service-section img-bg pt-50 pb-50 pt-md-100 pb-md-100">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-xxl-5 col-xl-6 col-lg-7 col-md-10">
@@ -299,7 +299,7 @@
     {{--			</div>--}}
     {{--		</section>--}}
 
-    <section class="cta-section img-bg pt-110 pb-60">
+    <section class="cta-section img-bg pt-80 pb-20">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-xl-6 col-lg-7">

@@ -74,3 +74,4 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'admin'], f
     Route::get('contact-us/{contact}/delete', [ContactController::class, 'destroy'])->name('connect-us-delete');
 });
 
+Route::get('sitemap.xml', [IndexController::class, 'sitemap']);

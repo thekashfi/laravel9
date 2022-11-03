@@ -17,19 +17,17 @@ class Contract extends Model
     //     return $this->hasMany(Fillable::class);
     // }
 
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', 1);
+    }
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
-
     public function package()
     {
         return $this->morphToMany(Package::class, 'item' , 'package_items');
-    }
-
-    public function scopeActive($query)
-    {
-        return $query->where('is_active', 1);
     }
 
     public function isBought(User $user){

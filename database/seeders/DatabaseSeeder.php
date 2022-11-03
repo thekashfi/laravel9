@@ -42,11 +42,20 @@ class DatabaseSeeder extends Seeder
             'price' => 2000,
             'is_active' => 1]);
 
+        $this->create_package('foo');
+        $this->create_package('bar');
+        $this->create_package('baz');
+        $this->create_package('qux');
+        $this->create_package('quux');
+    }
+
+    private function create_package($name)
+    {
         $package = Package::create([
             'category_id' => Category::first()->id,
-            'name' => 'foo',
+            'name' => $name,
             'description' => '<p>description for testing</p>',
-            'slug' => 'dd',
+            'slug' => str_replace(' ', '_', $name) . rand(1, 1000),
             'price' => 3000,
             'is_active' => 1]);
         $package->contracts()->sync(Contract::limit(2)->pluck('id'));

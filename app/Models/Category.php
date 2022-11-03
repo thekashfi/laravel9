@@ -11,11 +11,14 @@ class Category extends Model
 
     protected $fillable = ['icon', 'name', 'slug', 'in_menu', 'description', 'image'];
 
+    public function scopeInMenu($query)
+    {
+        return $query->where('in_menu', 1);
+    }
     public function contracts()
     {
         return $this->hasMany(Contract::class)->where('is_active' , 1 );
     }
-
     public function files()
     {
         return $this->hasMany(File::class)->where('is_active' , 1 );
@@ -24,7 +27,6 @@ class Category extends Model
     {
         return $this->hasMany(Contract::class);
     }
-
     public function allFiles()
     {
         return $this->hasMany(File::class);
