@@ -49,12 +49,11 @@
                                     </div>
                                 @endif
                                 <ul class="content">
-                                    <li>به همراه توضیحات کامل و کافی و وافی</li>
+                                    <li>دسترسی آسان</li>
                                     <li>پشتیبانی یکماهه</li>
-                                    <li><strong>امکان فلان</strong></li>
-                                    <li>ویژگی بیسان</li>
-                                    <li>بهترین قرارداد</li>
-                                    <li>برترین محصول سال</li>
+                                    <li><strong>امکان ویرایش</strong></li>
+                                    <li>بدون تاریخ انقضا</li>
+                                    
                                 </ul>
                                 <div class="pricing-btn text-center">
                                     @auth

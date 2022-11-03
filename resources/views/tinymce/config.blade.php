@@ -3,19 +3,19 @@
     var editorObject = tinymce.init({
         selector: 'textarea.tinymce-editor', // Replace this CSS selector to match the placeholder element for TinyMCE
         directionality : 'rtl',
-        plugins: 'code table lists',
+        plugins: 'code table advtable lists',
         toolbar: 'undo redo | formatselect| bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code table | customInsertButton',
         height : "800",
         setup: function (editor) {
             editor.ui.registry.addButton('customInsertButton', {
-                text: 'افزودن',
+                text: 'فیلد قرارداد',
                 onAction: function (_) {
                     let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no, width=0,height=0,left=-1000,top=-1000`;
                     let popup = window.open('{{route('admin.fillables')}}', 'test', params);
                 }
             });
         },
-        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
     });
     tinymce.init({
         selector: 'textarea.tinymce-editor-full', // Replace this CSS selector to match the placeholder element for TinyMCE

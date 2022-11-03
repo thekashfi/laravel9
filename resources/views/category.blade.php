@@ -62,7 +62,7 @@
                                                 {!! empty($package->summary) ? Str::limit(strip_tags($package->description), 100) : nl2br($package->summary) !!}
                                             </div>
                                             <div class="pricing-btn text-center mt-15">
-                                                <a href="{{ route('package', $package->slug) }}" class="main-btn btn-hover">مشاهده</a>
+                                                <a href="{{ route('package', $package->slug) }}" class="main-btn btn-hover">مشاهده و خرید</a>
                                             </div>
                                         </div>
                                     </div>
@@ -110,7 +110,7 @@
                                                 {!! empty($contract->summary) ? Str::limit(strip_tags($contract->description), 100) : nl2br($contract->summary) !!}
                                             </div>
                                             <div class="pricing-btn text-center mt-15">
-                                                <a href="{{ route('contract', $contract->slug) }}" class="main-btn btn-hover">مشاهده</a>
+                                                <a href="{{ route('contract', $contract->slug) }}" class="main-btn btn-hover">مشاهده و خرید</a>
                                             </div>
                                         </div>
                                     </div>
@@ -158,7 +158,7 @@
                                                 {!! empty($file->summary) ? Str::limit(strip_tags($file->description), 100) : nl2br($file->summary) !!}
                                             </div>
                                             <div class="pricing-btn text-center mt-15">
-                                                <a href="{{ route('file', $file->slug) }}" class="main-btn btn-hover">مشاهده</a>
+                                                <a href="{{ route('file', $file->slug) }}" class="main-btn btn-hover">مشاهده و خرید</a>
                                             </div>
                                         </div>
                                     </div>

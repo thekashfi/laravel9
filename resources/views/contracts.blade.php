@@ -21,7 +21,7 @@
                         <div class="section-title mb-50 ps-lg-5">
                             <h1 class="mb-25">
                                 <i class="lni lni-certificate"></i>
-                                {{ $category != "all" ? 'قرارداد های ' . $category->name : 'همه قرارداد ها' }}
+                                {{ $category != "all" ? '' . $category->name : 'همه قرارداد ها' }}
                             </h1>
 
                             <div class="row">
@@ -47,7 +47,7 @@
                                                     {!! empty($contract->summary) ? Str::limit(strip_tags($contract->description), 100) : nl2br($contract->summary) !!}
                                                 </div>
                                                 <div class="pricing-btn text-center mt-15">
-                                                    <a href="{{ route('contract', $contract->slug) }}" class="main-btn btn-hover">مشاهده</a>
+                                                    <a href="{{ route('contract', $contract->slug) }}" class="main-btn btn-hover">مشاهده و خرید</a>
                                                 </div>
                                             </div>
                                         </div>
