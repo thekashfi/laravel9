@@ -11,6 +11,10 @@ class Package extends Model
 
     protected $fillable = ['category_id', 'name','summary','description', 'slug' ,'price' ,'old_price' , 'is_active'];
 
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', 1);
+    }
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -20,11 +24,5 @@ class Package extends Model
     }
     public function files(){
         return $this->morphedByMany(File::class , 'item' ,'package_items');
-    }
-
-
-    public function scopeActive($query)
-    {
-        return $query->where('is_active', 1);
     }
 }
