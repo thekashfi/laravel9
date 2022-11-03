@@ -127,7 +127,7 @@ class IndexController extends Controller
 
     public function sitemap()
     {
-        // $categories = Category::get();
+        $categories = Category::withCount('packages' , 'contracts' , 'files')->get();
         $contracts = Contract::active()->get();
         $files = File::active()->get();
         $packages = Package::active()->get();

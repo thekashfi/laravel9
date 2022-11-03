@@ -15,14 +15,35 @@
         <changefreq>monthly</changefreq>
         <priority>0.3</priority>
     </url>
-    {{-- @foreach($categories as $category)
+     @foreach($categories as $category)
         <url>
             <loc>{{ route('category', $category->slug) }}</loc>
             <changefreq>monthly</changefreq>
             <lastmod>{{ $category->updated_at->tz('UTC')->toAtomString() }}</lastmod>
             <priority>0.9</priority>
         </url>
-    @endforeach --}}
+        @if($category->packages_count > 0)
+            <url>
+                <loc>{{ route('packages', $category->slug) }}</loc>
+                <changefreq>monthly</changefreq>
+                <priority>0.9</priority>
+            </url>
+        @endif
+        @if($category->contracts_count > 0)
+            <url>
+                <loc>{{ route('contracts', $category->slug) }}</loc>
+                <changefreq>monthly</changefreq>
+                <priority>0.9</priority>
+            </url>
+        @endif
+        @if($category->files_count > 0)
+            <url>
+                <loc>{{ route('contracts', $category->slug) }}</loc>
+                <changefreq>monthly</changefreq>
+                <priority>0.9</priority>
+            </url>
+        @endif
+    @endforeach
     @foreach($contracts as $contract)
         <url>
             <loc>{{ route('contract', $contract->slug) }}</loc>
