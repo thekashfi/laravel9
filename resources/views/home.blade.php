@@ -43,7 +43,7 @@
 
     @if(\App\Http\Controllers\IndexController::view('hasPackage'))
     <!-- ========================= client-logo-section start ========================= -->
-    <section id="pricing" class="pricing-section pt-50">
+    <section id="pricing" class="pricing-section">
         <div class="container">
             <div class="row">
 

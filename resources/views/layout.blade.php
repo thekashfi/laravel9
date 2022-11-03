@@ -134,7 +134,7 @@
                                         </li>
                                     @else
                                         <li class="nav-item">
-                                            <div class="navbar-btn d-none d-sm-inline-block">
+                                            <div class="navbar-btn d-sm-inline-block">
                                                 <a href="{{ route('auth.showLogin') }}" class="ud-main-btn ud-login-btn">
                                                 ورود
                                                 </a>
