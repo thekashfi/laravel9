@@ -36,7 +36,7 @@
                                     </div>
                                     <div class="text">
                                         <h2 class="price">{{ number_format($package->price, null, '.', ',') }}</h2>
-                                        <h3 class="package-name">تومان</h3>
+                                        <h3 class="package-name ">تومان</h3>
                                     </div>
                                 </div>
                                 @if ($package->price < $package->old_price)

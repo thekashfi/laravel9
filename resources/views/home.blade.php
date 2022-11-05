@@ -7,26 +7,32 @@
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <div class="hero-content">
-                        <span class="wow fadeInLeft" data-wow-delay=".2s">
+{{--                        <span class="wow fadeInLeft" data-wow-delay=".2s">--}}
+{{--                            از قدیم میگن جنگ اول  بهتر از صلح آخره..--}}
+{{--                        </span>--}}
+{{--                        <h1 class="wow fadeInUp" data-wow-delay=".4s">--}}
+{{--                            رادبیزنس--}}
+{{--                        </h1>--}}
+                        <p class="wow fadeInUp" style="margin-bottom: 15px !important" data-wow-delay=".6s">
                             از قدیم میگن جنگ اول  بهتر از صلح آخره..
-                        </span>
-                        <h1 class="wow fadeInUp" data-wow-delay=".4s">
-                            رادبیزنس
-                        </h1>
-                        <p class="wow fadeInUp" data-wow-delay=".6s">
+                            <br>
                             اگه توی زندگی قدرت نه نگفتن داشته باشیم خیلی جاها پشیمون نمیشیم...
                             <br>
                             پس یادت باشه قدم اول توی هر صحبتی صداقت و تعهد به اونه، ولی اگر در کنارش همون حرفارو مکتوب کنی با یه تیر دو نشون زدی:
                             <br>
                             هم تعهد دوطرفه ایجاد کردی هم نگرانیه بعدشو از بین بردی...
                             <br>
-                            پس اگه میخوای با یه تیر دو نشون بزنی و هوشمندانه تو کسب و کارت پیش بری، همین الان از تخفیف تکرار نشدنی  99 درصدی است
+                            پس اگه میخوای با یه تیر دو نشون بزنی و هوشمندانه تو کسب و کارت پیش بری.
+                            <span class="wow fadeInLeft" style="font-size: 1rem" data-wow-delay=".2s">
+                            همین الان از تخفیف تکرار نشدنی  99 درصدی استفاده کن و یه عمر خودتو راحت کن...
+                            </span>
                         </p>
+
 
                         @if(\App\Http\Controllers\IndexController::view('hasContract'))
                             <a href="{{ route('contracts' , 'all') }}" class="main-btn btn-hover wow fadeInUp"
                                data-wow-delay=".6s">
-                                دیدن نمونه قرارداد ها
+                                دیدن نمونه قرارداد ها و خرید
                             </a>
                         @endif
                     </div>
@@ -68,19 +74,20 @@
                                         <div class="price-header text-center">
                                             <div class="shape">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="142.92" height="137" viewBox="0 0 142.92 137">
-                                                    <path id="Path_751" data-name="Path 751" d="M17.065-3.312C-5.734,33.7-93.2,35.845-114.171-.154S-89.6-110.3-45.837-111.307C-2.071-112.381,39.864-40.384,17.065-3.312Z" transform="translate(119.436 111.319)" fill="#{{ (['ffeaea' ,'ffefff' , 'ced7ff'])[rand(0,2)] }}" />
+                                                    <path id="Path_751" data-name="Path 751" d="M17.065-3.312C-5.734,33.7-93.2,35.845-114.171-.154S-89.6-110.3-45.837-111.307C-2.071-112.381,39.864-40.384,17.065-3.312Z" transform="translate(119.436 111.319)" fill="#{{ (['ECFAEB' ,'ffefff' , 'ced7ff'])[rand(0,2)] }}" />
                                                 </svg>
                                             </div>
                                             <div class="text">
                                                 <h3 class="package-name">{{ $package->name }}</h3>
                                                 <h2 class="price">{{ number_format($package->price, null, '.', ',') }}<span class="toman">تومان</span></h2>
                                                 @if ($package->price < $package->old_price)
-                                                    <small class="text-decoration-line-through">{{ number_format($package->old_price, null, '.', ',') }}<span class="text-decoration-line-through toman">تومان</span></small>
+                                                    <small class="text-decoration-line-through text-danger">{{ number_format($package->old_price, null, '.', ',') }}<span class="text-decoration-line-through toman">تومان</span></small>
                                                 @endif
                                             </div>
                                         </div>
                                         <div class="content">
                                             {!! empty($package->summary) ? Str::limit(strip_tags($package->description), 100) : nl2br($package->summary) !!}
+                                            {!! nl2br($package->summary) !!}
                                         </div>
                                         <div class="pricing-btn text-center">
                                             <a href="{{ route('package', $package->slug) }}" class="main-btn btn-hover">مشاهده و خرید</a>
@@ -198,9 +205,9 @@
                     <div class="col-xxl-5 col-xl-6 col-lg-7 col-md-10">
                         <div class="section-title text-center mb-50">
                             <h1>دسته بندی ها</h1>
-                            <p>
-                                پس اگه میخوای با یه تیر دو نشون بزنی و هوشمندانه تو کسب و کارت پیش بری، همین الان از تخفیف تکرار نشدنی  99 درصدی استفاده کن و یه عمر خودتو راحت کن...
-                            </p>
+{{--                            <p>--}}
+{{--                                پس اگه میخوای با یه تیر دو نشون بزنی و هوشمندانه تو کسب و کارت پیش بری، همین الان از تخفیف تکرار نشدنی  99 درصدی استفاده کن و یه عمر خودتو راحت کن...--}}
+{{--                            </p>--}}
                         </div>
                     </div>
                 </div>
