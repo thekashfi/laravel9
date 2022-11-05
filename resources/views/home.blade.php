@@ -86,7 +86,11 @@
                                             </div>
                                         </div>
                                         <div class="content">
+<<<<<<< HEAD
                                             {!! empty($package->summary) ? Str::limit(strip_tags($package->description), 100) : nl2br($package->summary) !!}
+=======
+{{--                                            {!! empty($package->summary) ? Str::limit(strip_tags($package->description), 100) : nl2br($package->summary) !!}--}}
+>>>>>>> master
                                             {!! nl2br($package->summary) !!}
                                         </div>
                                         <div class="pricing-btn text-center">

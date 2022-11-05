@@ -44,7 +44,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="content">
-                                                    {!! empty($contract->summary) ? Str::limit(strip_tags($contract->description), 100) : nl2br($contract->summary) !!}
+{{--                                                    {!! empty($contract->summary) ? Str::limit(strip_tags($contract->description), 100) : nl2br($contract->summary) !!}--}}
+                                                    {!! nl2br($contract->summary) !!}
                                                 </div>
                                                 <div class="pricing-btn text-center mt-15">
                                                     <a href="{{ route('contract', $contract->slug) }}" class="main-btn btn-hover">مشاهده و خرید</a>

@@ -44,7 +44,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="content">
-                                                    {!! empty($package->summary) ? Str::limit(strip_tags($package->description), 100) : nl2br($package->summary) !!}
+{{--                                                    {!! empty($package->summary) ? Str::limit(strip_tags($package->description), 100) : nl2br($package->summary) !!}--}}
+                                                    {!! nl2br($package->summary) !!}
                                                 </div>
                                                 <div class="pricing-btn text-center mt-15">
                                                     <a href="{{ route('package', $package->slug) }}" class="main-btn btn-hover">مشاهده و خرید</a>

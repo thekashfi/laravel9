@@ -44,7 +44,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="content">
-                                                    {!! empty($file->summary) ? Str::limit(strip_tags($file->description), 100) : nl2br($file->summary) !!}
+{{--                                                    {!! empty($file->summary) ? Str::limit(strip_tags($file->description), 100) : nl2br($file->summary) !!}--}}
+                                                    {!! nl2br($file->summary) !!}
                                                 </div>
                                                 <div class="pricing-btn text-center mt-15">
                                                     <a href="{{ route('file', $file->slug) }}" class="main-btn btn-hover">مشاهده</a>
