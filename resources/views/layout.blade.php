@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="{{ url('') }}/front-assets/css/LineIcons.2.0.css" />
     <link rel="stylesheet" href="{{ url('') }}/front-assets/css/tiny-slider.css" />
     <link rel="stylesheet" href="{{ url('') }}/front-assets/css/animate.css" />
-    <link rel="stylesheet" href="{{ url('') }}/front-assets/css/main.css" />
-    <link rel="stylesheet" href="{{ url('') }}/front-assets/css/style.css" />
+    <link rel="stylesheet" href="{{ url('') }}/front-assets/css/main.css?v1.0" />
+    <link rel="stylesheet" href="{{ url('') }}/front-assets/css/style.css?v1.0" />
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-Variable-font-face.css" rel="stylesheet"
         type="text/css" />
     @yield('head')
@@ -61,6 +61,7 @@
                         <nav class="navbar navbar-expand-lg">
                             <a class="navbar-brand" href="{{ url('') }}">
                                 <img src="{{ url('') }}/front-assets/img/logo/logo.svg" alt="Logo" />
+                                <span class="logo-text pe-1">Raad Business</span>
                             </a>
                             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

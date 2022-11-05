@@ -39,7 +39,7 @@
                                     </div>
                                     <div class="text">
                                         <h2 class="price">{{ number_format($contract->price, null, '.', ',') }}</h2>
-                                        <h3 class="package-name">تومان</h3>
+                                        <h3 class="package-name ">تومان</h3>
                                     </div>
                                 </div>
                                 @if ($contract->price < $contract->old_price)
@@ -53,7 +53,7 @@
                                     <li>پشتیبانی یکماهه</li>
                                     <li><strong>امکان ویرایش</strong></li>
                                     <li>بدون تاریخ انقضا</li>
-                                    
+
                                 </ul>
                                 <div class="pricing-btn text-center">
                                     @auth
