@@ -14,6 +14,7 @@
                 <h6>دسته جدید</h6>
             </div>
 
+            <div class="row">
             <div class="pb-3">
                 <label for="name" class="form-label">نام</label>
                 <input name="name" type="text" class="form-control" id="name" placeholder="" value="{{ old('name', $category->name) }}">
@@ -25,7 +26,6 @@
                 <div id="optionsHelp" class="form-text">نام انگلیسی برای استفاده در url صفحه</div>
             </div>
 
-
             <div class="col-md-6 pb-3">
                 <label for="image_label" class="form-label">عکس متناسب</label>
                 <div class="input-group">
@@ -34,6 +34,11 @@
                            style="border-top-left-radius: 0;border-bottom-left-radius: 0;">
                     <button style="border-left: 1px solid #d2d6da !important;margin-bottom: 0" class="btn btn-outline-secondary" type="button" id="button-image">انتخاب فایل</button>
                 </div>
+            </div>
+
+            <div class="col-md-6 pb-3">
+                <label for="color" class="form-label">رنگ</label>
+                <input name="color" type="color" class="form-control" id="color" style="width:50px; height: 40px" value="{{old('color', $category->color)}}">
             </div>
 
 {{--            <div class="pb-3">--}}
@@ -59,6 +64,7 @@
 
             <div class="w-100 text-center">
                 <button class="btn btn-primary btn-sm mt-3">ثبت</button>
+            </div>
             </div>
         </form>
     </div>

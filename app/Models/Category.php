@@ -9,7 +9,7 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['icon', 'name', 'slug', 'in_menu', 'description', 'image'];
+    protected $fillable = ['icon', 'name', 'slug', 'color', 'description', 'image', 'in_menu'];
 
     public function scopeInMenu($query)
     {

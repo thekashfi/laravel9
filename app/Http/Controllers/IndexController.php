@@ -23,7 +23,7 @@ class IndexController extends Controller
     public function home()
     {
         $categories = Category::get();
-        $packages = Package::query()->active()->latest()->limit(8)->get();
+        $packages = Package::query()->with('category')->active()->latest()->limit(8)->get();
         return view('home', compact('categories' , 'packages'));
     }
 
@@ -47,7 +47,7 @@ class IndexController extends Controller
     public function contracts($category)
     {
         $result = cache()->remember('contracts_page_'.$category , 15 * 60 , function () use ($category){
-            $contracts = Contract::query()->latest()->active();
+            $contracts = Contract::query()->with('category')->latest()->active();
             if (strtolower($category) != "all") {
                 $category = Category::whereSlug($category)->firstOrFail();
                 $contracts = $contracts->where('category_id', $category->id);
@@ -62,7 +62,7 @@ class IndexController extends Controller
     public function packages($category)
     {
         $result = cache()->remember('packages_page_'.$category , 15 * 60 , function () use ($category){
-            $packages = Package::query()->latest()->active();
+            $packages = Package::query()->with('category')->latest()->active();
             if (strtolower($category) != "all") {
                 $category = Category::whereSlug($category)->firstOrFail();
                 $packages = $packages->where('category_id', $category->id);
@@ -77,7 +77,7 @@ class IndexController extends Controller
     public function files($category)
     {
         $result = cache()->remember('files_page_'.$category , 15 * 60 , function () use ($category){
-            $files = File::query()->latest()->active();
+            $files = File::query()->with('category')->latest()->active();
             if (strtolower($category) != "all") {
                 $category = Category::whereSlug($category)->firstOrFail();
                 $files = $files->where('category_id', $category->id);

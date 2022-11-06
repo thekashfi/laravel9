@@ -32,7 +32,7 @@
                                                 <div class="price-header text-center">
                                                     <div class="shape">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="142.92" height="137" viewBox="0 0 142.92 137">
-                                                            <path id="Path_751" data-name="Path 751" d="M17.065-3.312C-5.734,33.7-93.2,35.845-114.171-.154S-89.6-110.3-45.837-111.307C-2.071-112.381,39.864-40.384,17.065-3.312Z" transform="translate(119.436 111.319)" fill="#{{ (['ECFAEB' ,'ffefff' , 'ced7ff'])[rand(0,2)] }}" />
+                                                            <path id="Path_751" data-name="Path 751" d="M17.065-3.312C-5.734,33.7-93.2,35.845-114.171-.154S-89.6-110.3-45.837-111.307C-2.071-112.381,39.864-40.384,17.065-3.312Z" transform="translate(119.436 111.319)" fill="{{ $package->category->color }}{{--#{{ (['ECFAEB' ,'ffefff' , 'ced7ff'])[rand(0,2)] }}--}}" />
                                                         </svg>
                                                     </div>
                                                     <div class="text">
