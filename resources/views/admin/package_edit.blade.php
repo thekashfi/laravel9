@@ -56,6 +56,27 @@
                     </select>
                 </div>
 
+                <div class="col-md-12 pb-3">
+                    <label for="slogan1" class="form-label">شعار 1</label>
+                    <input name="slogan1" type="text" class="form-control" id="slogan1" value="{{ old('slogan1', $package->slogan1) }}">
+                </div>
+
+                <div class="col-md-12 pb-3">
+                    <label for="slogan2" class="form-label">شعار 2</label>
+                    <input name="slogan2" type="text" class="form-control" id="slogan2" value="{{ old('slogan2', $package->slogan2) }}">
+                </div>
+
+
+                <div class="col-md-6 pb-3">
+                    <label for="image_label" class="form-label">عکس</label>
+                    <div class="input-group">
+                        <input dir="ltr" readonly type="text" id="image_label" class="form-control" name="image"
+                               aria-label="Image" aria-describedby="button-image"  value="{{old('image', $package->image)}}"
+                               style="border-top-left-radius: 0;border-bottom-left-radius: 0;">
+                        <button style="border-left: 1px solid #d2d6da !important;margin-bottom: 0" class="btn btn-outline-secondary" type="button" id="button-image">انتخاب فایل</button>
+                    </div>
+                </div>
+
                 <div class="pb-3 col-md-6 pt-4">
                     <div class="form-check form-check-linethrough">
                         <input value="0" name="is_active" class="form-check-input h-5 mt-0 rounded-circle border-dashed flex-none float-end" type="hidden">

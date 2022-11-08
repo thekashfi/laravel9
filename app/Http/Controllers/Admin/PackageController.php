@@ -35,6 +35,9 @@ class PackageController extends Controller
             'slug' => 'required|max:100|unique:packages,slug',
             'category_id' => 'required',
             'price' => 'int',
+            'image' => 'nullable|image',
+            'slogan1' => 'nullable|max:255',
+            'slogan2' => 'nullable|max:255',
         ]);
 
         $request->merge(['description' => str_replace('../../../files' , url('files') , $request->description)]);
