@@ -46,10 +46,10 @@
 
                 <div class="pb-3 col-md-6">
                     <label for="category_id" class="form-label">دسته بندی</label>
-                    <select name="category_id" class="form-select resize-vertical"  x-model="category_id" id="category_id">
+                    <select name="category_id[]" multiple class="form-select resize-vertical"  x-model="category_id" id="category_id">
                         @foreach($categories as $category)
                             <option value="{{ $category->id }}"
-                                {{ old('category_id', optional($package->category)->id) == $category->id  ? 'selected' : '' }}>
+                                {{ in_array($category->id , old('category_id', optional($package->categories)->pluck('id')->toArray() ) ) ? 'selected' : '' }}>
                                 {{ $category->name }}
                             </option>
                         @endforeach

@@ -15,11 +15,6 @@ return new class extends Migration
     {
         Schema::create('files', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id')
-                ->references('id')
-                ->on('categories')
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
             $table->string('name', 100);
             $table->string('summary', 255)->nullable();
             $table->text('description')->nullable();

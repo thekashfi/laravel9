@@ -39,7 +39,8 @@ class FileController extends Controller
 
         $request->merge(['description' => str_replace('../../../files' , url('files') , $request->description)]);
 
-        File::create($request->all());
+        $file = File::create($request->all());
+        $file->categories()->sync($request->category_id);
         cache()->clear();
 
         return $this->flashBack();
@@ -70,7 +71,9 @@ class FileController extends Controller
 
         $request->merge(['description' => str_replace('../../../files' , url('files') , $request->description)]);
 
-        File::findOrFail($id)->update($request->all());
+        $file = File::findOrFail($id);
+        $file->update($request->all());
+        $file->categories()->sync($request->category_id);
         cache()->clear();
 
         return $this->flashBack();
@@ -78,7 +81,9 @@ class FileController extends Controller
 
     public function destroy($id)
     {
-        File::findOrFail($id)->delete();
+        $file = File::findOrFail($id);
+        $file->delete();
+        $file->categories()->detach();
         cache()->clear();
 
         return $this->flashBack();

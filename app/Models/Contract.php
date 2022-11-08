@@ -9,7 +9,7 @@ class Contract extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['category_id', 'name', 'summary', 'slug', 'description', 'text', 'price' ,'old_price' , 'is_active'];
+    protected $fillable = ['name', 'summary', 'slug', 'description', 'text', 'price' ,'old_price' , 'is_active'];
     protected $with = ['category'];
 
     // public function fillables()
@@ -21,9 +21,13 @@ class Contract extends Model
     {
         return $query->where('is_active', 1);
     }
+    public function categories()
+    {
+        return $this->morphToMany(Category::class, 'item' , 'category_items');
+    }
     public function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->categories()->orderBy('hidden')->first();
     }
     public function package()
     {

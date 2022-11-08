@@ -40,6 +40,7 @@ class PackageController extends Controller
         $request->merge(['description' => str_replace('../../../files' , url('files') , $request->description)]);
 
         $package = Package::create($request->all());
+        $package->categories()->sync($request->category_id);
         $package->contracts()->sync($request->contracts);
         $package->files()->sync($request->file_ids);
         cache()->clear();
@@ -74,6 +75,7 @@ class PackageController extends Controller
 
         $package = Package::findOrFail($id);
         $package->update($request->all());
+        $package->categories()->sync($request->category_id);
         $package->contracts()->sync($request->contracts);
         $package->files()->sync($request->file_ids);
         cache()->clear();
@@ -82,7 +84,11 @@ class PackageController extends Controller
 
     public function destroy($id)
     {
-        Package::findOrFail($id)->delete();
+        $package = Package::findOrFail($id);
+        $package->delete();
+        $package->categories()->detach();
+        $package->contracts()->detach();
+        $package->files()->detach();
         cache()->clear();
 
         return $this->flashBack();

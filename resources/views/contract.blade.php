@@ -8,9 +8,9 @@
                   <ol class="breadcrumb">
                       <li class="breadcrumb-item px-0"><a href="{{ route('home') }}">خانه</a></li>
                       <li class="breadcrumb-item px-0"><a
-                              href="{{ route('category' , $contract->category->slug) }}">{{ $contract->category->name }}</a>
+                              href="{{ route('category' , $contract->category()->slug) }}">{{ $contract->category()->name }}</a>
                       </li>
-                      <li class="breadcrumb-item px-0"><a href="{{ route('contracts', $contract->category->slug) }}">قرارداد
+                      <li class="breadcrumb-item px-0"><a href="{{ route('contracts', $contract->category()->slug) }}">قرارداد
                               ها</a></li>
                       <li class="breadcrumb-item px-0 active" aria-current="page">{{ $contract->name }}</li>
                   </ol>

@@ -23,7 +23,7 @@ class IndexController extends Controller
     public function home()
     {
         $categories = Category::visible()->get();
-        $packages = Package::query()->with('category')->active()->latest()->limit(8)->get();
+        $packages = Package::query()->active()->latest()->limit(8)->get();
         return view('home', compact('categories' , 'packages'));
     }
 
@@ -47,10 +47,12 @@ class IndexController extends Controller
     public function contracts($category)
     {
         $result = cache()->remember('contracts_page_'.$category , 15 * 60 , function () use ($category){
-            $contracts = Contract::query()->with('category')->latest()->active();
+            $contracts = Contract::query()->latest()->active();
             if (strtolower($category) != "all") {
                 $category = Category::whereSlug($category)->firstOrFail();
-                $contracts = $contracts->where('category_id', $category->id);
+                $contracts = $contracts->whereHas('categories' , function ($q) use($category){
+                    $q->where('id',$category->id);
+                });
             }
             $contracts = $contracts->get();
             return compact('contracts', 'category');
@@ -62,10 +64,12 @@ class IndexController extends Controller
     public function packages($category)
     {
         $result = cache()->remember('packages_page_'.$category , 15 * 60 , function () use ($category){
-            $packages = Package::query()->with('category')->latest()->active();
+            $packages = Package::query()->latest()->active();
             if (strtolower($category) != "all") {
                 $category = Category::whereSlug($category)->firstOrFail();
-                $packages = $packages->where('category_id', $category->id);
+                $packages = $packages->whereHas('categories' , function ($q) use($category){
+                    $q->where('id',$category->id);
+                });
             }
             $packages = $packages->get();
             return compact('packages', 'category');
@@ -77,10 +81,12 @@ class IndexController extends Controller
     public function files($category)
     {
         $result = cache()->remember('files_page_'.$category , 15 * 60 , function () use ($category){
-            $files = File::query()->with('category')->latest()->active();
+            $files = File::query()->latest()->active();
             if (strtolower($category) != "all") {
                 $category = Category::whereSlug($category)->firstOrFail();
-                $files = $files->where('category_id', $category->id);
+                $files = $files->whereHas('categories' , function ($q) use($category){
+                    $q->where('id',$category->id);
+                });
             }
             $files = $files->get();
             return compact('files', 'category');

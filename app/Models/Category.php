@@ -19,28 +19,24 @@ class Category extends Model
     {
         return $query->where('hidden', 0);
     }
-    public function contracts()
-    {
-        return $this->hasMany(Contract::class)->where('is_active' , 1 );
-    }
-    public function files()
-    {
-        return $this->hasMany(File::class)->where('is_active' , 1 );
-    }
-    public function allContracts()
-    {
-        return $this->hasMany(Contract::class);
-    }
-    public function allFiles()
-    {
-        return $this->hasMany(File::class);
-    }
     public function packages()
     {
-        return $this->hasMany(Package::class)->where('is_active' , 1 );
+        return $this->morphedByMany(Package::class , 'item' ,'category_items')->where('is_active' , 1 );
     }
     public function allPackages()
     {
-        return $this->hasMany(Package::class);
+        return $this->morphedByMany(Package::class , 'item' ,'category_items');
+    }
+    public function contracts(){
+        return $this->morphedByMany(Contract::class , 'item' ,'category_items')->where('is_active' , 1 );
+    }
+    public function allContracts(){
+        return $this->morphedByMany(Contract::class , 'item' ,'category_items');
+    }
+    public function files(){
+        return $this->morphedByMany(File::class , 'item' ,'category_items')->where('is_active' , 1 );
+    }
+    public function allFiles(){
+        return $this->morphedByMany(File::class , 'item' ,'category_items');
     }
 }

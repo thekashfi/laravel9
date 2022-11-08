@@ -7,8 +7,8 @@
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item px-0"><a href="{{ route('home') }}">خانه</a></li>
-                  <li class="breadcrumb-item px-0"><a href="{{ route('category' , $file->category->slug) }}">{{ $file->category->name }}</a></li>
-                  <li class="breadcrumb-item px-0"><a href="{{ route('files', $file->category->slug) }}">فایل ها</a></li>
+                  <li class="breadcrumb-item px-0"><a href="{{ route('category' , $file->category()->slug) }}">{{ $file->category()->name }}</a></li>
+                  <li class="breadcrumb-item px-0"><a href="{{ route('files', $file->category()->slug) }}">فایل ها</a></li>
                   <li class="breadcrumb-item px-0 active" aria-current="page">{{ $file->name }}</li>
                 </ol>
               </nav>
