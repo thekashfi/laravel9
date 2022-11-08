@@ -13,21 +13,27 @@
                 </ol>
               </nav>
             <div class="row">
-                <div class="col-lg-8">
+                <div class="col-lg-6">
                     <div class="about-content mb-50">
                         <div class="section-title mb-50 ps-lg-5">
                             <h1 class="mb-25">
                                 <i class="lni lni-files" style="margin-left: 15px;"></i>
                                 {{ $package->name }}
                             </h1>
-                            {!! $package->description !!}
                             @if(! empty($package->image))
-                                <img src="{{ $package->image }}" alt="{{ $package->name }}">
+                                <img src="{{ $package->image }}" class="w-75" alt="{{ $package->name }}">
                             @endif
+                            @if($package->slogan1)
+                                <h2 class="border- mt-2 p-3 text-danger" style="background-color: #eeeeee;border-radius: 12px;">{{ $package->slogan1 }}</h2>
+                            @endif
+                            @if($package->slogan2)
+                                <h2 class="border- mt-2 p-3 text-danger" style="background-color: #eeeeee;border-radius: 12px;">{{ $package->slogan2 }}</h2>
+                            @endif
+                            {!! $package->description !!}
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 text-center">
+                <div class="col-lg-6 text-center">
                     <div class="about-img">
                         <div class="pricing-box tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
                             <div class="single-pricing">

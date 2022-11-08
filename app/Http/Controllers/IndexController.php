@@ -34,7 +34,7 @@ class IndexController extends Controller
     }
     public function package($package_slug)
     {
-        $package = Package::whereSlug($package_slug)->active()->with('contracts','contracts.category','files','files.category')->firstOrFail();
+        $package = Package::whereSlug($package_slug)->active()->with('contracts','files')->firstOrFail();
 
         // $category_ids = $package->contracts->pluck('category'), $package->files->pluck('category');
         // dd($foo);
