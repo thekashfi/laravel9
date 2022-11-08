@@ -200,17 +200,20 @@
                                 </p>
 								<ul class="socials">
 									<li>
-										<a href="jvascript:void(0)"> <i class="lni lni-facebook-filled"></i> </a>
+										<a href="https://telegram.me/raadbusiness"> <i class="lni lni-telegram-original"></i> </a>
 									</li>
 									<li>
-										<a href="jvascript:void(0)"> <i class="lni lni-twitter-filled"></i> </a>
+										<a href="https://twitter.com/raadbusiness"> <i class="lni lni-twitter-filled"></i> </a>
 									</li>
 									<li>
-										<a href="jvascript:void(0)"> <i class="lni lni-instagram-filled"></i> </a>
+										<a href="https://instagram.com/radbusiness"> <i class="lni lni-instagram-filled"></i> </a>
 									</li>
 									<li>
-										<a href="jvascript:void(0)"> <i class="lni lni-linkedin-original"></i> </a>
+										<a href="https://youtube.com/channel/UCrDxtXwbiZ8rXuoK_nrsr5Q"> <i class="lni lni-youtube"></i> </a>
 									</li>
+									<!--<li>-->
+									<!--	<a href="jvascript:void(0)"> <i class="lni lni-linkedin-original"></i> </a>-->
+									<!--</li>-->
 								</ul>
 							</div>
 						</div>

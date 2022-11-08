@@ -24,7 +24,7 @@
                             <br>
                             پس اگه میخوای با یه تیر دو نشون بزنی و هوشمندانه تو کسب و کارت پیش بری.
                             <span class="wow fadeInLeft mt-1" data-wow-delay=".2s">
-                            همین الان از تخفیف تکرار نشدنی  99 درصدی استفاده کن و یه عمر خودتو راحت کن...
+                            همین الان از تخفیف تکرار نشدنی  90 درصدی استفاده کن و یه عمر خودتو راحت کن...
                             </span>
                         </p>
 
@@ -86,8 +86,12 @@
                                             </div>
                                         </div>
                                         <div class="content">
-{{--                                            {!! empty($package->summary) ? Str::limit(strip_tags($package->description), 100) : nl2br($package->summary) !!}--}}
-                                            {!! nl2br($package->summary) !!}
+
+                                            {!! empty($package->summary) ? Str::limit(strip_tags($package->description), 100) : nl2br($package->summary) !!}
+
+                                            <!--{!! empty($package->summary) ? Str::limit(strip_tags($package->description), 100) : nl2br($package->summary) !!}--}}-->
+
+                                            <!--{!! nl2br($package->summary) !!}-->
                                         </div>
                                         <div class="pricing-btn text-center">
                                             <a href="{{ route('package', $package->slug) }}" class="main-btn btn-hover">مشاهده و خرید</a>
