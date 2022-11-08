@@ -21,7 +21,8 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->text('image')->nullable();
             $table->string('color', 7)->default('#FFFFFF');
-            $table->boolean('in_menu')->nullable()->default(null);
+            $table->boolean('in_menu')->default(0);
+            $table->boolean('hidden')->default(0);
             $table->timestamps();
         });
     }

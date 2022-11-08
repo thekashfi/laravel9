@@ -29,6 +29,7 @@ class CategoryController extends Controller
             'slug' => 'required|max:100|unique:categories,slug',
             'color' => 'required|max:7',
             'in_menu' => 'boolean',
+            'hidden' => 'boolean',
         ]);
 
         Category::create($request->all());
@@ -56,6 +57,7 @@ class CategoryController extends Controller
             'slug' => 'required|max:100|unique:categories,slug,' . $id,
             'color' => 'required|max:7',
             'in_menu' => 'boolean',
+            'hidden' => 'boolean',
         ]);
 
         Category::findOrfail($id)->update($request->all());

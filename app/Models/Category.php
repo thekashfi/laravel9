@@ -9,11 +9,15 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['icon', 'name', 'slug', 'color', 'description', 'image', 'in_menu'];
+    protected $fillable = ['icon', 'name', 'slug', 'color', 'description', 'image', 'in_menu' , 'hidden'];
 
     public function scopeInMenu($query)
     {
         return $query->where('in_menu', 1);
+    }
+    public function scopeVisible($query)
+    {
+        return $query->where('hidden', 0);
     }
     public function contracts()
     {

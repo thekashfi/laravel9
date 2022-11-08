@@ -13,7 +13,7 @@ class IndexController extends Controller
         $data =  cache()->remember('viewOptions' , 15 * 60 , function (){
             return [
                 'hasContract' => Contract::query()->active()->exists(),
-                'hasCategory' => Category::query()->exists(),
+                'hasCategory' => Category::query()->visible()->exists(),
                 'hasFile' => File::query()->active()->exists(),
                 'hasPackage' => Package::query()->active()->exists(),
             ];
@@ -22,7 +22,7 @@ class IndexController extends Controller
     }
     public function home()
     {
-        $categories = Category::get();
+        $categories = Category::visible()->get();
         $packages = Package::query()->with('category')->active()->latest()->limit(8)->get();
         return view('home', compact('categories' , 'packages'));
     }
@@ -89,7 +89,7 @@ class IndexController extends Controller
     }
     public function category($category)
     {
-        $category = Category::whereSlug($category)->firstOrFail();
+        $category = Category::whereSlug($category)->visible()->firstOrFail();
         $result = cache()->remember('category_page_'.$category->id , 15 * 60 , function () use ($category){
             $contracts = $category->contracts()->latest()->limit(8)->get();
             $files = $category->files()->latest()->limit(8)->get();
@@ -127,7 +127,7 @@ class IndexController extends Controller
 
     public function sitemap()
     {
-        $categories = Category::withCount('packages' , 'contracts' , 'files')->get();
+        $categories = Category::withCount('packages' , 'contracts' , 'files')->visible()->get();
         $contracts = Contract::active()->get();
         $files = File::active()->get();
         $packages = Package::active()->get();

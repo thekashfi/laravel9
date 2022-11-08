@@ -60,6 +60,13 @@
                     <label for="in_menu" class="me-4">در منو نمایش داده شود.</label>
                 </div>
             </div>
+            <div class="mt-3">
+                <div class="form-check form-check-linethrough">
+                    <input value="0" name="hidden" class="form-check-input h-5 mt-0 rounded-circle border-dashed flex-none float-end" type="hidden">
+                    <input value="1" name="hidden" id="hidden" class="form-check-input h-5 mt-0 rounded-circle border-dashed flex-none float-end" type="checkbox" {{ old('hidden', $category->hidden) == false ?: 'checked' }}>
+                    <label for="hidden" class="me-4">فقط در پکیج ها نمایش داده شود.</label>
+                </div>
+            </div>
 
 
             <div class="w-100 text-center">

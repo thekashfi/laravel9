@@ -18,6 +18,7 @@
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">تعداد فایل</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">تعداد پکیج ها</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">نمایش در منو</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">نمایش در</th>
                             <th class="text-secondary opacity-7"></th>
                         </tr>
                     </thead>
@@ -48,6 +49,13 @@
                                         <span class="badge badge-sm bg-gradient-success">بله</span>
                                     @else
                                         <span class="badge badge-sm bg-gradient-secondary">خیر</span>
+                                    @endif
+                                </td>
+                                <td class="align-middle text-center text-sm">
+                                    @if($category->hidden)
+                                        <span class="badge badge-sm bg-gradient-success">فقط پکیج</span>
+                                    @else
+                                        <span class="badge badge-sm bg-gradient-secondary">پکیج و منو وبسایت</span>
                                     @endif
                                 </td>
                                 <td class="align-middle">
