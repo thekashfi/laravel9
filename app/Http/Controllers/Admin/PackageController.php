@@ -58,7 +58,7 @@ class PackageController extends Controller
     public function edit($id)
     {
         $package = Package::findOrFail($id);
-        $categories = Category::get();
+        $categories = Category::orderBy('order')->get();
         $files = File::latest()->get();
         $contracts = Contract::latest()->get();
 

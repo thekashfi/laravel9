@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('slug', 100)->unique();
             $table->text('description')->nullable();
             $table->text('image')->nullable();
+            $table->tinyInteger('order')->nullable();
             $table->string('color', 7)->default('#FFFFFF');
             $table->boolean('in_menu')->default(0);
             $table->boolean('hidden')->default(0);

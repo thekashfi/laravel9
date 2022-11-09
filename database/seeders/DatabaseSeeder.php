@@ -26,7 +26,6 @@ class DatabaseSeeder extends Seeder
         Contract::factory(5)->create();
 
         File::create([
-            'category_id' => Category::first()->id,
             'name' => 'foo',
             'description' => '<p>description for testing</p>',
             'file' => '/storage/private/1.jpg',
@@ -34,7 +33,6 @@ class DatabaseSeeder extends Seeder
             'price' => 1000,
             'is_active' => 1]);
         File::create([
-            'category_id' => Category::first()->id,
             'name' => 'bar',
             'description' => '<p>description for testing</p>',
             'file' => '/storage/private/2.jpg',
@@ -52,7 +50,6 @@ class DatabaseSeeder extends Seeder
     private function create_package($name)
     {
         $package = Package::create([
-            'category_id' => Category::first()->id,
             'name' => $name,
             'description' => '<p>description for testing</p>',
             'slug' => str_replace(' ', '_', $name) . rand(1, 1000),

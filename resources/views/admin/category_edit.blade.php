@@ -41,6 +41,11 @@
                 <input name="color" type="color" class="form-control" id="color" style="width:50px; height: 40px" value="{{old('color', $category->color)}}">
             </div>
 
+            <div class="col-md-6 pb-3">
+                <label for="order" class="form-label">ترتیب</label>
+                <input dir="ltr" name="order" type="number" class="form-control" id="order" placeholder="" value="{{ old('order', $category->order) }}">
+            </div>
+
 {{--            <div class="pb-3">--}}
 {{--                <label for="icon" class="form-label">آیکن</label>--}}
 {{--                <input name="icon" type="text" class="form-control" id="icon">--}}

@@ -22,7 +22,7 @@ class IndexController extends Controller
     }
     public function home()
     {
-        $categories = Category::visible()->get();
+        $categories = Category::visible()->orderBy('order')->get();
         $packages = Package::query()->active()->latest()->limit(8)->get();
         return view('home', compact('categories' , 'packages'));
     }
@@ -38,7 +38,6 @@ class IndexController extends Controller
 
         // $category_ids = $package->contracts->pluck('category'), $package->files->pluck('category');
         // dd($foo);
-
 
         return view('package', compact('package'));
     }

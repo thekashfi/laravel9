@@ -22,7 +22,7 @@ class FileController extends Controller
     public function create()
     {
         $file = new File();
-        $categories = Category::get();
+        $categories = Category::orderBy('order')->get();
 
         return view('admin.file_edit', compact('file', 'categories'));
     }
