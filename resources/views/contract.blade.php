@@ -7,11 +7,15 @@
               <nav aria-label="breadcrumb">
                   <ol class="breadcrumb">
                       <li class="breadcrumb-item px-0"><a href="{{ route('home') }}">خانه</a></li>
+                      @if ( $contract->category()->hidden )
+                          <li class="breadcrumb-item px-0"><a href="{{ route('contracts' , 'all') }}">قرارداد ها</a></li>
+                      @else
                       <li class="breadcrumb-item px-0"><a
                               href="{{ route('category' , $contract->category()->slug) }}">{{ $contract->category()->name }}</a>
                       </li>
                       <li class="breadcrumb-item px-0"><a href="{{ route('contracts', $contract->category()->slug) }}">قرارداد
                               ها</a></li>
+                      @endif
                       <li class="breadcrumb-item px-0 active" aria-current="page">{{ $contract->name }}</li>
                   </ol>
               </nav>

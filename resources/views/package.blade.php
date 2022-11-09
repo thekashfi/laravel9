@@ -7,8 +7,12 @@
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item px-0"><a href="{{ route('home') }}">خانه</a></li>
-                  <li class="breadcrumb-item px-0"><a href="{{ route('category' , $package->category()->slug) }}">{{ $package->category()->name }}</a></li>
-                  <li class="breadcrumb-item px-0"><a href="{{ route('packages', $package->category()->slug) }}">پکیج ها</a></li>
+                    @if ( $package->category()->hidden )
+                        <li class="breadcrumb-item px-0"><a href="{{ route('packages' , 'all') }}">فایل ها</a></li>
+                    @else
+                      <li class="breadcrumb-item px-0"><a href="{{ route('category' , $package->category()->slug) }}">{{ $package->category()->name }}</a></li>
+                      <li class="breadcrumb-item px-0"><a href="{{ route('packages', $package->category()->slug) }}">پکیج ها</a></li>
+                    @endif
                   <li class="breadcrumb-item px-0 active" aria-current="page">{{ $package->name }}</li>
                 </ol>
               </nav>
