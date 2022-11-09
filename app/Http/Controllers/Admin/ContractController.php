@@ -21,7 +21,7 @@ class ContractController extends Controller
     public function create()
     {
         $contract = new Contract;
-        $categories = Category::orderBy('order')->get();
+        $categories = Category::orderByDesc('order')->get();
 
         return view('admin.contract_edit', compact('contract', 'categories'));
     }

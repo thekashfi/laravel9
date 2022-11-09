@@ -22,7 +22,7 @@ class IndexController extends Controller
     }
     public function home()
     {
-        $categories = Category::visible()->orderBy('order')->get();
+        $categories = Category::visible()->orderByDesc('order')->get();
         $packages = Package::query()->active()->latest()->limit(8)->get();
         return view('home', compact('categories' , 'packages'));
     }

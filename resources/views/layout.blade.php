@@ -80,7 +80,7 @@
                                             دسته بندی ها
                                         </a>
                                         <ul class="dropdown-menu px-3 shadow rounded-3 border-0 text-end" aria-labelledby="navbarDropdown">
-                                            @foreach(\App\Models\Category::query()->visible()->orderBy('order')->latest()->get() as $h_category)
+                                            @foreach(\App\Models\Category::query()->visible()->orderByDesc('order')->latest()->get() as $h_category)
                                                 <li>
                                                     <a class="dropdown-item" href="{{ route('category', $h_category->slug) }}">{{ $h_category->name }}</a>
                                                 </li>
@@ -102,7 +102,7 @@
                                             <a class="@if(\Illuminate\Support\Facades\Route::currentRouteName() == "files" and request()->route('category') == "all" ) active @endif" href="{{ route('files' , 'all') }}">فایل ها</a>
                                         </li>
                                     @endif
-                                    @foreach(\App\Models\Category::where('in_menu', true)->orderBy('order')->visible()->get() as $h_category)
+                                    @foreach(\App\Models\Category::where('in_menu', true)->orderByDesc('order')->visible()->get() as $h_category)
                                         <li class="nav-item">
                                             <a class="@if(\Illuminate\Support\Facades\Route::currentRouteName() == "contracts" and request()->route('category') == $h_category->slug ) active @endif" href="{{ route('contracts', $h_category->slug) }}">{{ $h_category->name }}</a>
                                         </li>
@@ -270,7 +270,7 @@
                                 <div class="footer-widget">
                                     <h3>دسته بندی ها</h3>
                                     <ul class="links">
-                                        @foreach(\App\Models\Category::query()->visible()->orderBy('order')->limit(7)->latest()->get() as $h_category)
+                                        @foreach(\App\Models\Category::query()->visible()->orderByDesc('order')->limit(7)->latest()->get() as $h_category)
                                             <li>
                                                 <a class="" href="{{ route('category', $h_category->slug) }}">{{ $h_category->name }}</a>
                                             </li>
