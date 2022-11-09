@@ -48,7 +48,7 @@ body, h1, h2, h3, h5, h6, p, strong, b {
     line-height: 35px;
 }
 .single-pricing ul.content {
-    margin-bottom: 30px;
+    margin-bottom: 0;
 }
 .breadcrumb-item *{
     color: #4E6EF1 !important;

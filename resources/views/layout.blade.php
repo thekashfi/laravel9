@@ -11,12 +11,12 @@
     <!-- Place favicon.ico in the root directory -->
 
     <!-- ========================= CSS here ========================= -->
-    <link rel="stylesheet" href="{{ url('') }}/front-assets/css/bootstrap-5.0.0-beta2.min.css" />
+    <link rel="stylesheet" href="{{ url('') }}/front-assets/css/bootstrap-5.0.0-beta2.min.css?v1.1" />
     <link rel="stylesheet" href="{{ url('') }}/front-assets/css/LineIcons.2.0.css" />
     <link rel="stylesheet" href="{{ url('') }}/front-assets/css/tiny-slider.css" />
     <link rel="stylesheet" href="{{ url('') }}/front-assets/css/animate.css" />
-    <link rel="stylesheet" href="{{ url('') }}/front-assets/css/main.css?v1.0" />
-    <link rel="stylesheet" href="{{ url('') }}/front-assets/css/style.css?v1.0" />
+    <link rel="stylesheet" href="{{ url('') }}/front-assets/css/main.css?v1.1" />
+    <link rel="stylesheet" href="{{ url('') }}/front-assets/css/style.css?v1.1" />
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-Variable-font-face.css" rel="stylesheet"
         type="text/css" />
     @yield('head')

@@ -23,6 +23,10 @@ class File extends Model
     {
         return $this->categories()->orderBy('hidden')->first();
     }
+    public function packageCategory()
+    {
+        return $this->categories()->orderByDesc('hidden')->first();
+    }
     public function package()
     {
         return $this->morphToMany(Package::class, 'item' , 'package_items');

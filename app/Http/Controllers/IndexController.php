@@ -37,7 +37,7 @@ class IndexController extends Controller
         $package = Package::whereSlug($package_slug)->active()->with('contracts','files')->firstOrFail();
 
         $items = [];
-        foreach(array_merge((array) $package->contracts , $package->files) as $item){
+        foreach($package->contracts as $item){
             $category = $item->packageCategory();
             if ( ! isset($items[$category->id]) )
                 $items[$category->id] = [
@@ -49,15 +49,28 @@ class IndexController extends Controller
                     'count_contracts' => 0,
                     'count_files' => 0,
                 ];
-            $type = 'contracts';
-            if ( $item instanceof File::class)
-                $type = 'files';
-            $items[$category->id][$type] = $item ;
-            $items[$category->id]['count_'.$type]++;
+            $items[$category->id]['contracts'][] = $item ;
+            $items[$category->id]['count_contracts']++;
+            $items[$category->id]['count']++;
+        }
+        foreach($package->files as $item){
+            $category = $item->packageCategory();
+            if ( ! isset($items[$category->id]) )
+                $items[$category->id] = [
+                    'category' => $category,
+                    'sort' => $category->order,
+                    'contracts' => [],
+                    'files' => [],
+                    'count' => 0,
+                    'count_contracts' => 0,
+                    'count_files' => 0,
+                ];
+            $items[$category->id]['files'][] = $item ;
+            $items[$category->id]['count_files']++;
             $items[$category->id]['count']++;
         }
         usort($items, function($a, $b) {
-            return $a['order'] - $b['order'];
+            return $b['sort'] - $a['sort'];
         });
 
         return view('package', compact('package' , 'items'));

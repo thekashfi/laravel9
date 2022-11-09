@@ -13,7 +13,7 @@
                 </ol>
               </nav>
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-8">
                     <div class="about-content mb-50">
                         <div class="section-title mb-50 ps-lg-5">
                             <h1 class="mb-25">
@@ -24,37 +24,37 @@
                                 <img src="{{ $package->image }}" class="w-75" alt="{{ $package->name }}">
                             @endif
                             @if($package->slogan1)
-                                <h2 class="border- mt-2 p-3 text-danger" style="background-color: #eeeeee;border-radius: 12px;">{{ $package->slogan1 }}</h2>
+                                <h2 class="border- mt-3 p-3 text-danger" style="background-color: #eeeeee;border-radius: 12px;">{{ $package->slogan1 }}</h2>
                             @endif
                             @if($package->slogan2)
-                                <h2 class="border- mt-2 p-3 text-danger" style="background-color: #eeeeee;border-radius: 12px;">{{ $package->slogan2 }}</h2>
+                                <h2 class="border- mt-3 p-3 text-danger" style="background-color: #eeeeee;border-radius: 12px;">{{ $package->slogan2 }}</h2>
                             @endif
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 text-center">
-                    <div class="about-img">
+                <div class="col-lg-4 text-center">
+                    <div class="about-img w-100">
                         <div class="pricing-box tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
                             <div class="single-pricing">
                                 <div class="accordion" id="accordionExample">
                                     @foreach($items  as $key => $item)
                                     <div class="accordion-item">
                                         <h2 class="accordion-header" id="heading{{$key}}">
-                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{$key}}" aria-expanded="true" aria-controls="collapse{{$key}}">
-                                                تعداد {{ $item['category']->name }}ها: {{ $item['count'] }}
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{$key}}" aria-expanded="false" aria-controls="collapse{{$key}}">
+                                                تعداد {{ $item['category']->name }}‌ها: {{ $item['count'] }} عدد
                                             </button>
                                         </h2>
-                                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="heading{{$key}}" data-bs-parent="#accordionExample">
+                                        <div id="collapse{{$key}}" class="accordion-collapse collapse" aria-labelledby="heading{{$key}}" data-bs-parent="#accordionExample">
                                             <div class="accordion-body">
                                                 <ul class="content">
                                                     @foreach($item['contracts'] as $contract)
                                                         <li>
                                                             @if( $contract->is_active )
                                                                 <a href="{{ route('contract' , $contract->slug) }}" target="_blank">
-                                                                    {{ $contract->name }}
+                                                                    {{ $contract->name }} @if( $item['category']->hidden )(به ارزش: {{ number_format($contract->old_price, null, '.', ',') }}<span class="toman">تومان</span>)@endif
                                                                 </a>
                                                             @else
-                                                                {{ $contract->name }}
+                                                                {{ $contract->name }} @if( $item['category']->hidden )(به ارزش: {{ number_format($contract->old_price, null, '.', ',') }}<span class="toman">تومان</span>)@endif
                                                             @endif
                                                         </li>
                                                     @endforeach
@@ -62,10 +62,10 @@
                                                         <li>
                                                             @if( $file->is_active )
                                                                 <a href="{{ route('file' , $file->slug) }}" target="_blank">
-                                                                    {{ $file->name }}
+                                                                    {{ $file->name }} @if( $item['category']->hidden )(به ارزش: {{ number_format($file->old_price, null, '.', ',') }}<span class="toman">تومان</span>)@endif
                                                                 </a>
                                                             @else
-                                                                {{ $file->name }}
+                                                                {{ $file->name }} @if( $item['category']->hidden )(به ارزش: {{ number_format($file->old_price, null, '.', ',') }}<span class="toman">تومان</span>)@endif
                                                             @endif
                                                         </li>
                                                     @endforeach
@@ -79,30 +79,34 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12">
-                    {!! $package->description !!}
+                <div class="col-md-12 mt-2">
+                    سلام، این یک متن تست است
+                    <div class="about-img w-100">
+                        <div class="pricing-box tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
+                            <div class="single-pricing">
+                                {!! $package->description !!}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                    <div class="price-header">
-                        <div class="shape">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="142.92" height="137" viewBox="0 0 142.92 137">
-                                <path id="Path_751" data-name="Path 751" d="M17.065-3.312C-5.734,33.7-93.2,35.845-114.171-.154S-89.6-110.3-45.837-111.307C-2.071-112.381,39.864-40.384,17.065-3.312Z" transform="translate(119.436 111.319)" fill="#ced7ff"></path>
-                            </svg>
-                        </div>
-                        <div class="text">
-                            <h2 class="price">{{ number_format($package->price, null, '.', ',') }}</h2>
-                            <h3 class="package-name ">تومان</h3>
-                        </div>
-                    </div>
+                <div class="col-md-3 col-sm-12 col-xs-12">
+                </div>
+                <div class="col-md-6 col-sm-12 col-xs-12 mt-5">
+                    <div class="alert alert-success m-auto mb-5">
                     @if ($package->price < $package->old_price)
-                        <div class="alert alert-success">
                             <strong>این پکیج شامل {{ number_format($package->old_price - $package->price, null, '.', ',') }} تومان تخفیف می باشد.</strong>
-                            <br> قیمت قبلی: {{ number_format($package->old_price, null, '.', ',') }}<span class="toman">تومان</span>
-                        </div>
+                            <div class="text-danger text-decoration-line-through">
+                            قیمت قبلی: {{ number_format($package->old_price, null, '.', ',') }}<span class="toman text-decoration-line-through">تومان</span>
+                            </div>
                     @endif
-                    <div class="pricing-btn text-center">
-                        <a href="{{ route('buyPackage', $package->slug) }}" class="main-btn btn-hover">خرید</a>
+                        قیمت فعلی :  {{ number_format($package->price, null, '.', ',') }}<span class="toman">تومان</span>
+
+                        <div class="pricing-btn text-center mt-3">
+                            <a href="{{ route('buyPackage', $package->slug) }}" class="w-100 main-btn btn-hover">خرید</a>
+                        </div>
                     </div>
+                </div>
+                <div class="col-md-3 col-sm-12 col-xs-12">
                 </div>
             </div>
         </div>
