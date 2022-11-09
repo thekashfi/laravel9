@@ -36,10 +36,28 @@ class IndexController extends Controller
     {
         $package = Package::whereSlug($package_slug)->active()->with('contracts','files')->firstOrFail();
 
-        // $category_ids = $package->contracts->pluck('category'), $package->files->pluck('category');
-        // dd($foo);
+        $items = [];
+        foreach(array_merge((array) $package->contracts , $package->files) as $item){
+            $category = $item->packageCategory();
+            if ( ! isset($items[$category->id]) )
+                $items[$category->id] = [
+                    'category' => $category,
+                    'sort' => $category->order,
+                    'contracts' => [],
+                    'files' => [],
+                    'count' => 0,
+                    'count_contracts' => 0,
+                    'count_files' => 0,
+                ];
+            $type = 'contracts';
+            if ( $item instanceof File::class)
+                $type = 'files';
+            $items[$category->id][$type] = $item ;
+            $items[$category->id]['count_'.$type]++;
+            $items[$category->id]['count']++;
+        }
 
-        return view('package', compact('package'));
+        return view('package', compact('package' , 'items'));
     }
 
     public function file($file_slug)
