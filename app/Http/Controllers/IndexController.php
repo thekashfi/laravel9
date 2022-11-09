@@ -56,6 +56,9 @@ class IndexController extends Controller
             $items[$category->id]['count_'.$type]++;
             $items[$category->id]['count']++;
         }
+        usort($items, function($a, $b) {
+            return $a['order'] - $b['order'];
+        });
 
         return view('package', compact('package' , 'items'));
     }
