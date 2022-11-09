@@ -21,13 +21,13 @@
                                 {{ $package->name }}
                             </h1>
                             @if(! empty($package->image))
-                                <img src="{{ $package->image }}" class="w-75" alt="{{ $package->name }}">
+                                <img src="{{ $package->image }}" class="w-100" alt="{{ $package->name }}">
                             @endif
                             @if($package->slogan1)
-                                <h2 class="border- mt-3 p-3 text-danger" style="background-color: #eeeeee;border-radius: 12px;">{{ $package->slogan1 }}</h2>
+                                <h3 class="border- mt-3 p-3 text-danger" style="background-color: #eeeeee;border-radius: 12px;">{{ $package->slogan1 }}</h2>
                             @endif
                             @if($package->slogan2)
-                                <h2 class="border- mt-3 p-3 text-danger" style="background-color: #eeeeee;border-radius: 12px;">{{ $package->slogan2 }}</h2>
+                                <h3 class="border- mt-3 p-3 text-danger" style="background-color: #eeeeee;border-radius: 12px;">{{ $package->slogan2 }}</h2>
                             @endif
                         </div>
                     </div>
@@ -80,7 +80,7 @@
                     </div>
                 </div>
                 <div class="col-md-12 mt-2">
-                    سلام، این یک متن تست است
+                    شاید از خودت بپرسی چرا باید این محصول رو بخرم؟ یا این محصول چه مشکلی رو حل میکنه؟
                     <div class="about-img w-100">
                         <div class="pricing-box tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
                             <div class="single-pricing">

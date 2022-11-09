@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- ========================= hero-section start ========================= -->
-    <section id="home" class="hero-section pt-4 pt-md-140">
+    <section id="home" class="hero-section pt-4 pt-md-1401">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
