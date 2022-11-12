@@ -29,7 +29,7 @@
                                     <div class="col-xl-3 col-md-4 col-12 px-sm-2 px-1 mb-3">
                                         <div class="pricing-box w-100">
                                             <div class="single-pricing m-0">
-                                                <div class="price-header text-center">
+                                                <div class="price-header text-center" style="height:200px; width:200px;">
                                                     <div class="shape">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="142.92" height="137" viewBox="0 0 142.92 137">
                                                             <path id="Path_751" data-name="Path 751" d="M17.065-3.312C-5.734,33.7-93.2,35.845-114.171-.154S-89.6-110.3-45.837-111.307C-2.071-112.381,39.864-40.384,17.065-3.312Z" transform="translate(119.436 111.319)" fill="{{ $category != "all" ? $category->color : $package->category()->color }}{{--#{{ (['ECFAEB' ,'ffefff' , 'ced7ff'])[rand(0,2)] }}--}}" />

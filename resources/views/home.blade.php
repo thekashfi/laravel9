@@ -22,8 +22,9 @@
                             <br>
                             هم تعهد دوطرفه ایجاد کردی هم نگرانیه بعدشو از بین بردی...
                             <br>
-                            پس اگه میخوای با یه تیر دو نشون بزنی و هوشمندانه تو کسب و کارت پیش بری.
+                            
                             <span class="wow fadeInLeft mt-1" data-wow-delay=".2s">
+                                پس اگه میخوای با یه تیر دو نشون بزنی و هوشمندانه تو کسب و کارت پیش بری.
                             همین الان از تخفیف تکرار نشدنی  90 درصدی استفاده کن و یه عمر خودتو راحت کن...
                             </span>
                         </p>
@@ -71,14 +72,14 @@
 
                                 <div class="pricing-box">
                                     <div class="single-pricing"  style="direction: rtl;text-align: right;">
-                                        <div class="price-header text-center">
+                                        <div class="price-header text-center" style="height:200px; width:240px;">
                                             <div class="shape">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="142.92" height="137" viewBox="0 0 142.92 137">
                                                     <path id="Path_751" data-name="Path 751" d="M17.065-3.312C-5.734,33.7-93.2,35.845-114.171-.154S-89.6-110.3-45.837-111.307C-2.071-112.381,39.864-40.384,17.065-3.312Z" transform="translate(119.436 111.319)" fill="{{ $package->category()->color }}{{--#{{ (['ECFAEB' ,'ffefff' , 'ced7ff'])[rand(0,2)] }}--}}" />
                                                 </svg>
                                             </div>
                                             <div class="text">
-                                                <h3 class="package-name">{{ $package->name }}</h3>
+                                                <h4 class="package-name" style="max-line:2;">{{ $package->name }}</h4>
                                                 <h2 class="price">{{ number_format($package->price, null, '.', ',') }}<span class="toman">تومان</span></h2>
                                                 @if ($package->price < $package->old_price)
                                                     <small class="text-decoration-line-through text-danger">{{ number_format($package->old_price, null, '.', ',') }}<span class="text-decoration-line-through toman">تومان</span></small>
