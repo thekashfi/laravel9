@@ -9,7 +9,7 @@ class File extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','summary','description', 'file', 'slug' ,'price' ,'old_price' , 'is_active'];
+    protected $fillable = ['name','summary','description', 'file', 'slug' ,'price', 'order' ,'old_price' , 'is_active'];
 
     public function scopeActive($query)
     {

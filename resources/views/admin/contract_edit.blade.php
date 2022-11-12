@@ -56,6 +56,12 @@
                     </select>
                 </div>
 
+
+                <div class="col-md-6 pb-3">
+                    <label for="order" class="form-label">ترتیب</label>
+                    <input dir="ltr" name="order" type="number" class="form-control" id="order" placeholder="" value="{{ old('order', $contract->order) }}">
+                </div>
+
                 <div class="col-md-6 mt-5">
                     <div class="form-check form-check-linethrough">
                         <input value="0" name="is_active" class="form-check-input h-5 mt-0 rounded-circle border-dashed flex-none float-end" type="hidden">

@@ -9,7 +9,7 @@ class Package extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'summary', 'description', 'slug', 'image', 'slogan1', 'slogan2' ,'price' ,'old_price' , 'is_active'];
+    protected $fillable = ['name', 'summary', 'description', 'slug', 'image', 'slogan1', 'slogan2' ,'price' , 'order' ,'old_price' , 'is_active'];
 
     public function scopeActive($query)
     {

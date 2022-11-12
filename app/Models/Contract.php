@@ -9,7 +9,7 @@ class Contract extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'summary', 'slug', 'description', 'text', 'price' ,'old_price' , 'is_active'];
+    protected $fillable = ['name', 'summary', 'slug', 'description', 'text', 'price' ,'order' ,'old_price' , 'is_active'];
     protected $with = ['category'];
 
     // public function fillables()

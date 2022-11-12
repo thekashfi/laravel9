@@ -13,7 +13,7 @@ class PackageController extends Controller
 {
     public function index()
     {
-        $packages = Package::withCount('contracts','files')->latest()->paginate(20);
+        $packages = Package::withCount('contracts','files')->orderByDesc('order')->latest()->paginate(20);
 
         return view('admin.package_index', compact('packages'));
     }
@@ -22,8 +22,8 @@ class PackageController extends Controller
     {
         $package = new Package();
         $categories = Category::get();
-        $files = File::latest()->get();
-        $contracts = Contract::latest()->get();
+        $files = File::orderByDesc('order')->latest()->get();
+        $contracts = Contract::orderByDesc('order')->latest()->get();
 
         return view('admin.package_edit', compact('package', 'categories' , 'files' , 'contracts'));
     }
@@ -59,8 +59,8 @@ class PackageController extends Controller
     {
         $package = Package::findOrFail($id);
         $categories = Category::orderByDesc('order')->get();
-        $files = File::latest()->get();
-        $contracts = Contract::latest()->get();
+        $files = File::orderByDesc('order')->latest()->get();
+        $contracts = Contract::orderByDesc('order')->latest()->get();
 
         return view('admin.package_edit', compact('package', 'categories' , 'files' , 'contracts'));
     }

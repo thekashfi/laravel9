@@ -13,7 +13,7 @@ class ContractController extends Controller
 {
     public function index()
     {
-        $contracts = Contract::latest()->paginate(20);
+        $contracts = Contract::orderByDesc('order')->latest()->paginate(20);
 
         return view('admin.contract_index', compact('contracts'));
     }

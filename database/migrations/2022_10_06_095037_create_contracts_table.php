@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('text');
             $table->string('slug', 100)->unique();
             $table->integer('price')->default(0);
+            $table->integer('order')->nullable()->default(0);
             $table->integer('old_price')->default(0)->nullable();
             $table->boolean('is_active')->default(1);
             $table->timestamps();

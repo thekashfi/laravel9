@@ -14,7 +14,7 @@ class FileController extends Controller
 {
     public function index()
     {
-        $files = File::latest()->paginate(20);
+        $files = File::orderByDesc('order')->latest()->paginate(20);
 
         return view('admin.file_index', compact('files'));
     }

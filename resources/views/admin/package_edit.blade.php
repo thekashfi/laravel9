@@ -77,6 +77,12 @@
                     </div>
                 </div>
 
+
+                <div class="col-md-6 pb-3">
+                    <label for="order" class="form-label">ترتیب</label>
+                    <input dir="ltr" name="order" type="number" class="form-control" id="order" placeholder="" value="{{ old('order', $package->order) }}">
+                </div>
+
                 <div class="pb-3 col-md-6 pt-4">
                     <div class="form-check form-check-linethrough">
                         <input value="0" name="is_active" class="form-check-input h-5 mt-0 rounded-circle border-dashed flex-none float-end" type="hidden">

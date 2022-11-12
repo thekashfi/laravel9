@@ -22,8 +22,8 @@ class IndexController extends Controller
     }
     public function home()
     {
-        $categories = Category::visible()->orderByDesc('order')->get();
-        $packages = Package::query()->active()->latest()->limit(8)->get();
+        $categories = Category::visible()->orderByDesc('order')->latest()->get();
+        $packages = Package::query()->orderByDesc('order')->active()->latest()->limit(8)->get();
         return view('home', compact('categories' , 'packages'));
     }
 
@@ -72,6 +72,14 @@ class IndexController extends Controller
         usort($items, function($a, $b) {
             return $b['sort'] - $a['sort'];
         });
+        foreach($items as $category_id => $item){
+            usort($items[$category_id]['contracts'], function($a, $b) {
+                return $b->order - $a->order;
+            });
+            usort($items[$category_id]['files'], function($a, $b) {
+                return $b->order - $a->order;
+            });
+        }
 
         return view('package', compact('package' , 'items'));
     }
@@ -85,7 +93,7 @@ class IndexController extends Controller
     public function contracts($category)
     {
         $result = cache()->remember('contracts_page_'.$category , 15 * 60 , function () use ($category){
-            $contracts = Contract::query()->latest()->active();
+            $contracts = Contract::query()->orderByDesc('order')->latest()->active();
             if (strtolower($category) != "all") {
                 $category = Category::whereSlug($category)->firstOrFail();
                 $contracts = $contracts->whereHas('categories' , function ($q) use($category){
@@ -102,7 +110,7 @@ class IndexController extends Controller
     public function packages($category)
     {
         $result = cache()->remember('packages_page_'.$category , 15 * 60 , function () use ($category){
-            $packages = Package::query()->latest()->active();
+            $packages = Package::query()->orderByDesc('order')->latest()->active();
             if (strtolower($category) != "all") {
                 $category = Category::whereSlug($category)->firstOrFail();
                 $packages = $packages->whereHas('categories' , function ($q) use($category){
@@ -119,7 +127,7 @@ class IndexController extends Controller
     public function files($category)
     {
         $result = cache()->remember('files_page_'.$category , 15 * 60 , function () use ($category){
-            $files = File::query()->latest()->active();
+            $files = File::query()->orderByDesc('order')->latest()->active();
             if (strtolower($category) != "all") {
                 $category = Category::whereSlug($category)->firstOrFail();
                 $files = $files->whereHas('categories' , function ($q) use($category){
@@ -135,9 +143,9 @@ class IndexController extends Controller
     {
         $category = Category::whereSlug($category)->visible()->firstOrFail();
         $result = cache()->remember('category_page_'.$category->id , 15 * 60 , function () use ($category){
-            $contracts = $category->contracts()->latest()->limit(8)->get();
-            $files = $category->files()->latest()->limit(8)->get();
-            $packages = $category->packages()->latest()->limit(8)->get();
+            $contracts = $category->contracts()->orderByDesc('order')->latest()->limit(8)->get();
+            $files = $category->files()->orderByDesc('order')->latest()->limit(8)->get();
+            $packages = $category->packages()->orderByDesc('order')->latest()->limit(8)->get();
             return compact('files', 'contracts' , 'packages');
         });
         $result['category'] = $category;
