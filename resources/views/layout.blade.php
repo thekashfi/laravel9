@@ -322,6 +322,7 @@
     <script src="{{ url('') }}/front-assets/js/wow.min.js"></script>
     <script src="{{ url('') }}/front-assets/js/polifill.js"></script>
     <script src="{{ url('') }}/front-assets/js/main.js"></script>
+    @yield('js')
 </body>
 
 </html>
